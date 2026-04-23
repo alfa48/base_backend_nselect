@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+  <div th:fragment="modals" class="modals-wrapper" style="display:none; opacity:0">
+    
+    <!-- Modal de Sucesso -->
+    <div id="modal-success" class="modal success" style="display:none; opacity:0">
+      <div class="modal-icon success"></div>
+      <div class="modal-text-wrapper">
+        <h2 class="modal-header">Sucesso!</h2>
+        <div id="modal-success-text" class="modal-subtext visible">Ação realizada com sucesso.</div>
+      </div>
+      <div class="close-modal" onclick="closeModal()"></div>
+    </div>
+
+    <!-- Modal de Erro -->
+    <div id="modal-error" class="modal error" style="display:none; opacity:0">
+      <div class="modal-icon error"></div>
+      <div class="modal-text-wrapper">
+        <h2 class="modal-header">Erro!</h2>
+        <div id="modal-error-text" class="modal-subtext visible">Ocorreu um erro inesperado.</div>
+      </div>
+      <div class="close-modal" onclick="closeModal()"></div>
+    </div>
+
+    <!-- Modal de Alerta / Confirmação -->
+    <div id="modal-warning" class="modal warning w-clearfix" style="display:none; opacity:0">
+      <div class="modal-icon warning"></div>
+      <div class="modal-text-wrapper">
+        <h2 id="modal-warning-header" class="modal-header">Alerta?</h2>
+        <div id="modal-warning-text" class="modal-subtext visible">Tem certeza que deseja continuar?</div>
+      </div>
+      <div class="modal-cta-wrapper">
+        <div class="_3-buttons-wrapper">
+          <a href="javascript:void(0)" class="action-button modal-button cancelar-acao w-inline-block" onclick="closeModal()">
+            <div class="button-text">Cancelar</div>
+          </a>
+          <a id="modal-confirm-btn" href="#" class="action-button modal-button sim w-inline-block">
+            <div class="button-text" id="modal-confirm-text">Sim, confirmar</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega-close-modal" onclick="closeModal()"></div>
+  </div>
+
+</body>
+</html>

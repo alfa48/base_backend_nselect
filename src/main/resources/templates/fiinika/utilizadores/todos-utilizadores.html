@@ -1,0 +1,220 @@
+<!DOCTYPE html><!--  Last Published: Tue Apr 21 2026 11:33:50 GMT+0000 (Coordinated Universal Time)  -->
+<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69e60b2f16d9365e83a9cce6" data-wf-site="69e60b2f16d9365e83a9cc56">
+
+<head th:replace="~{layout/fragments/dashboard_layout :: head('Todos Utilizadores - Fiinika Comercial')}">
+</head>
+
+<body>
+  <div class="mother-div">
+    <div class="page-content-wrapper">
+      <div th:replace="~{layout/fragments/dashboard_layout :: navbar}"></div>
+      <div data-w-id="69e60b2f-16d9-365e-83a9-cce6b701c37b" class="content">
+        <section class="criar-page-section">
+          <div class="container">
+            <!-- Modal triggers -->
+          <input type="hidden" id="server-success-message" th:if="${successMessage}" th:value="${successMessage}">
+          <input type="hidden" id="operation-error-message" th:if="${errorMessage}" th:value="${errorMessage}">
+
+          <div class="top-section-navigation">
+              <a href="javascript:history.back()" class="seta-para-tras w-inline-block">
+                <div class="text-block-129">q</div>
+              </a>
+              <div class="titulo">
+                <div class="text-block-130">Utilizadores<br></div>
+              </div>
+              <div class="bot-o-ou-menu">
+                <a th:href="@{/utilizadores/novo}" class="botao w-button">Criar utilizador</a>
+              </div>
+            </div>
+            <div class="form-wrapper w-form">
+              <form id="wf-form-Criar-Fatura" name="wf-form-Criar-Fatura" data-name="Criar Fatura" method="get"
+                class="form" data-wf-page-id="69e60b2f16d9365e83a9cce6"
+                data-wf-element-id="074ac903-9eb4-07c8-ea1c-1ebb296c9677">
+                <div class="form-section">
+                  <div class="div-block-107">
+                    <h1 class="heading-3">Utilizadores</h1>
+                    <div class="button main">
+                      <div class="button-text">Criar</div>
+                      <a th:href="@{/utilizadores/novo}"
+                        class="button-link _100 w-inline-block"></a>
+                      <div class="left-icon-wrapper"></div>
+                    </div>
+                  </div>
+                  <div class="table">
+                    <div class="table-utility-row">
+                      <div class="form-field-wrapper wrap-search _10">
+                        <div class="search-field-wrapper"><input class="form-search-field w-input" maxlength="256"
+                            name="search" data-name="search" placeholder="" type="text" id="search">
+                          <div class="search-icon">
+                            <div class="icon">
+                              <div class="main-font-icon smaller-icon">x</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="table-main-button-wrapper">
+                        <div class="button main">
+                          <div class="left-icon-wrapper">
+                            <div class="icon left-icon">
+                              <div class="main-font-icon">add</div>
+                            </div>
+                          </div>
+                          <div class="button-text">Criar</div>
+                          <a th:href="@{/utilizadores/novo}"
+                            class="button-link w-inline-block"></a>
+                        </div>
+                      </div>
+                      <div class="filter-date-status-wrapper centered _0"><select id="field-2" name="field-2"
+                          data-name="Field 2"
+                          class="form-text-field whitex w-node-e2ab263e-664c-de04-ac7d-8046acfa447b-83a9cce6 w-select">
+                          <option value="">Tipo</option>
+                          <option value="ADMIN">Admin</option>
+                          <option value="OPERADOR">Operador</option>
+                        </select></div>
+                    </div>
+                    <div class="table-row cell-label-wrapper"><label class="w-checkbox table-checkbox-wrapper">
+                        <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input
+                          type="checkbox" name="checkbox-2" id="checkbox-2" data-name="Checkbox 2"
+                          style="opacity:0;position:absolute;z-index:-1"><span
+                          class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                      </label>
+                      <div class="table-row-content">
+                        <div class="cell-label _10">
+                          <div class="table-cell-text">Imagem</div>
+                        </div>
+                        <div class="cell-label _20">
+                          <div class="table-cell-text">Nome</div>
+                        </div>
+                        <div class="cell-label _15">
+                          <div class="table-cell-text">Data</div>
+                        </div>
+                        <div class="cell-label _15">
+                          <div class="table-cell-text">Telefone</div>
+                        </div>
+                        <div class="cell-label _20">
+                          <div class="table-cell-text">E-mail</div>
+                        </div>
+                        <div class="cell-label _20">
+                          <div class="table-cell-text">Tipo</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div th:each="usuario : ${usuarios}" class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                        <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input
+                          type="checkbox" name="checkbox-2" id="checkbox-2" data-name="Checkbox 2"
+                          style="opacity:0;position:absolute;z-index:-1"><span
+                          class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                      </label>
+                      <a href="javascript:void(0)"
+                        class="table-row-content item-link w-inline-block">
+                        <div class="table-cell _10 i">
+                          <div class="table-image-wrapper">
+                            <img alt="" loading="lazy" 
+                                 th:src="${usuario.foto != null ? usuario.foto : '/images/Fiinika-Comercial_logo_main.png'}" 
+                                 class="img is--contain utilizador">
+                          </div>
+                        </div>
+                        <div class="table-cell _20">
+                          <div class="table-cell-text" th:text="${usuario.nome}">Elizabeth Daniel</div>
+                        </div>
+                        <div class="table-cell _15 i">
+                          <div class="table-cell-text" th:text="${usuario.username}">elizabeth.d</div>
+                        </div>
+                        <div class="table-cell _15">
+                          <div class="table-cell-text">923 000 000</div>
+                        </div>
+                        <div class="table-cell _20 i">
+                          <div class="table-cell-text" th:text="${usuario.email}">email@domínio.com</div>
+                        </div>
+                        <div class="table-cell _20">
+                          <div class="table-cell-text _1">Admin</div>
+                        </div>
+                      </a>
+                      <div class="table-row-action-button-wrapper">
+                        <a href="#" class="table-action-button w-inline-block">
+                          <div class="icon _3-dots"><img width="12" alt="" th:src="@{/images/3dots-gray.svg}"
+                              loading="lazy" class="_3dots"></div>
+                        </a>
+                        <div class="flyout-menu-wrapper table-actions-flyout">
+                          <div class="flyout-menu-content in-table">
+                            <a href="#" class="menu-item w-inline-block">
+                              <div class="menu-icon-wrapper">
+                                <div class="icon menu-left-icon">
+                                  <div class="main-font-icon">visibility</div>
+                                </div>
+                              </div>
+                              <div class="button-text">Visualizar</div>
+                            </a>
+                            <a href="#" class="menu-item w-inline-block">
+                              <div class="menu-icon-wrapper">
+                                <div class="icon menu-left-icon">
+                                  <div class="main-font-icon">edit</div>
+                                </div>
+                              </div>
+                              <div class="button-text">Editar</div>
+                            </a>
+                            <a href="#" class="menu-item w-inline-block">
+                              <div class="menu-icon-wrapper">
+                                <div class="icon menu-left-icon">
+                                  <div class="main-font-icon">Delete</div>
+                                </div>
+                              </div>
+                              <div class="button-text">Eliminar</div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Mensagem se estiver vazio -->
+                    <!-- Mensagem se estiver vazio -->
+                    <div th:if="${#lists.isEmpty(usuarios)}" class="table-row" style="justify-content: center; padding: 2rem;">
+                        <div class="table-cell-text">Nenhum utilizador encontrado.</div>
+                    </div>
+
+                    </div>
+
+                    <!-- Paginação -->
+                    <div class="pagination-wrapper" style="display: flex; justify-content: center; align-items: center; padding: 2rem; gap: 1.5rem; border-top: 1px solid #eee;">
+                        <a th:if="${currentPage > 1}" 
+                           th:href="@{/utilizadores(page=${currentPage - 1}, size=${size})}" 
+                           class="action-button secondary w-inline-block" style="padding: 8px 20px; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                            <div class="button-text" style="color: #666">Anterior</div>
+                        </a>
+                        
+                        <div class="table-cell-text" style="font-weight: 500; color: #333;">
+                            Página <span th:text="${currentPage}">1</span> de <span th:text="${totalPages}">1</span>
+                        </div>
+
+                        <a th:if="${currentPage < totalPages}" 
+                           th:href="@{/utilizadores(page=${currentPage + 1}, size=${size})}" 
+                           class="action-button secondary w-inline-block" style="padding: 8px 20px; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                            <div class="button-text" style="color: #666">Próximo</div>
+                        </a>
+                    </div>
+                </div>
+              </form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="not-valid">
+    <div class="text-block-116">Dimensão de ecrã não suportada...</div>
+  </div>
+  <div class="close-flyout"></div>
+  <div th:replace="~{layout/fragments/dashboard_layout :: scripts}"></div>
+  <script th:src="@{/js/modals.js}" type="text/javascript"></script>
+
+  <!-- Modais -->
+  <div th:replace="~{layout/fragments/modals :: modals}"></div>
+</body>
+
+</html>

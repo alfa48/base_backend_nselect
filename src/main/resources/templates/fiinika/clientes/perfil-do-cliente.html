@@ -1,0 +1,2137 @@
+<!DOCTYPE html><!--  Last Published: Tue Apr 21 2026 11:33:50 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69e60b2f16d9365e83a9cc83" data-wf-site="69e60b2f16d9365e83a9cc56">
+<head>
+  <meta charset="utf-8">
+  <title>Perfil do Cliente</title>
+  <meta content="Perfil do Cliente" property="og:title">
+  <meta content="Perfil do Cliente" property="twitter:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="../../css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="../../css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="../../css/fiinika-comercial-app-6e0-d3d3528fb4f33.webflow.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Barlow:300,400,500,600,700","Inter:300,400,500,600,700"]  }});</script>
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="../../images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="../../images/webclip.png" rel="apple-touch-icon">
+</head>
+<body>
+  <div class="mother-div">
+    <div class="html-embed w-embed"></div>
+    <div class="close-flyout"></div>
+    <div class="page-content-wrapper">
+      <div class="fiinika-nav-main">
+        <div data-animation="over-right" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+          <div class="container _1">
+            <a href="../../fiinika/dashboard.html" class="brand w-nav-brand"></a>
+            <nav role="navigation" class="nav-menu w-nav-menu">
+              <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
+                <div class="dropdown-toggle-2 w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div>Receitas</div>
+                </div>
+                <nav class="dropdown-list-3 w-dropdown-list">
+                  <a href="../../fiinika/documentos/todos-documentos.html" class="link-inside-dropdown w-dropdown-link">Ver todos documentos</a>
+                  <a href="../../fiinika/documentos/factura/criar-factura.html" class="link-inside-dropdown w-dropdown-link">Criar factura</a>
+                  <a href="../../fiinika/documentos/factura/criar-factura-recibo.html" class="link-inside-dropdown w-dropdown-link">Criar factura/recibo</a>
+                  <a href="../../fiinika/documentos/proforma/criar-proforma.html" class="link-inside-dropdown w-dropdown-link">Criar proforma</a>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
+                <div class="dropdown-toggle-2 w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div>Despesas</div>
+                </div>
+                <nav class="dropdown-list-3 w-dropdown-list">
+                  <a href="../../fiinika/despesas/criar-despesa.html" class="link-inside-dropdown w-dropdown-link">Registar despesa</a>
+                  <a href="../../fiinika/despesas/todas-despesas.html" class="link-inside-dropdown w-dropdown-link">Histórico de despesas</a>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
+                <div class="dropdown-toggle-2 w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div>Salários</div>
+                </div>
+                <nav class="dropdown-list-3 w-dropdown-list">
+                  <a href="../../fiinika/salarios/processamento-de-salarios/processar-salario.html" class="link-inside-dropdown w-dropdown-link">Processar salários</a>
+                  <a href="../../fiinika/salarios/faltas/registar-falta.html" class="link-inside-dropdown w-dropdown-link">Registar falta</a>
+                  <a href="../../fiinika/salarios/processamento-de-salarios/adiantamentos/solicitar-adiantamento.html" class="link-inside-dropdown w-dropdown-link">Solicitar adiantamento</a>
+                  <a href="../../fiinika/salarios/processamento-de-salarios/historico-de-processamentos.html" class="link-inside-dropdown w-dropdown-link">Histórico de processamentos</a>
+                  <a href="../../fiinika/salarios/processamento-de-salarios/adiantamentos/historico-de-adiantamentos.html" class="link-inside-dropdown w-dropdown-link">Histórico de adiantamentos</a>
+                  <a href="../../fiinika/salarios/faltas/historico-de-faltas.html" class="link-inside-dropdown w-dropdown-link">Histórico de faltas</a>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
+                <div class="dropdown-toggle-2 w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div>Stock</div>
+                </div>
+                <nav class="dropdown-list-3 w-dropdown-list">
+                  <a href="../../fiinika/stock/meu-stock.html" class="link-inside-dropdown w-dropdown-link">Gestão do stock</a>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
+                <div class="dropdown-toggle-2 w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div>Procurement</div>
+                </div>
+                <nav class="dropdown-list-3 w-dropdown-list">
+                  <a href="../../fiinika/procurement/meus-pedidos/novo-pedido.html" class="link-inside-dropdown w-dropdown-link">Nova compra</a>
+                  <a href="../../fiinika/procurement/meus-pedidos/meus-pedidos-historico.html" class="link-inside-dropdown w-dropdown-link">Histórico das minhas compras</a>
+                  <a href="../../fiinika/procurement/pedidos-externos/concursos-abertos.html" class="link-inside-dropdown w-dropdown-link">Novos pedidos de propostas</a>
+                  <a href="../../fiinika/procurement/pedidos-externos/minhas-propostas-historico.html" class="link-inside-dropdown w-dropdown-link">Propostas enviadas</a>
+                  <a href="../../fiinika/procurement/pedidos-externos/facturacao.html" class="link-inside-dropdown w-dropdown-link">Minha faturação</a>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
+                <div class="dropdown-toggle-2 w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div>Finanças</div>
+                </div>
+                <nav class="dropdown-list-3 w-dropdown-list">
+                  <a href="../../fiinika/financas/ver-relatorios.html" class="link-inside-dropdown w-dropdown-link">Ver relatórios</a>
+                  <a href="../../fiinika/configuracoes/saft.html" class="link-inside-dropdown w-dropdown-link">SAFT</a>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
+                <div class="dropdown-toggle-2 w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div>Cadastros</div>
+                </div>
+                <nav class="dropdown-list-3 w-dropdown-list">
+                  <a href="../../fiinika/produtos/todos-produtos.html" class="link-inside-dropdown w-dropdown-link">Artigos</a>
+                  <a href="../../fiinika/categorias/todas-categorias.html" class="link-inside-dropdown w-dropdown-link">Categorias de artigos</a>
+                  <a href="../../fiinika/clientes/todos-clientes.html" class="link-inside-dropdown w-dropdown-link">Clientes</a>
+                  <a href="../../fiinika/fornecedores/todos-fornecedores.html" class="link-inside-dropdown w-dropdown-link">Fornecedores</a>
+                  <a href="../../fiinika/salarios/funcionarios/todos-funcionarios.html" class="link-inside-dropdown w-dropdown-link">Funcionários</a>
+                  <a href="../../fiinika/salarios/retribuicoes-e-deducoes/deducoes-e-retribuicoes-main.html" class="link-inside-dropdown w-dropdown-link">Remunerações e deduções</a>
+                  <a href="../../fiinika/bancos/todos-bancos.html" class="link-inside-dropdown w-dropdown-link">Contas bancárias</a>
+                  <a href="../../fiinika/utilizadores/todos-utilizadores.html" class="link-inside-dropdown w-dropdown-link">Utilizadores do sistema</a>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
+                <div class="dropdown-toggle-2 w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div>Configurações</div>
+                </div>
+                <nav class="dropdown-list-3 w-dropdown-list">
+                  <a href="../../fiinika/configuracoes/configuracoes-gerais.html" class="link-inside-dropdown w-dropdown-link">Configurações gerais</a>
+                </nav>
+              </div>
+              <a href="../../index.html" class="link-block-5 w-inline-block">
+                <div>Sair</div>
+              </a>
+            </nav>
+            <div class="menu-button w-nav-button">
+              <div class="w-icon-nav-menu"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="container">
+          <div class="top-section-navigation">
+            <a href="javascript:history.back()" class="seta-para-tras w-inline-block">
+              <div class="text-block-129">q</div>
+            </a>
+            <div class="titulo"></div>
+            <div class="bot-o-ou-menu">
+              <a href="../../fiinika/clientes/editar-cliente.html" class="action-button w-inline-block">
+                <div class="icon quick-action">
+                  <div class="main-font-icon u">u</div>
+                  <div class="button-text quick-action-text">Editar</div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="div-block-7">
+            <div class="w-layout-grid grid-2">
+              <div class="img-wrapper cliente"><img src="../../images/profile-circle-icon-2048x2048-cqe5466q.png" loading="lazy" sizes="(max-width: 479px) 65vw, (max-width: 767px) 78vw, (max-width: 991px) 83vw, (max-width: 1279px) 87vw, (max-width: 1919px) 88vw, 1360px" srcset="../../images/profile-circle-icon-2048x2048-cqe5466q-p-500.png 500w, ../../images/profile-circle-icon-2048x2048-cqe5466q-p-800.png 800w, ../../images/profile-circle-icon-2048x2048-cqe5466q-p-1080.png 1080w, ../../images/profile-circle-icon-2048x2048-cqe5466q-p-1600.png 1600w, ../../images/profile-circle-icon-2048x2048-cqe5466q-p-2000.png 2000w, ../../images/profile-circle-icon-2048x2048-cqe5466q.png 2048w" alt="" class="img is--contain"></div>
+              <div id="w-node-d043887a-a5aa-bca2-3006-06290e62090c-83a9cc83" class="div-block-6">
+                <div class="w-layout-grid grid-3">
+                  <div id="w-node-_91f7b2e1-80e8-7878-3971-eea7037ec7d0-83a9cc83">
+                    <div class="list-item">
+                      <div class="list-item-lable">Nome</div>
+                      <div class="list-item">Gestão de redes sociais</div>
+                    </div>
+                    <div class="list-item">
+                      <div class="list-item-lable">NIF</div>
+                      <div class="list-item">Gestão de redes sociais</div>
+                    </div>
+                    <div class="list-item">
+                      <div class="list-item-lable">Telemóvel</div>
+                      <div class="list-item">Gestão de redes sociais</div>
+                    </div>
+                    <div class="list-item">
+                      <div class="list-item-lable">Email</div>
+                      <div class="list-item">Gestão de redes sociais</div>
+                    </div>
+                  </div>
+                  <div id="w-node-f6e19744-e5cd-4063-4724-2efeb7351c05-83a9cc83">
+                    <div class="list-item">
+                      <div class="list-item-lable">Endereço</div>
+                      <div class="list-item">Gestão de redes sociais, Gestão de redes sociais</div>
+                    </div>
+                    <div class="list-item">
+                      <div class="list-item-lable">Tipo de cliente</div>
+                      <div class="list-item">Gestão de redes sociais</div>
+                    </div>
+                    <div class="list-item">
+                      <div class="list-item-lable">Data de criação</div>
+                      <div class="list-item">Gestão de redes sociais</div>
+                    </div>
+                    <a href="#" class="action-button full w-inline-block">
+                      <div class="icon quick-action">
+                        <div class="main-font-icon">o</div>
+                        <div class="button-text quick-action-text">Imprimir Extracto</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="69e60b2f16d9365e83a9cc83" data-wf-element-id="cdea431f-3cbc-bbca-da17-866d0cf3c099">
+              <div class="form-section _5">
+                <div class="kpi-grid">
+                  <div id="w-node-_88ce47df-f758-64ea-b199-19255b5cd960-83a9cc83" class="kpi">
+                    <div class="kpi-top-section">
+                      <div class="kpi-icon-wrapper">
+                        <div class="icon inside-kpi">
+                          <div class="main-font-icon smaller-icon">task</div>
+                        </div>
+                      </div>
+                      <h2 class="kpi-header">Facturado</h2>
+                    </div>
+                    <div class="kpi-mid-section">
+                      <div class="kpi-valor currency">Kz</div>
+                      <div class="kpi-valor">288.059,64</div>
+                    </div>
+                    <div class="kpi-bottom-section">
+                      <div class="kpi-dropdown-wrap">
+                        <a href="#" class="table-action-button w-inline-block"></a>
+                        <div class="flyout-menu-wrapper kpi-actions-flyout">
+                          <div class="flyout-menu-content in-table"><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-27" data-name="Radio 27" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-27">Últimos 7 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-27" data-name="Radio 27" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-27">Últimos 15 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-27" data-name="Radio 27" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-27">Últimos 30 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-27" data-name="Radio 27" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-27">Últimos 6 meses</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-27" data-name="Radio 27" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-27">Últimos 12 meses</span>
+                            </label></div>
+                        </div>
+                        <div class="kpi-stats-wrapper">
+                          <div class="kpi-stats positive">
+                            <div class="icon kpi-stats-icon">
+                              <div class="main-font-icon smaller-icon">8</div>
+                            </div>
+                            <div class="stats">8.26%</div>
+                          </div>
+                          <div class="kpi-stats negative hidden">
+                            <div class="icon kpi-stats-icon">
+                              <div class="main-font-icon smaller-icon">trending_down</div>
+                            </div>
+                            <div class="stats">8.26%</div>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="#" class="table-action-button w-inline-block">
+                        <div class="icon kpi-dropdown-icon">
+                          <div class="button-text quick-action-text _0-margin">Últimos 7 dias</div>
+                          <div class="main-font-icon">arrow_drop_down</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div id="w-node-_88ce47df-f758-64ea-b199-19255b5cd9ce-83a9cc83" class="kpi">
+                    <div class="kpi-top-section">
+                      <div class="kpi-icon-wrapper">
+                        <div class="icon inside-kpi">
+                          <div class="main-font-icon smaller-icon">task</div>
+                        </div>
+                      </div>
+                      <h2 class="kpi-header">Recebido</h2>
+                    </div>
+                    <div class="kpi-mid-section">
+                      <div class="kpi-valor currency">Kz</div>
+                      <div class="kpi-valor">1.701.444,22</div>
+                    </div>
+                    <div class="kpi-bottom-section">
+                      <div class="kpi-dropdown-wrap">
+                        <div class="flyout-menu-wrapper kpi-actions-flyout">
+                          <div class="flyout-menu-content in-table"><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-29" data-name="Radio 29" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-29">Últimos 7 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-29" data-name="Radio 29" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-29">Últimos 15 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-29" data-name="Radio 29" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-29">Últimos 30 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-29" data-name="Radio 29" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-29">Últimos 6 meses</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-29" data-name="Radio 29" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-29">Últimos 12 meses</span>
+                            </label></div>
+                        </div>
+                        <div class="kpi-stats-wrapper">
+                          <div class="kpi-stats positive">
+                            <div class="icon kpi-stats-icon">
+                              <div class="main-font-icon smaller-icon">8</div>
+                            </div>
+                            <div class="stats">8.26%</div>
+                          </div>
+                          <div class="kpi-stats negative hidden">
+                            <div class="icon kpi-stats-icon">
+                              <div class="main-font-icon smaller-icon">trending_down</div>
+                            </div>
+                            <div class="stats">8.26%</div>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="#" class="table-action-button w-inline-block">
+                        <div class="icon kpi-dropdown-icon">
+                          <div class="button-text quick-action-text _0-margin">Últimos 7 dias</div>
+                          <div class="main-font-icon">arrow_drop_down</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div id="w-node-_88ce47df-f758-64ea-b199-19255b5cda06-83a9cc83" class="kpi">
+                    <div class="kpi-top-section">
+                      <div class="kpi-icon-wrapper">
+                        <div class="icon inside-kpi">
+                          <div class="main-font-icon smaller-icon">task</div>
+                        </div>
+                      </div>
+                      <h2 class="kpi-header">Reembolsado</h2>
+                    </div>
+                    <div class="kpi-mid-section">
+                      <div class="kpi-valor currency">Kz</div>
+                      <div class="kpi-valor">49.660,53</div>
+                    </div>
+                    <div class="kpi-bottom-section">
+                      <div class="kpi-stats-wrapper">
+                        <div class="kpi-stats positive">
+                          <div class="icon kpi-stats-icon">
+                            <div class="main-font-icon smaller-icon">8</div>
+                          </div>
+                          <div class="stats">8.26%</div>
+                        </div>
+                        <div class="kpi-stats negative hidden">
+                          <div class="icon kpi-stats-icon">
+                            <div class="main-font-icon smaller-icon">trending_down</div>
+                          </div>
+                          <div class="stats">8.26%</div>
+                        </div>
+                      </div>
+                      <div class="kpi-dropdown-wrap">
+                        <a href="#" class="table-action-button w-inline-block">
+                          <div class="icon kpi-dropdown-icon">
+                            <div class="button-text quick-action-text _0-margin">Últimos 7 dias</div>
+                            <div class="main-font-icon">arrow_drop_down</div>
+                          </div>
+                        </a>
+                        <div class="flyout-menu-wrapper kpi-actions-flyout">
+                          <div class="flyout-menu-content in-table"><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-30" data-name="Radio 30" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-30">Últimos 7 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-30" data-name="Radio 30" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-30">Últimos 15 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-30" data-name="Radio 30" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-30">Últimos 30 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-30" data-name="Radio 30" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-30">Últimos 6 meses</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-30" data-name="Radio 30" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-30">Últimos 12 meses</span>
+                            </label></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="w-node-e261d2bb-7259-f16a-be85-20a7a56ce614-83a9cc83" class="kpi">
+                    <div class="kpi-top-section">
+                      <div class="kpi-icon-wrapper">
+                        <div class="icon inside-kpi">
+                          <div class="main-font-icon smaller-icon">task</div>
+                        </div>
+                      </div>
+                      <h2 class="kpi-header">A receber</h2>
+                    </div>
+                    <div class="kpi-mid-section">
+                      <div class="kpi-valor currency">Kz</div>
+                      <div class="kpi-valor">49.660,53</div>
+                    </div>
+                    <div class="kpi-bottom-section">
+                      <div class="kpi-stats-wrapper">
+                        <div class="kpi-stats positive">
+                          <div class="icon kpi-stats-icon">
+                            <div class="main-font-icon smaller-icon">8</div>
+                          </div>
+                          <div class="stats">8.26%</div>
+                        </div>
+                        <div class="kpi-stats negative hidden">
+                          <div class="icon kpi-stats-icon">
+                            <div class="main-font-icon smaller-icon">trending_down</div>
+                          </div>
+                          <div class="stats">8.26%</div>
+                        </div>
+                      </div>
+                      <div class="kpi-dropdown-wrap">
+                        <a href="#" class="table-action-button w-inline-block">
+                          <div class="icon kpi-dropdown-icon">
+                            <div class="button-text quick-action-text _0-margin">Últimos 7 dias</div>
+                            <div class="main-font-icon">arrow_drop_down</div>
+                          </div>
+                        </a>
+                        <div class="flyout-menu-wrapper kpi-actions-flyout">
+                          <div class="flyout-menu-content in-table"><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-44" data-name="Radio 44" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-44">Últimos 7 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-44" data-name="Radio 44" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-44">Últimos 15 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-44" data-name="Radio 44" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-44">Últimos 30 dias</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-44" data-name="Radio 44" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-44">Últimos 6 meses</span>
+                            </label><label class="menu-item with-radio-button w-radio">
+                              <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="radio" id="radio-44" data-name="Radio 44" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-44">Últimos 12 meses</span>
+                            </label></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="w-form-fail">
+              <div>Oops! Something went wrong while submitting the form.</div>
+            </div>
+          </div>
+          <div>
+            <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="w-tabs">
+              <div class="tabs-menu w-tab-menu">
+                <a data-w-tab="Tab 1" class="table-tab-link w-inline-block w-tab-link w--current">
+                  <div>Proformas</div>
+                </a>
+                <a data-w-tab="Tab 2" class="table-tab-link w-inline-block w-tab-link">
+                  <div>Facturas</div>
+                </a>
+                <a data-w-tab="Tab 3" class="table-tab-link w-inline-block w-tab-link">
+                  <div>Recibos</div>
+                </a>
+                <a data-w-tab="Tab 4" class="table-tab-link w-inline-block w-tab-link">
+                  <div>Notas </div>
+                </a>
+              </div>
+              <div class="w-tab-content">
+                <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+                  <div class="w-form">
+                    <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="69e60b2f16d9365e83a9cc83" data-wf-element-id="08f738d9-98d2-4320-97ec-2304f1c534ba">
+                      <div class="table">
+                        <div class="table-row cell-label-wrapper"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <div class="table-row-content">
+                            <div class="cell-label _10">
+                              <div class="table-cell-text">Nº</div>
+                            </div>
+                            <div class="cell-label _25">
+                              <div class="table-cell-text">Entidade</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Criado por</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Data</div>
+                            </div>
+                            <div class="cell-label _20">
+                              <div class="table-cell-text">Valor</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Documento</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper cancelado">
+                                <div class="status-text">despesa</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper pago">
+                                <div class="status-text">recibo</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper factura">
+                                <div class="status-text">FACTURA</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper nao-pago">
+                                <div class="status-text">proforma</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper reembolso">
+                                <div class="status-text">nota de cRÉDITO</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+                <div data-w-tab="Tab 2" class="w-tab-pane">
+                  <div class="w-form">
+                    <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="69e60b2f16d9365e83a9cc83" data-wf-element-id="63e70903-8354-4216-f71f-401d50b840e3">
+                      <div class="table">
+                        <div class="table-row cell-label-wrapper"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <div class="table-row-content">
+                            <div class="cell-label _10">
+                              <div class="table-cell-text">Nº</div>
+                            </div>
+                            <div class="cell-label _25">
+                              <div class="table-cell-text">Entidade</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Criado por</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Data</div>
+                            </div>
+                            <div class="cell-label _20">
+                              <div class="table-cell-text">Valor</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Documento</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper cancelado">
+                                <div class="status-text">despesa</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper pago">
+                                <div class="status-text">recibo</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper factura">
+                                <div class="status-text">FACTURA</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper nao-pago">
+                                <div class="status-text">proforma</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper reembolso">
+                                <div class="status-text">nota de cRÉDITO</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+                <div data-w-tab="Tab 3" class="w-tab-pane">
+                  <div class="w-form">
+                    <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="69e60b2f16d9365e83a9cc83" data-wf-element-id="aa8c4ef7-b862-b10b-ac9b-3eed8f7077d1">
+                      <div class="table">
+                        <div class="table-row cell-label-wrapper"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <div class="table-row-content">
+                            <div class="cell-label _10">
+                              <div class="table-cell-text">Nº</div>
+                            </div>
+                            <div class="cell-label _25">
+                              <div class="table-cell-text">Entidade</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Criado por</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Data</div>
+                            </div>
+                            <div class="cell-label _20">
+                              <div class="table-cell-text">Valor</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Documento</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper cancelado">
+                                <div class="status-text">despesa</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper pago">
+                                <div class="status-text">recibo</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper factura">
+                                <div class="status-text">FACTURA</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper nao-pago">
+                                <div class="status-text">proforma</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper reembolso">
+                                <div class="status-text">nota de cRÉDITO</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+                <div data-w-tab="Tab 4" class="w-tab-pane">
+                  <div class="w-form">
+                    <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="69e60b2f16d9365e83a9cc83" data-wf-element-id="11728877-88a3-2738-b7a9-2b28f443a305">
+                      <div class="table">
+                        <div class="table-row cell-label-wrapper"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <div class="table-row-content">
+                            <div class="cell-label _10">
+                              <div class="table-cell-text">Nº</div>
+                            </div>
+                            <div class="cell-label _25">
+                              <div class="table-cell-text">Entidade</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Criado por</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Data</div>
+                            </div>
+                            <div class="cell-label _20">
+                              <div class="table-cell-text">Valor</div>
+                            </div>
+                            <div class="cell-label _15">
+                              <div class="table-cell-text">Documento</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper cancelado">
+                                <div class="status-text">despesa</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper pago">
+                                <div class="status-text">recibo</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper factura">
+                                <div class="status-text">FACTURA</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper nao-pago">
+                                <div class="status-text">proforma</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-row"><label class="w-checkbox table-checkbox-wrapper">
+                            <div class="w-checkbox-input w-checkbox-input--inputType-custom table-checkbox"></div><input id="checkbox-2" type="checkbox" name="checkbox-2" data-name="Checkbox 2" style="opacity:0;position:absolute;z-index:-1"><span class="checkbox-lable hidden w-form-label" for="checkbox-2">Checkbox</span>
+                          </label>
+                          <a href="#" class="table-row-content item-link w-inline-block">
+                            <div class="table-cell _10">
+                              <div class="table-cell-text bold">PK2208015</div>
+                            </div>
+                            <div class="table-cell _25 client-cell">
+                              <div class="table-image-wrapper"><img sizes="(max-width: 479px) 60px, (max-width: 767px) 13vw, (max-width: 1279px) 44px, (max-width: 1439px) 3vw, 44px" srcset="../../images/logo-dexa-prox-p-500.png 500w, ../../images/logo-dexa-prox.png 750w" src="../../images/logo-dexa-prox.png" loading="lazy" alt="" class="img is--contain"></div>
+                              <div class="table-cell-text">Fedex Angola, Lda</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">Nome do Admin</div>
+                            </div>
+                            <div class="table-cell _15 i">
+                              <div class="table-cell-text">12/08/2022</div>
+                            </div>
+                            <div class="table-cell _20">
+                              <div class="table-cell-text">KZ 68.000,00</div>
+                            </div>
+                            <div class="table-cell _15">
+                              <div class="status-wrapper pago hidden">
+                                <div class="status-text">Pago</div>
+                              </div>
+                              <div class="status-wrapper nao-pago hidden">
+                                <div class="status-text">Não pago</div>
+                              </div>
+                              <div class="status-wrapper reembolso hidden">
+                                <div class="status-text">Rembolso</div>
+                              </div>
+                              <div class="status-wrapper reembolso">
+                                <div class="status-text">nota de cRÉDITO</div>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="table-row-action-button-wrapper">
+                            <a href="#" class="table-action-button w-inline-block">
+                              <div class="icon _3-dots"><img width="12" alt="" src="../../images/3dots-gray.svg" loading="lazy" class="_3dots"></div>
+                            </a>
+                            <div class="flyout-menu-wrapper table-actions-flyout">
+                              <div class="flyout-menu-content in-table">
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">visibility</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Visualizar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Print</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Imprimir</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Download</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Descarregar</div>
+                                </a>
+                                <a href="#" class="menu-item w-inline-block">
+                                  <div class="menu-icon-wrapper">
+                                    <div class="icon menu-left-icon">
+                                      <div class="main-font-icon">Delete</div>
+                                    </div>
+                                  </div>
+                                  <div class="button-text">Eliminar</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="not-valid">
+    <div class="text-block-116">Dimensão de ecrã não suportada...</div>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=69e60b2f16d9365e83a9cc56" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="../../js/webflow.js" type="text/javascript"></script>
+</body>
+</html>

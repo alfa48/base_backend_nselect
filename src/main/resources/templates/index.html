@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69e60b2f16d9365e83a9cc55"
+  data-wf-site="69e60b2f16d9365e83a9cc56">
+
+<head th:replace="~{layout/fragments/auth :: head('Login - Fiinika Comercial')}">
+</head>
+
+<body>
+  <div class="auth-bg">
+    <div class="auth-form-wrapper w-form">
+
+      <form id="wf-form-Login" name="wf-form-Login" data-name="Login" th:action="@{/login}" th:object="${loginRequest}"
+        method="post" class="auth-form">
+
+        <div class="form-content">
+
+          <div th:replace="~{layout/fragments/auth :: logoHeader}"></div>
+
+          <div class="form-header">
+            <h1 class="pages-h2">Faça login para continuar</h1>
+          </div>
+
+          <div th:if="${error}">
+             <input type="hidden" id="server-error-message" th:value="${error}">
+          </div>
+
+          <div class="form-field-wrapper-2">
+            <label for="username" class="field-lable">Email</label>
+            <input class="text-field w-input" maxlength="256" name="username" data-name="Email"
+              placeholder="seu@email.com" type="email" id="username" required="" th:field="*{username}">
+          </div>
+          <div class="form-field-wrapper-2">
+            <label for="password" class="field-lable">Senha</label>
+            <input class="text-field w-input" maxlength="256" name="password" data-name="Senha" placeholder="••••••••"
+              type="password" id="password" required="" th:field="*{password}">
+            <div class="restore-password-cta-wrapper">
+              <div class="restore-password-cta-text">Esqueceu a senha? <a href="#" class="form-cta">Repor senha</a>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="submit-button" style="width: 100%; border: none; cursor: pointer;">Iniciar
+            sessão</button>
+        </div>
+      </form>
+    </div>
+    <div class="auth-image-overlay"></div>
+  </div>
+
+  <div th:replace="~{layout/fragments/auth :: scripts}"></div>
+
+</body>
+
+</html>

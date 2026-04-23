@@ -1,0 +1,149 @@
+<!DOCTYPE html><!--  Last Published: Tue Apr 21 2026 11:33:50 GMT+0000 (Coordinated Universal Time)  -->
+<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69e60b2f16d9365e83a9cc6c"
+  data-wf-site="69e60b2f16d9365e83a9cc56">
+
+<head th:replace="~{layout/fragments/dashboard_layout :: head('Criar Utilizador - Fiinika Comercial')}">
+</head>
+
+<body>
+  <div class="mother-div">
+    <div class="page-content-wrapper">
+      <div th:replace="~{layout/fragments/dashboard_layout :: navbar}"></div>
+      <div data-w-id="287978e4-e45d-6d8f-5d8e-7bd478f34aad" class="content">
+        <section class="criar-page-section">
+          <div class="container">
+            <div class="top-section-navigation">
+              <a href="javascript:history.back()" class="seta-para-tras w-inline-block">
+                <div class="text-block-129">q</div>
+              </a>
+              <div class="titulo">
+                <div class="text-block-130">Criar Utilizador<br></div>
+              </div>
+            </div>
+
+            <!-- Modal triggers -->
+            <input type="hidden" id="operation-error-message" th:if="${errorMessage}" th:value="${errorMessage}">
+
+            <div class="form-wrapper w-form">
+              <form id="wf-form-Criar-Utilizador" th:action="@{/utilizadores/novo}" th:object="${usuarioForm}"
+                method="post" enctype="multipart/form-data" class="form">
+                <div class="form-section tighter">
+                  <div class="criar-content-wrapper">
+                    <div class="photo-upload-input-wrapper"><label for="foto-input"
+                        class="form-field-lable">Imagem</label>
+                      <div class="photo-upload-input-field" onclick="document.getElementById('foto-input').click()" style="cursor: pointer;">
+                        <div class="icon upload-icon">
+                          <div class="main-font-icon">4</div>
+                        </div>
+                        <div class="photo-upload-text">Clique para fazer upload</div>
+                        <div class="photo-upload-text small-gray">Ficheiro deve ter menos de 1MB</div>
+                        <input type="file" id="foto-input" name="foto" style="display: none;" onchange="updateFileName(this)">
+                      </div>
+                      <div class="uploaded-photo-wrapper">
+                        <div class="uploaded-photo-content">
+                          <div class="uploaded-photo-div">
+                            <div class="photo-contain"><img
+                                src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt=""></div>
+                          </div>
+                          <div class="uploaded-photo-info">
+                            <div class="div-block-3">
+                              <div class="uploaded-image-name">imagem-teste.png</div>
+                              <div class="uploaded-image-resolution">200 x 180</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="uploaded-photo-content">
+                          <div class="uploaded-photo-div">
+                            <div class="photo-contain pdf"><img src="../../images/PDF_file_icon.svg.png" sizes="100vw"
+                                srcset="../../images/PDF_file_icon.svg-p-500.png 500w, ../../images/PDF_file_icon.svg-p-800.png 800w, ../../images/PDF_file_icon.svg-p-1080.png 1080w, ../../images/PDF_file_icon.svg.png 1200w"
+                                alt="" class="pdf"></div>
+                          </div>
+                          <div class="uploaded-photo-info">
+                            <div class="div-block-3">
+                              <div class="uploaded-image-name">imagem-teste.png</div>
+                              <div class="uploaded-image-resolution">200 x 180</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="_3-buttons-wrapper">
+                          <a href="#" class="action-button w-inline-block">
+                            <div class="icon quick-action">
+                              <div class="main-font-icon">w</div>
+                              <div class="button-text quick-action-text">Substituir</div>
+                            </div>
+                          </a>
+                          <a href="#" class="action-button w-inline-block">
+                            <div class="icon quick-action">
+                              <div class="main-font-icon">v</div>
+                              <div class="button-text quick-action-text">Eliminar</div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-field-wrapper"><label for="name" class="form-field-lable">Nome</label>
+                      <input class="form-text-field w-input" maxlength="256" th:field="*{nome}"
+                        placeholder="Nome completo" type="text" id="field" required>
+                    </div>
+                    <div class="form-field-wrapper"><label for="Filtro-ano-2" class="form-field-lable">Tipo de
+                        utilizador</label>
+                      <div>
+                        <select th:field="*{role}" class="select-field w-select" required>
+                          <option value="">Selecione...</option>
+                          <option value="ADMIN">Administrador</option>
+                          <option value="OPERADOR">Operador</option>
+                        </select>
+                        <div class="div-block-100"></div>
+                      </div>
+                    </div>
+                    <div class="form-field-wrapper"><label for="name" class="form-field-lable">Nº de
+                        telefone</label><input class="form-text-field w-input" maxlength="256" name="field-2"
+                        data-name="Field 2" placeholder="" type="text" id="field-2"></div>
+                    <div class="form-field-wrapper"><label for="name" class="form-field-lable">Username (E-mail)</label>
+                      <input class="form-text-field w-input" maxlength="256" th:field="*{username}"
+                        placeholder="exemplo@dominio.com" type="email" id="field-email" required>
+                    </div>
+                    <div class="form-field-wrapper"><label for="name" class="form-field-lable">Palavra-passe</label>
+                      <input class="form-text-field w-input" maxlength="256" th:field="*{password}"
+                        placeholder="No mínimo 8 caracteres" type="password" id="field-password" required>
+                    </div>
+                    <div class="create-div">
+                      <button type="submit" class="button main w-button">Criar utilizador</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="html-embed w-embed"></div>
+    <div class="close-flyout"></div>
+  </div>
+  <div class="not-valid">
+    <div class="text-block-116">Dimensão de ecrã não suportada...</div>
+  </div>
+  <div class="close-flyout"></div>
+  <div th:replace="~{layout/fragments/dashboard_layout :: scripts}"></div>
+  <script th:src="@{/js/modals.js}" type="text/javascript"></script>
+  <script>
+    function updateFileName(input) {
+      if (input.files && input.files[0]) {
+        const fileName = input.files[0].name;
+        document.querySelector('.photo-upload-text').innerText = fileName;
+      }
+    }
+  </script>
+
+  <!-- Modais -->
+  <div th:replace="~{layout/fragments/modals :: modals}"></div>
+</body>
+
+</html>
