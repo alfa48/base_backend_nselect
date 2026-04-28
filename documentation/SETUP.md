@@ -7,8 +7,8 @@ Este documento explica como preparar este projeto como base para qualquer nova a
 ## 1. Requisitos Prévios
 Certifica-te de que tens as seguintes ferramentas instaladas:
 - **Java 17** ou superior.
-- **Maven 3.8+**.
-- **Docker e Docker Compose** (Opcional, mas recomendado para a base de dados).
+- **Maven 3.8+** ou **Gradle 7.++**.
+- **Docker e Docker Compose** (Opcional).
 
 ---
 

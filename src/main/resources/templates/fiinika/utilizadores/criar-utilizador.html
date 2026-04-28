@@ -42,7 +42,7 @@
                       <div class="uploaded-photo-wrapper">
                         <div class="uploaded-photo-content">
                           <div class="uploaded-photo-div">
-                            <div class="photo-contain"><img
+                            <div class="photo-contain"><img id="photo-preview"
                                 src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt=""></div>
                           </div>
                           <div class="uploaded-photo-info">
@@ -66,13 +66,13 @@
                           </div>
                         </div>
                         <div class="_3-buttons-wrapper">
-                          <a href="#" class="action-button w-inline-block">
+                          <a href="javascript:void(0)" class="action-button w-inline-block" onclick="document.getElementById('foto-input').click()">
                             <div class="icon quick-action">
                               <div class="main-font-icon">w</div>
                               <div class="button-text quick-action-text">Substituir</div>
                             </div>
                           </a>
-                          <a href="#" class="action-button w-inline-block">
+                          <a href="javascript:void(0)" class="action-button w-inline-block" onclick="removePhoto()">
                             <div class="icon quick-action">
                               <div class="main-font-icon">v</div>
                               <div class="button-text quick-action-text">Eliminar</div>
@@ -136,10 +136,45 @@
   <script>
     function updateFileName(input) {
       if (input.files && input.files[0]) {
-        const fileName = input.files[0].name;
+        const file = input.files[0];
+        const fileName = file.name;
+        
+        // Update text
         document.querySelector('.photo-upload-text').innerText = fileName;
+        document.querySelector('.uploaded-image-name').innerText = fileName;
+
+        // Preview Image
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const previewImg = document.getElementById('photo-preview');
+          previewImg.src = e.target.result;
+          
+          // Show the wrapper
+          document.querySelector('.uploaded-photo-wrapper').style.display = 'flex';
+          
+          // Optional: Hide the PDF preview if it's an image
+          const contents = document.querySelectorAll('.uploaded-photo-content');
+          if (contents.length > 1) {
+            contents[1].style.display = 'none';
+          }
+        }
+        reader.readAsDataURL(file);
       }
+    function removePhoto() {
+        const input = document.getElementById('foto-input');
+        input.value = '';
+        document.querySelector('.photo-upload-text').innerText = 'Clique para fazer upload';
+        document.querySelector('.uploaded-photo-wrapper').style.display = 'none';
+        document.getElementById('photo-preview').src = 'https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg';
     }
+
+    // Hide preview by default
+    document.addEventListener('DOMContentLoaded', function() {
+        const photoWrapper = document.querySelector('.uploaded-photo-wrapper');
+        if (photoWrapper) {
+            photoWrapper.style.display = 'none';
+        }
+    });
   </script>
 
   <!-- Modais -->

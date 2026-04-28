@@ -47,6 +47,33 @@ public class UsuarioService extends BaseApiService {
     }
 
     /**
+     * Busca um utilizador pelo seu publicId ou ID numérico.
+     */
+    public UserDTO getUsuarioByPublicId(String id) {
+        String endpoint = "/usuarios/" + id;
+        log.debug("Chamando API para buscar utilizador: {}", endpoint);
+        return get(endpoint, UserDTO.class);
+    }
+
+    /**
+     * Atualiza os dados de um utilizador.
+     */
+    public String atualizarUsuario(String id, UsuarioCreateRequest request) {
+        String endpoint = "/usuarios/" + id;
+        log.debug("Chamando API para atualizar utilizador: {}", endpoint);
+        return put(endpoint, request, String.class);
+    }
+
+    /**
+     * Elimina um utilizador.
+     */
+    public void eliminarUsuario(String id) {
+        String endpoint = "/usuarios/" + id;
+        log.debug("Chamando API para eliminar utilizador: {}", endpoint);
+        delete(endpoint);
+    }
+
+    /**
      * Atualiza a foto de um utilizador.
      */
     public void atualizarFoto(String publicId, org.springframework.web.multipart.MultipartFile foto) {

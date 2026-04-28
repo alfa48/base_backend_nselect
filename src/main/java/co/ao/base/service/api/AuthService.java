@@ -51,6 +51,7 @@ public class AuthService extends BaseApiService {
     }
 
     public boolean isAuthenticated() {
-        return session.getAttribute("token") != null;
+        var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        return auth != null && auth.isAuthenticated() && !(auth instanceof org.springframework.security.authentication.AnonymousAuthenticationToken);
     }
 }

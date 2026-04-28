@@ -115,3 +115,25 @@ public String upload(@RequestParam("foto") MultipartFile arquivo) {
 > <div onclick="document.getElementById('file-id').click()">Fazer Upload</div>
 > <input type="file" id="file-id" style="display:none">
 > ```
+
+---
+
+## 6. Integração com Spring Security
+Podes controlar o que o utilizador vê com base no seu estado de autenticação ou Roles.
+
+**Verificar se o utilizador está logado:**
+```html
+<div sec:authorize="isAuthenticated()">
+    Bem-vindo, <span sec:authentication="name">Usuário</span>!
+</div>
+```
+
+**Mostrar apenas para Administradores:**
+```html
+<button sec:authorize="hasRole('Administrador')">Eliminar Utilizador</button>
+```
+
+**Mostrar apenas se NÃO estiver logado:**
+```html
+<a th:href="@{/}" sec:authorize="!isAuthenticated()">Fazer Login</a>
+```

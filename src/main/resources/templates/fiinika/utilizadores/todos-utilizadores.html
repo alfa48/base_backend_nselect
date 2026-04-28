@@ -137,7 +137,7 @@
                         </a>
                         <div class="flyout-menu-wrapper table-actions-flyout">
                           <div class="flyout-menu-content in-table">
-                            <a href="#" class="menu-item w-inline-block">
+                            <a th:href="@{/utilizadores/visualizar/{id}(id=${usuario.publicId != null ? usuario.publicId : usuario.id})}" class="menu-item w-inline-block">
                               <div class="menu-icon-wrapper">
                                 <div class="icon menu-left-icon">
                                   <div class="main-font-icon">visibility</div>
@@ -145,7 +145,7 @@
                               </div>
                               <div class="button-text">Visualizar</div>
                             </a>
-                            <a href="#" class="menu-item w-inline-block">
+                            <a th:href="@{/utilizadores/editar/{id}(id=${usuario.publicId != null ? usuario.publicId : usuario.id})}" class="menu-item w-inline-block">
                               <div class="menu-icon-wrapper">
                                 <div class="icon menu-left-icon">
                                   <div class="main-font-icon">edit</div>
@@ -153,7 +153,9 @@
                               </div>
                               <div class="button-text">Editar</div>
                             </a>
-                            <a href="#" class="menu-item w-inline-block">
+                            <a th:href="@{/utilizadores/eliminar/{id}(id=${usuario.publicId != null ? usuario.publicId : usuario.id})}" 
+                               onclick="return confirm('Tem certeza que deseja eliminar este utilizador?')"
+                               class="menu-item w-inline-block">
                               <div class="menu-icon-wrapper">
                                 <div class="icon menu-left-icon">
                                   <div class="main-font-icon">Delete</div>

@@ -13,7 +13,6 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard() {
-        if (!authService.isAuthenticated()) return "redirect:/";
         return "fiinika/dashboard";
     }
 }

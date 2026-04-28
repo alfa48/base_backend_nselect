@@ -9,7 +9,7 @@
   <div class="auth-bg">
     <div class="auth-form-wrapper w-form">
 
-      <form id="wf-form-Login" name="wf-form-Login" data-name="Login" th:action="@{/login}" th:object="${loginRequest}"
+      <form id="wf-form-Login" name="wf-form-Login" data-name="Login" th:action="@{/autenticar}" th:object="${loginRequest}"
         method="post" class="auth-form">
 
         <div class="form-content">
@@ -31,8 +31,8 @@
           </div>
           <div class="form-field-wrapper-2">
             <label for="password" class="field-lable">Senha</label>
-            <input class="text-field w-input" maxlength="256" name="password" data-name="Senha" placeholder="••••••••"
-              type="password" id="password" required="" th:field="*{password}">
+            <input class="text-field w-input" maxlength="256" name="senha" data-name="Senha" placeholder="••••••••"
+              type="password" id="password" required="">
             <div class="restore-password-cta-wrapper">
               <div class="restore-password-cta-text">Esqueceu a senha? <a href="#" class="form-cta">Repor senha</a>
               </div>

@@ -1,6 +1,6 @@
 # Spring Boot BFF Starter - App Base
 
-Este projeto é a **App Base oficial** para o desenvolvimento de novas aplicações na nossa stack. Ele não é apenas um projeto para ser expandido, mas sim o **esqueleto (seed/skeleton)** que deve ser clonado e utilizado como ponto de partida para toda e qualquer nova aplicação que siga o padrão BFF (Backend for Frontend).
+Este projeto é a **App Base oficial** para o desenvolvimento de novas aplicações na nossa stack. Ele não é apenas um projeto para ser expandido, mas sim o **esqueleto** que deve ser clonado e utilizado como ponto de partida para toda e qualquer nova aplicação que siga o padrão (Backend for Frontend).
 
 ## Objetivo da App Base
 
@@ -12,7 +12,7 @@ Providenciar uma estrutura pré-configurada e padronizada para que novos program
 
 ---
 
-## 🛠 Como iniciar uma nova aplicação a partir desta Base
+## Como iniciar uma nova aplicação a partir desta Base
 
 1.  **Clone este repositório** como o seu novo projeto.
 2.  **Renomeie o artefacto** no `pom.xml` (`<artifactId>`).
@@ -25,7 +25,7 @@ Providenciar uma estrutura pré-configurada e padronizada para que novos program
 
 A aplicação funciona como um orquestrador de interface. Ela **não possui base de dados local**. 
 - Todas as operações de leitura e escrita devem ser delegadas para APIs via `BaseApiService`.
-- A lógica de negócio "pesada" reside nos microserviços externos.
+- A lógica de negócio "pesada" reside nas APIs externas.
 
 ---
 

@@ -13,6 +13,9 @@ import org.springframework.web.client.RestClientException;
 
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import co.ao.base.model.UserDTO;
 
 @Slf4j
 @Service
@@ -80,6 +83,43 @@ public abstract class BaseApiService {
     }
 
     /**
+     * Método genérico para execução de chamadas PUT.
+     */
+    protected <T> T put(String endpoint, Object body, Class<T> responseType) {
+        String url = Constant.BASE_URL + endpoint;
+        try {
+            log.info("API REQUEST: PUT {} | Payload: {}", url, body);
+            ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.PUT, getRequestEntity(body), responseType);
+            log.info("API RESPONSE: {} | Status: {}", url, response.getStatusCode());
+            return response.getBody();
+        } catch (HttpStatusCodeException e) {
+            log.error("API HTTP ERROR: {} | Status: {} | Body: {}", url, e.getStatusCode(), e.getResponseBodyAsString());
+            throw e;
+        } catch (Exception e) {
+            log.error("API UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
+            throw new RestClientException("Erro inesperado na chamada da API: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Método genérico para execução de chamadas DELETE.
+     */
+    protected void delete(String endpoint) {
+        String url = Constant.BASE_URL + endpoint;
+        try {
+            log.info("API REQUEST: DELETE {}", url);
+            restTemplate.exchange(url, HttpMethod.DELETE, getRequestEntity(null), Void.class);
+            log.info("API RESPONSE: {} | Status: 204/200 OK", url);
+        } catch (HttpStatusCodeException e) {
+            log.error("API HTTP ERROR: {} | Status: {} | Body: {}", url, e.getStatusCode(), e.getResponseBodyAsString());
+            throw e;
+        } catch (Exception e) {
+            log.error("API UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
+            throw new RestClientException("Erro inesperado na chamada da API: " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * Método genérico para execução de chamadas GET.
      */
     protected <T> T get(String endpoint, Class<T> responseType) {
@@ -137,6 +177,12 @@ public abstract class BaseApiService {
      */
     protected boolean tryRefreshToken() {
         String refreshToken = (String) session.getAttribute("refreshToken");
+        
+        if (refreshToken == null) {
+            UserDTO user = getSessionUser();
+            if (user != null) refreshToken = user.getRefreshToken();
+        }
+
         if (refreshToken == null) {
             log.warn("Sem refresh token disponível na sessão.");
             return false;
@@ -154,7 +200,14 @@ public abstract class BaseApiService {
                 Object newRefresh = response.getBody().get("refresh_token");
                 if (newToken != null) {
                     session.setAttribute("token", newToken.toString());
-                    if (newRefresh != null) session.setAttribute("refreshToken", newRefresh.toString());
+                    UserDTO user = getSessionUser();
+                    if (user != null) {
+                        user.setAccessToken(newToken.toString());
+                        if (newRefresh != null) {
+                            user.setRefreshToken(newRefresh.toString());
+                            session.setAttribute("refreshToken", newRefresh.toString());
+                        }
+                    }
                     log.info("Token renovado com sucesso.");
                     return true;
                 }
@@ -170,6 +223,11 @@ public abstract class BaseApiService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         
         String token = (String) session.getAttribute("token");
+        if (token == null) {
+            UserDTO user = getSessionUser();
+            if (user != null) token = user.getAccessToken();
+        }
+
         if (token != null) {
             headers.set("Authorization", "Bearer " + token);
         }
@@ -183,10 +241,17 @@ public abstract class BaseApiService {
     }
 
     /**
-     * Retorna o utilizador autenticado da sessão.
+     * Retorna o utilizador autenticado da sessão ou do SecurityContext.
      */
-    protected co.ao.base.model.UserDTO getSessionUser() {
-        return (co.ao.base.model.UserDTO) session.getAttribute("user");
+    protected UserDTO getSessionUser() {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user == null) {
+            var auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null && auth.getPrincipal() instanceof UserDTO) {
+                user = (UserDTO) auth.getPrincipal();
+            }
+        }
+        return user;
     }
 
     /**
@@ -194,7 +259,7 @@ public abstract class BaseApiService {
      * Útil para construir rotas que precisam do ID do cliente.
      */
     protected String getSessionPublicId() {
-        co.ao.base.model.UserDTO user = getSessionUser();
+        UserDTO user = getSessionUser();
         return user != null ? user.getPublicId() : null;
     }
 
@@ -202,7 +267,7 @@ public abstract class BaseApiService {
      * Retorna o id numérico do utilizador autenticado.
      */
     protected Long getSessionUserId() {
-        co.ao.base.model.UserDTO user = getSessionUser();
+        UserDTO user = getSessionUser();
         return user != null ? user.getId() : null;
     }
 }

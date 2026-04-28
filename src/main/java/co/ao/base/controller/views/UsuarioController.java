@@ -85,4 +85,71 @@ public class UsuarioController {
             return "fiinika/utilizadores/criar-utilizador";
         }
     }
+
+    @GetMapping("/utilizadores/visualizar/{publicId}")
+    public String visualizarUtilizador(@org.springframework.web.bind.annotation.PathVariable String publicId, Model model) {
+        try {
+            UserDTO usuario = usuarioService.getUsuarioByPublicId(publicId);
+            model.addAttribute("usuario", usuario);
+            return "fiinika/utilizadores/visualizar-utilizador";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Erro ao carregar utilizador: " + e.getMessage());
+            return "redirect:/utilizadores";
+        }
+    }
+
+    @GetMapping("/utilizadores/editar/{publicId}")
+    public String editarUtilizador(@org.springframework.web.bind.annotation.PathVariable String publicId, Model model) {
+        try {
+            UserDTO usuario = usuarioService.getUsuarioByPublicId(publicId);
+            UsuarioCreateRequest form = new UsuarioCreateRequest();
+            form.setNome(usuario.getNome());
+            form.setUsername(usuario.getUsername());
+            form.setRole(usuario.getRole());
+            // Password não enviamos
+            
+            model.addAttribute("usuarioForm", form);
+            model.addAttribute("publicId", publicId);
+            model.addAttribute("fotoUrl", usuario.getFoto());
+            return "fiinika/utilizadores/editar-utilizador";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Erro ao carregar utilizador: " + e.getMessage());
+            return "redirect:/utilizadores";
+        }
+    }
+
+    @PostMapping("/utilizadores/editar/{publicId}")
+    public String salvarEdicao(@org.springframework.web.bind.annotation.PathVariable String publicId,
+                               @ModelAttribute("usuarioForm") UsuarioCreateRequest usuario,
+                               @RequestParam(value = "foto", required = false) org.springframework.web.multipart.MultipartFile foto,
+                               org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttrs,
+                               Model model) {
+        try {
+            usuarioService.atualizarUsuario(publicId, usuario);
+            
+            if (foto != null && !foto.isEmpty()) {
+                usuarioService.atualizarFoto(publicId, foto);
+            }
+            
+            redirectAttrs.addFlashAttribute("successMessage", "Utilizador atualizado com sucesso!");
+            return "redirect:/utilizadores";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Erro ao atualizar utilizador: " + e.getMessage());
+            model.addAttribute("usuarioForm", usuario);
+            model.addAttribute("publicId", publicId);
+            return "fiinika/utilizadores/editar-utilizador";
+        }
+    }
+
+    @GetMapping("/utilizadores/eliminar/{publicId}")
+    public String eliminarUtilizador(@org.springframework.web.bind.annotation.PathVariable String publicId,
+                                     org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttrs) {
+        try {
+            usuarioService.eliminarUsuario(publicId);
+            redirectAttrs.addFlashAttribute("successMessage", "Utilizador eliminado com sucesso!");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("errorMessage", "Erro ao eliminar utilizador: " + e.getMessage());
+        }
+        return "redirect:/utilizadores";
+    }
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/dashboard_layout :: head('Visualizar Utilizador - Fiinika Comercial')}">
+</head>
+<body>
+  <div class="mother-div">
+    <div class="page-content-wrapper">
+      <div th:replace="~{layout/fragments/dashboard_layout :: navbar}"></div>
+      <div class="content">
+        <section class="criar-page-section">
+          <div class="container">
+            <div class="top-section-navigation">
+              <a href="javascript:history.back()" class="seta-para-tras w-inline-block">
+                <div class="text-block-129">q</div>
+              </a>
+              <div class="titulo">
+                <div class="text-block-130">Detalhes do Utilizador<br></div>
+              </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="form-section tighter">
+                  <div class="criar-content-wrapper">
+                    
+                    <div class="photo-upload-input-wrapper" style="text-align: center; margin-bottom: 30px;">
+                      <div class="uploaded-photo-div" style="margin: 0 auto; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 2px solid #eee;">
+                         <img th:src="${usuario.foto != null ? usuario.foto : 'https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg'}" 
+                              style="width: 100%; height: 100%; object-fit: cover;">
+                      </div>
+                    </div>
+
+                    <div class="form-field-wrapper">
+                        <label class="form-field-lable">Nome</label>
+                        <div class="form-text-field" style="background: #f9f9f9; padding: 10px; border-radius: 5px;" th:text="${usuario.nome}">Manuel André</div>
+                    </div>
+
+                    <div class="form-field-wrapper">
+                        <label class="form-field-lable">Tipo de utilizador</label>
+                        <div class="form-text-field" style="background: #f9f9f9; padding: 10px; border-radius: 5px;" th:text="${usuario.role}">Administrador</div>
+                    </div>
+
+                    <div class="form-field-wrapper">
+                        <label class="form-field-lable">Username (E-mail)</label>
+                        <div class="form-text-field" style="background: #f9f9f9; padding: 10px; border-radius: 5px;" th:text="${usuario.username}">manandre@email.com</div>
+                    </div>
+
+                    <div class="form-field-wrapper">
+                        <label class="form-field-lable">Estado</label>
+                        <div class="form-text-field" style="background: #f9f9f9; padding: 10px; border-radius: 5px;">Ativo</div>
+                    </div>
+                    
+                    <div class="create-div" style="margin-top: 30px; display: flex; gap: 10px;">
+                      <a th:href="@{/utilizadores/editar/{id}(id=${usuario.publicId})}" class="button main w-button">Editar utilizador</a>
+                      <a href="javascript:history.back()" class="button w-button" style="background: #ccc; color: #333;">Voltar</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div th:replace="~{layout/fragments/dashboard_layout :: scripts}"></div>
+</body>
+</html>

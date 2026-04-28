@@ -34,4 +34,8 @@ public class AuthViewController {
         model.addAttribute("signupForm", new SignupRequest());
         return "inscricao";
     }
+    @GetMapping("/userLogin")
+    public String userLogin() {
+        return "redirect:/dashboard";
+    }
 }

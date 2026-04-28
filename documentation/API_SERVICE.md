@@ -12,6 +12,9 @@ Todos os teus serviços de API **devem** estender a classe `BaseApiService`. Ela
 - Tratamento de erros HTTP.
 - Refresh automático de Token.
 
+> [!NOTE]
+> O `BaseApiService` agora integra-se com o **Spring Security**. Ele obtém o token automaticamente do `SecurityContextHolder`, o que significa que as chamadas à API funcionam de forma transparente assim que o utilizador está logado.
+
 ---
 
 ## 2. Como Criar um Novo Serviço
