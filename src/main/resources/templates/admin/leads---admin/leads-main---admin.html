@@ -1,0 +1,142 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed00598e555cf1c7a74a5b" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Leads main - Admin')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
+  <section class="section-3 parceiros">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a href="#" class="link-5">q</a>
+            <div class="text-block-258">Leads</div>
+          </div>
+          <div class="div-block-457">
+            <div class="form-block-2 w-form">
+              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3" data-wf-page-id="69ed00598e555cf1c7a74a5b" data-wf-element-id="35d8065a-d4bc-6c01-e5c4-9982cc0018de"><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="">Ano</option>
+                  <option value="First">First choice</option>
+                  <option value="Second">Second choice</option>
+                  <option value="Third">Third choice</option>
+                </select><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="">Mês</option>
+                  <option value="First">First choice</option>
+                  <option value="Second">Second choice</option>
+                  <option value="Third">Third choice</option>
+                </select><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="">Fase</option>
+                  <option value="First">First choice</option>
+                  <option value="Second">Second choice</option>
+                  <option value="Third">Third choice</option>
+                </select><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="">Parceiro</option>
+                  <option value="First">First choice</option>
+                  <option value="Second">Second choice</option>
+                  <option value="Third">Third choice</option>
+                </select></form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-500">
+        <!-- Coluna: LEADS -->
+        <div class="phase-content-wp">
+          <div class="phase-name-wp">
+            <div class="text-block-324">LEADS</div>
+          </div>
+          <th:block th:each="lead : ${leads.content}" th:if="${lead.estado == 'LEAD'}">
+            <div class="pipeline-cardwp">
+              <div class="div-block-497">
+                <div class="text-block-327" th:text="${lead.nome}">Deal name</div>
+                <div class="text-block-328" th:text="${lead.pacotePreco}">$ 9.000</div>
+              </div>
+              <div class="div-block-498">
+                <div class="text-block-329" th:text="${lead.parceiroNome}">Name of partner</div>
+                <a th:href="@{/admin/leads/{id}(id=${lead.publicId})}" class="link-42">8</a>
+              </div>
+              <div class="div-block-499">
+                <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
+              </div>
+            </div>
+          </th:block>
+        </div>
+
+        <!-- Coluna: PENDENTE -->
+        <div class="phase-content-wp">
+          <div class="phase-name-wp">
+            <div class="text-block-324">PENDENTE</div>
+          </div>
+          <th:block th:each="lead : ${leads.content}" th:if="${lead.estado == 'PENDENTE'}">
+            <div class="pipeline-cardwp col-2">
+              <div class="div-block-497">
+                <div class="text-block-327" th:text="${lead.nome}">Deal name</div>
+                <div class="text-block-328" th:text="${lead.pacotePreco}">$ 9.000</div>
+              </div>
+              <div class="div-block-498">
+                <div class="text-block-329" th:text="${lead.parceiroNome}">Name of partner</div>
+                <a th:href="@{/admin/leads/{id}(id=${lead.publicId})}" class="link-42">8</a>
+              </div>
+              <div class="div-block-499">
+                <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
+              </div>
+            </div>
+          </th:block>
+        </div>
+
+        <!-- Coluna: CONVERTIDO -->
+        <div class="phase-content-wp">
+          <div class="phase-name-wp">
+            <div class="text-block-324">CONVERTIDO</div>
+          </div>
+          <th:block th:each="lead : ${leads.content}" th:if="${lead.estado == 'CONVERTIDO'}">
+            <div class="pipeline-cardwp won">
+              <div class="div-block-497">
+                <div class="text-block-327" th:text="${lead.nome}">Deal name</div>
+                <div class="text-block-328" th:text="${lead.pacotePreco}">$ 9.000</div>
+              </div>
+              <div class="div-block-498">
+                <div class="text-block-329" th:text="${lead.parceiroNome}">Name of partner</div>
+                <a th:href="@{/admin/leads/{id}(id=${lead.publicId})}" class="link-42">8</a>
+              </div>
+              <div class="div-block-499">
+                <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
+              </div>
+            </div>
+          </th:block>
+        </div>
+
+        <!-- Coluna: PERDIDO -->
+        <div class="phase-content-wp">
+          <div class="phase-name-wp">
+            <div class="text-block-324">PERDIDO</div>
+          </div>
+          <th:block th:each="lead : ${leads.content}" th:if="${lead.estado == 'PERDIDO'}">
+            <div class="pipeline-cardwp lost">
+              <div class="div-block-497">
+                <div class="text-block-327" th:text="${lead.nome}">Deal name</div>
+                <div class="text-block-328" th:text="${lead.pacotePreco}">$ 9.000</div>
+              </div>
+              <div class="div-block-498">
+                <div class="text-block-329" th:text="${lead.parceiroNome}">Name of partner</div>
+                <a th:href="@{/admin/leads/{id}(id=${lead.publicId})}" class="link-42">8</a>
+              </div>
+              <div class="div-block-499">
+                <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
+              </div>
+            </div>
+          </th:block>
+        </div>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

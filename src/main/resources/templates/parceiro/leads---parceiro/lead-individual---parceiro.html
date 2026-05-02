@@ -1,0 +1,109 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed2bf42f342051644c392e" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Lead individual - Parceiro')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a th:href="@{/parceiro/leads---parceiro/lead-individual---parceiro}" aria-current="page" class="link-5 w--current">q</a>
+            <div class="text-block-258">#646576</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-6 _5">
+        <div class="w-layout-grid grid-3">
+          <div id="w-node-c6163680-e59a-d217-9f55-1f5777ae442a-644c392e">
+            <div class="list-item">
+              <div class="list-item-lable">Nome</div>
+              <div class="list-item" th:text="${lead.nome}">---</div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-lable">Email</div>
+              <div class="list-item" th:text="${lead.email}">---</div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-lable">Telemóvel</div>
+              <div class="list-item" th:text="${lead.telemovel}">---</div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-lable">Criado em</div>
+              <div class="list-item" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy HH:mm')}">-----</div>
+            </div>
+          </div>
+          <div id="w-node-c6163680-e59a-d217-9f55-1f5777ae443f-644c392e">
+            <div class="list-item">
+              <div class="list-item-lable">Estado</div>
+              <div class="status-wrapper" th:classappend="${#strings.toLowerCase(lead.estado)}">
+                <div class="status-text" th:text="${lead.estado}">LEAD</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-lable">Pacote</div>
+              <div class="list-item" th:text="${lead.pacoteNome + ' - KZ ' + #numbers.formatDecimal(lead.pacotePreco, 0, 'POINT', 2, 'COMMA')}">-----</div>
+            </div>
+            <div class="w-layout-grid grid-51">
+              <a href="#" class="action-button full w-inline-block" id="btn-mudar-estado">
+                <div class="icon quick-action">
+                  <div class="main-font-icon">2</div>
+                  <div class="button-text quick-action-text">Mudar estado</div>
+                </div>
+              </a>
+              <a th:href="@{/parceiro/leads/{id}/notas/novo(id=${lead.publicId})}" class="action-button full w-inline-block">
+                <div class="icon quick-action">
+                  <div class="main-font-icon">i</div>
+                  <div class="button-text quick-action-text">Submeter nota</div>
+                </div>
+              </a>
+              <a th:href="@{/parceiro/leads/editar/{id}(id=${lead.publicId})}" class="action-button full w-inline-block">
+                <div class="icon quick-action">
+                  <div class="main-font-icon">u</div>
+                  <div class="button-text quick-action-text">Editar</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Área de Notas -->
+      <div class="div-block-501">
+        <div class="text-block-331">Notas do agente</div>
+        <div id="notes-container">
+          <th:block th:each="nota : ${lead.notas}">
+            <div class="nota-do-parceiro">
+              <div class="text-block-332">i</div>
+              <div class="div-block-502">
+                <p class="paragraph" th:text="${nota.nota}">Lorem ipsum...</p>
+                <div class="text-block-333" th:text="${'Data de criação: ' + #temporals.format(nota.createdAt, 'dd/MM/yyyy HH:mm')}">Data</div>
+                <div class="div-block-505" style="display: flex; gap: 10px;">
+                  <a th:href="@{/parceiro/leads/{leadId}/notas/editar/{notaId}(leadId=${lead.publicId}, notaId=${nota.publicId})}" class="link-45" style="color: #667999;">u</a>
+                  <a href="#" class="link-45 btn-delete-nota" th:data-id="${nota.publicId}" style="color: #ff5b5b;">v</a>
+                </div>
+              </div>
+            </div>
+          </th:block>
+        </div>
+        <div th:if="${#lists.isEmpty(lead.notas)}" id="no-notes-msg" class="text-block-331" style="font-size: 14px; opacity: 0.6;">Sem notas registadas.</div>
+      </div>
+    </div>
+  </section>
+
+  <script th:inline="javascript">
+    const leadId = [[${lead.publicId}]];
+
+    document.querySelectorAll('.btn-delete-nota').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const notaId = this.getAttribute('data-id');
+        Modal.deleteItem(notaId, `/api/leads/${leadId}/notas/${notaId}`, 'esta nota');
+      });
+    });
+  </script>
+
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

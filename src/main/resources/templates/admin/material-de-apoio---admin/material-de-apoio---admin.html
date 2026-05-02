@@ -1,0 +1,67 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed077057818795fe23ad02" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Material de apoio - Admin')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
+  <section class="section-3 parceiros">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a th:href="@{/admin/dashboard}" class="link-5">q</a>
+            <div class="text-block-258">Material de apoio</div>
+          </div>
+          <div class="div-block-457">
+            <a th:href="@{/admin/materiais/novo}" class="link-43" style="margin-left: 20px;">Novo material</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="_8">
+        <!-- Iterar Materiais -->
+        <th:block th:each="material : ${materiais.content}">
+          <div class="main-card">
+            <a th:href="${material.arquivoUrl}" target="_blank" class="main-items-of-card w-inline-block">
+              <div class="icon-div">
+                <div class="text-block-255">c</div>
+              </div>
+              <div class="content-do-card-div">
+                <div class="text-block-256 main" th:text="${material.nome}">Nome do conteudo</div>
+              </div>
+              <div class="content-do-card-div">
+                <div class="text-block-256" th:text="${material.tipoConteudo}">PROMOCIONAL</div>
+              </div>
+              <div class="content-do-card-div status-things">
+                <div class="status-wrapper" th:classappend="${material.tipoConteudo == 'PROMOCIONAL' ? 'pago' : 'nao-pago'}">
+                  <div class="status-text" th:text="${material.tipoConteudo}">PROMOCIONAL</div>
+                </div>
+              </div>
+            </a>
+            <div class="options-side">
+              <a th:href="@{/admin/materiais/editar/{id}(id=${material.publicId})}" class="link-4">u</a>
+              <a href="#" class="link-4 btn-delete-material" th:data-id="${material.publicId}" style="color: #ff4d4d;">v</a>
+            </div>
+          </div>
+        </th:block>
+        
+        <div th:if="${#lists.isEmpty(materiais.content)}" class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
+          Nenhum material de apoio encontrado.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.btn-delete-material').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          Modal.deleteItem(id, `/api/admin/materiais-apoio/${id}`, 'este material');
+        });
+      });
+    });
+  </script>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

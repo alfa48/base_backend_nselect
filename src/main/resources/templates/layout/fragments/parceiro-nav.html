@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section th:fragment="nav" class="nav-nvo">
+  <div data-animation="over-right" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+    <div class="contain-this">
+      <a th:href="@{/parceiro/dashboard}" class="brand w-nav-brand"></a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        <a th:href="@{/parceiro/dashboard}" class="nav-link w-nav-link">Início</a>
+        <a th:href="@{/parceiro/leads}" class="nav-link w-nav-link">Leads</a>
+        <a th:href="@{/parceiro/materiais}" class="nav-link w-nav-link">Material de apoio</a>
+        <a th:href="@{/parceiro/tickets}" class="nav-link w-nav-link">Tickets</a>
+        <div>
+          <a th:href="@{/parceiro/leads/novo}" class="button-5 w-button">Novo Lead</a>
+        </div>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="submit" class="nav-link w-nav-link" style="background: none; border: none; cursor: pointer;">Sair</button>
+        </form>
+      </nav>
+      <div class="menu-button w-nav-button">
+        <div class="w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</html>

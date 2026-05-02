@@ -1,0 +1,157 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed2e96a5bc49a97118d330" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Editar lead - Parceiro')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a href="#" class="link-5">q</a>
+            <div class="text-block-258">Novo lead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-504">
+        <div class="w-form">
+          <form id="form-editar-lead" name="email-form" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="leadPublicId" th:value="${lead.publicId}">
+            <div class="criar-content-wrapper">
+              <div class="form-field-wrapper">
+                <label for="nome" class="form-field-lable">Nome</label>
+                <input class="form-text-field w-input" name="nome" th:value="${lead.nome}" type="text" id="nome" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="email" class="form-field-lable">Email</label>
+                <input class="form-text-field w-input" name="email" th:value="${lead.email}" type="email" id="email" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="telemovel" class="form-field-lable">Telemóvel</label>
+                <input class="form-text-field w-input" name="telemovel" th:value="${lead.telemovel}" type="text" id="telemovel" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="nif" class="form-field-lable">NIF</label>
+                <input class="form-text-field w-input" name="nif" th:value="${lead.nif}" type="text" id="nif" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="pacotePublicId" class="form-field-lable">Pacote que o lead pretende comprar</label>
+                <select id="pacotePublicId" name="pacotePublicId" class="select-field w-select" required>
+                  <option value="">Selecione...</option>
+                  <option value="pac_1" th:selected="${lead.pacotePublicId == 'pac_1'}">KZ 5.500</option>
+                  <option value="pac_2" th:selected="${lead.pacotePublicId == 'pac_2'}">KZ 30.000</option>
+                  <option value="pac_3" th:selected="${lead.pacotePublicId == 'pac_3'}">KZ 60.000</option>
+                  <option value="pac_4" th:selected="${lead.pacotePublicId == 'pac_4'}">KZ 118.000</option>
+                </select>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="estado" class="form-field-lable">Estado</label>
+                <select id="estado" name="estado" class="select-field w-select" required>
+                  <option value="LEAD" th:selected="${lead.estado == 'LEAD'}">Lead</option>
+                  <option value="PENDENTE" th:selected="${lead.estado == 'PENDENTE'}">Pendente</option>
+                  <option value="CONVERTIDO" th:selected="${lead.estado == 'CONVERTIDO'}">Convertido</option>
+                  <option value="PERDIDO" th:selected="${lead.estado == 'PERDIDO'}">Perdido</option>
+                </select>
+              </div>
+              
+              <div class="photo-upload-input-wrapper">
+                <label for="comprovativo" class="form-field-lable">Comprovativo (lead convertido)</label>
+                <input type="file" id="comprovativo" name="comprovativo" style="display: none;" onchange="updateFileName(this)">
+                <div class="photo-upload-input-field" onclick="document.getElementById('comprovativo').click()" style="cursor: pointer;">
+                  <div class="icon upload-icon">
+                    <div class="main-font-icon">4</div>
+                  </div>
+                  <div class="photo-upload-text" id="file-name-display">Clique para fazer upload</div>
+                  <div class="photo-upload-text small-gray">Ficheiro deve ter menos que 1MB</div>
+                </div>
+              </div>
+
+              <div class="create-this">
+                <button type="submit" class="button main mobile w-button">Salvar Alterações</button>
+              </div>
+            </div>
+          </form>
+
+          <script>
+            function updateFileName(input) {
+              const fileName = input.files[0] ? input.files[0].name : 'Clique para fazer upload';
+              document.getElementById('file-name-display').innerText = fileName;
+            }
+
+            document.getElementById('form-editar-lead').addEventListener('submit', function(e) {
+              e.preventDefault();
+              const leadId = document.getElementById('leadPublicId').value;
+              const formData = new FormData(this);
+              
+              const dados = {
+                nome: formData.get('nome'),
+                email: formData.get('email'),
+                telemovel: formData.get('telemovel'),
+                nif: formData.get('nif'),
+                pacotePublicId: formData.get('pacotePublicId'),
+                estado: formData.get('estado')
+              };
+
+              const multipartData = new FormData();
+              multipartData.append('dados', JSON.stringify(dados));
+              if (formData.get('comprovativo')) {
+                multipartData.append('comprovativo', formData.get('comprovativo'));
+              }
+
+              Modal.showLoading('A actualizar lead...');
+
+              fetch('/api/leads/' + leadId, {
+                method: 'PUT',
+                body: multipartData
+              })
+              .then(res => res.json())
+              .then(data => {
+                Modal.hideLoading();
+                if (data.message) {
+                  Modal.toast(data.message);
+                  setTimeout(() => { window.location.href = '/parceiro/leads/' + leadId; }, 1500);
+                } else {
+                  Modal.error(data.error || 'Erro ao atualizar lead');
+                }
+              })
+              .catch(err => {
+                Modal.hideLoading();
+                Modal.error('Erro de rede');
+              });
+            });
+          </script>
+          <div class="w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div>
+        </div>
+      </div>
+      <div class="div-block-106">
+        <button type="button" class="action-button cncel w-inline-block btn-delete-lead" th:data-id="${lead.publicId}">
+            <div class="icon quick-action">
+                <div class="main-font-icon" style="color: #ff5b5b;">v</div>
+                <div class="button-text quick-action-text" style="color: #ff5b5b;">Apagar Lead</div>
+            </div>
+        </button>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.btn-delete-lead').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const leadId = this.getAttribute('data-id');
+          Modal.deleteItem(leadId, `/api/leads/${leadId}`, 'este lead', () => {
+            window.location.href = '/parceiro/leads';
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

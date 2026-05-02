@@ -1,0 +1,179 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed096596489b254403df8c" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Criar material - Admin')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a href="#" class="link-5">q</a>
+            <div class="text-block-258">Novo material</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-458">
+        <div class="w-form">
+          <form id="form-criar-material" name="email-form" method="post" enctype="multipart/form-data">
+            <div class="criar-content-wrapper">
+              <div class="photo-upload-input-wrapper">
+                <label class="form-field-lable">Ficheiro (PDF ou Imagem)</label>
+                <div class="photo-upload-input-field" id="upload-box" onclick="document.getElementById('arquivo').click()" style="cursor: pointer; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #c9d7f0; border-radius: 8px; background-color: #f8fbff; transition: all 0.3s ease;">
+                  <div id="upload-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+                    <div class="icon upload-icon" style="margin-bottom: 10px;">
+                      <div class="main-font-icon">4</div>
+                    </div>
+                    <div class="photo-upload-text" style="margin-bottom: 4px;">Clique para fazer upload</div>
+                    <div class="photo-upload-text small-gray">Ficheiro deve ter menos que 1MB</div>
+                  </div>
+                  
+                  <!-- Preview Integrado -->
+                  <div id="integrated-preview" style="display:none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;">
+                    <img id="preview-img-integrated" src="" style="max-height: 80px; max-width: 100%; object-fit: contain; margin-bottom: 10px; display: none;">
+                    <div id="preview-pdf-icon" class="main-font-icon" style="font-size: 40px; margin-bottom: 10px; display: none;">c</div>
+                    <div id="integrated-filename" style="font-size: 13px; color: #667999; font-weight: 500; text-align: center; word-break: break-all; padding: 0 10px;"></div>
+                    <div style="margin-top: 10px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique para trocar</div>
+                  </div>
+                  
+                  <input type="file" id="arquivo" name="arquivo" style="display:none" accept=".pdf,image/*" required>
+                </div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="nome" class="form-field-lable">Nome do material</label>
+                <input class="form-text-field w-input" name="nome" placeholder="Ex: Manual do Parceiro" type="text" id="nome" required>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label class="form-field-lable">Para</label>
+                <div class="div-block-100"></div>
+                <label class="w-checkbox checkbox-field-3">
+                  <input type="checkbox" name="tiposParceiro" value="REPRESENTANTE" class="w-checkbox-input checkbox-3">
+                  <span class="checkbox-label-2 w-form-label">Representante Certificado</span>
+                </label>
+                <label class="w-checkbox checkbox-field-3">
+                  <input type="checkbox" name="tiposParceiro" value="AGENTE" class="w-checkbox-input checkbox-3">
+                  <span class="checkbox-label-2 w-form-label">Agente</span>
+                </label>
+                <label class="w-checkbox checkbox-field-3">
+                  <input type="checkbox" name="tiposParceiro" value="PARCEIRO" class="w-checkbox-input checkbox-3">
+                  <span class="checkbox-label-2 w-form-label">Partner</span>
+                </label>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="tipoConteudo" class="form-field-lable">Tipo de conteúdo</label>
+                <select id="tipoConteudo" name="tipoConteudo" class="select-field w-select" required>
+                  <option value="">Selecione...</option>
+                  <option value="PROMOCIONAL">Promocional</option>
+                  <option value="EDUCATIVO">Educativo</option>
+                </select>
+                <div class="div-block-100"></div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="tagPromocional" class="form-field-lable">Promocional (tag)</label>
+                <select id="tagPromocional" name="tagPromocional" class="select-field w-select">
+                  <option value="">Selecione...</option>
+                  <option value="Campanha 2026">Campanha 2026</option>
+                  <option value="Oferta Especial">Oferta Especial</option>
+                </select>
+                <div class="div-block-100"></div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="tagEducativo" class="form-field-lable">Educativo (tag)</label>
+                <select id="tagEducativo" name="tagEducativo" class="select-field w-select">
+                  <option value="">Selecione...</option>
+                  <option value="Manual Técnico">Manual Técnico</option>
+                  <option value="Guia de Vendas">Guia de Vendas</option>
+                </select>
+                <div class="div-block-100"></div>
+              </div>
+
+              <div class="create-this">
+                <button type="submit" class="button main mobile w-button">Salvar Material</button>
+              </div>
+            </div>
+          </form>
+          <script th:inline="javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+              const form = document.getElementById('form-criar-material');
+              const arquivoInput = document.getElementById('arquivo');
+              const uploadPlaceholder = document.getElementById('upload-placeholder');
+              const integratedPreview = document.getElementById('integrated-preview');
+              const previewImg = document.getElementById('preview-img-integrated');
+              const previewPdfIcon = document.getElementById('preview-pdf-icon');
+              const filenameDisplay = document.getElementById('integrated-filename');
+              
+              arquivoInput.addEventListener('change', e => {
+                const file = e.target.files[0];
+                if(file) {
+                  uploadPlaceholder.style.display = 'none';
+                  integratedPreview.style.display = 'flex';
+                  filenameDisplay.innerText = file.name;
+                  
+                  if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = ev => {
+                      previewImg.src = ev.target.result;
+                      previewImg.style.display = 'block';
+                      previewPdfIcon.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                  } else {
+                    previewImg.style.display = 'none';
+                    previewPdfIcon.style.display = 'block';
+                  }
+                }
+              });
+
+              form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const tiposParceiro = Array.from(form.querySelectorAll('input[name="tiposParceiro"]:checked')).map(cb => cb.value);
+
+                const dados = {
+                  nome: formData.get('nome'),
+                  tipoConteudo: formData.get('tipoConteudo'),
+                  tagPromocional: formData.get('tagPromocional'),
+                  tagEducativo: formData.get('tagEducativo'),
+                  tiposParceiroPublicIds: tiposParceiro
+                };
+
+                const multipartData = new FormData();
+                multipartData.append('arquivo', formData.get('arquivo'));
+                multipartData.append('dados', JSON.stringify(dados));
+
+                Modal.showLoading('A guardar material...');
+                fetch('/api/admin/materiais-apoio', {
+                  method: 'POST',
+                  body: multipartData
+                })
+                .then(res => res.json().catch(() => res.ok ? {message: 'Sucesso'} : {error: 'Erro'}))
+                .then(data => {
+                  Modal.hideLoading();
+                  if (data.message || !data.error) {
+                    Modal.toast(data.message || 'Material criado com sucesso!');
+                    setTimeout(() => { window.location.href = '/admin/materiais'; }, 1500);
+                  } else {
+                    Modal.error(data.error || 'Erro ao criar material.');
+                  }
+                })
+                .catch(err => {
+                  Modal.hideLoading();
+                  Modal.error('Erro de rede.');
+                });
+              });
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

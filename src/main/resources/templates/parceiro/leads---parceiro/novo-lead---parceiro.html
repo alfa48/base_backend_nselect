@@ -1,0 +1,94 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed2d293672be5f2f2174fa" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Novo lead - Parceiro')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a href="#" class="link-5">q</a>
+            <div class="text-block-258">Novo lead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-504">
+        <div class="w-form">
+          <form id="form-novo-lead" name="email-form" method="post" action="/api/leads">
+            <div class="criar-content-wrapper">
+              <div class="form-field-wrapper">
+                <label for="nome" class="form-field-lable">Nome</label>
+                <input class="form-text-field w-input" name="nome" placeholder="Nome completo" type="text" id="nome" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="email" class="form-field-lable">Email</label>
+                <input class="form-text-field w-input" name="email" placeholder="Email" type="email" id="email" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="telemovel" class="form-field-lable">Telemóvel</label>
+                <input class="form-text-field w-input" name="telemovel" placeholder="Telemóvel" type="text" id="telemovel" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="nif" class="form-field-lable">NIF</label>
+                <input class="form-text-field w-input" name="nif" placeholder="NIF" type="text" id="nif" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="pacotePublicId" class="form-field-lable">Pacote que o lead pretende comprar</label>
+                <select id="pacotePublicId" name="pacotePublicId" class="select-field w-select" required>
+                  <option value="">Selecione...</option>
+                  <!-- Estes valores devem vir do banco/API no futuro -->
+                  <option value="pac_1">KZ 5.500</option>
+                  <option value="pac_2">KZ 30.000</option>
+                  <option value="pac_3">KZ 60.000</option>
+                  <option value="pac_4">KZ 118.000</option>
+                </select>
+              </div>
+              <div class="create-this">
+                <button type="submit" class="button main mobile w-button">Salvar</button>
+              </div>
+            </div>
+          </form>
+
+          <script>
+            document.getElementById('form-novo-lead').addEventListener('submit', function(e) {
+              e.preventDefault();
+              const formData = new FormData(this);
+              const data = Object.fromEntries(formData.entries());
+
+              Modal.showLoading('A criar lead...');
+
+              fetch('/api/leads', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+              })
+              .then(response => response.json())
+              .then(result => {
+                Modal.hideLoading();
+                if (result.publicId) {
+                  Modal.toast('Lead criado com sucesso!');
+                  setTimeout(() => {
+                    window.location.href = '/parceiro/leads';
+                  }, 1500);
+                } else {
+                  Modal.error('Erro: ' + (result.error || 'Erro desconhecido'));
+                }
+              })
+              .catch(error => {
+                Modal.hideLoading();
+                console.error('Error:', error);
+                Modal.error('Erro ao conectar com o servidor');
+              });
+            });
+          </script>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

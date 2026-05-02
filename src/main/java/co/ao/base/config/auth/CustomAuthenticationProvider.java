@@ -34,12 +34,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             if (userDTO != null && userDTO.getAccessToken() != null) {
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 if (userDTO.getRole() != null) {
-                    // Spring Security hasRole checks for ROLE_ prefix by default
-                    authorities.add(new SimpleGrantedAuthority("ROLE_" + userDTO.getRole()));
+                    // Standardize role to uppercase to match security config and controller checks
+                    String role = userDTO.getRole().toUpperCase();
+                    authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
                 } else {
                     // AJUSTE TEMPORÁRIO: Se a API não devolver role, assumimos Administrador para testes
                     System.out.println("DEBUG SECURITY: Role ausente na API. Atribuindo Administrador temporariamente.");
-                    authorities.add(new SimpleGrantedAuthority("ROLE_Administrador"));
+                    authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 }
 
                 // Return authenticated token

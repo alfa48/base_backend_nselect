@@ -29,11 +29,31 @@ public class AuthViewController {
     @GetMapping("/inscricao")
     public String signupPage(Model model) {
         if (authService.isAuthenticated()) return "redirect:/dashboard";
-        
-        // Usando um nome diferente para evitar qualquer conflito
         model.addAttribute("signupForm", new SignupRequest());
         return "inscricao";
     }
+
+    @GetMapping("/dashboard")
+    public String dashboardRedirect() {
+        var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated()) {
+            boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+            
+            if (isAdmin) {
+                return "redirect:/admin/dashboard?success=Login+efetuado+com+sucesso";
+            }
+            
+            boolean isParceiro = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_PARCEIRO"));
+            
+            if (isParceiro) {
+                return "redirect:/parceiro/dashboard?success=Login+efetuado+com+sucesso";
+            }
+        }
+        return "redirect:/";
+    }
+
     @GetMapping("/userLogin")
     public String userLogin() {
         return "redirect:/dashboard";

@@ -1,0 +1,82 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed0c55321d78262dfb7d25" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Tickets - Admin')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
+  <section class="section-3 parceiros">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a href="#" class="link-5">q</a>
+            <div class="text-block-258">Tickets</div>
+            <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256" name="query" placeholder="Pesquisar" type="search" id="search" required=""><input type="submit" class="search-button w-button" value="x"></form>
+          </div>
+          <div class="div-block-457">
+            <div class="form-block-2 w-form">
+              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3" data-wf-page-id="69ed0c55321d78262dfb7d25" data-wf-element-id="35d8065a-d4bc-6c01-e5c4-9982cc0018de"><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="">Tipo</option>
+                  <option value="First">First choice</option>
+                  <option value="Second">Second choice</option>
+                  <option value="Third">Third choice</option>
+                </select><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="">Data início</option>
+                  <option value="First">First choice</option>
+                  <option value="Second">Second choice</option>
+                  <option value="Third">Third choice</option>
+                </select><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="">Data fim</option>
+                  <option value="First">First choice</option>
+                  <option value="Second">Second choice</option>
+                  <option value="Third">Third choice</option>
+                </select></form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="_8">
+        <!-- Error message -->
+        <div th:if="${error}" class="text-block-256" style="color: #ff4d4d; text-align: center; padding: 20px;" th:text="${error}">Erro ao carregar dados.</div>
+
+        <!-- Iterar Tickets -->
+        <th:block th:if="${tickets != null}" th:each="ticket : ${tickets.content}">
+          <div class="main-card">
+            <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId})}" class="main-items-of-card w-inline-block">
+              <div class="icon-div">
+                <div class="text-block-255">2</div>
+              </div>
+              <div class="content-do-card-div">
+                <div class="text-block-256 main" th:text="${ticket.conteudo}">Parte do conteudo do ticket</div>
+              </div>
+              <div class="content-do-card-div">
+                <div class="text-block-256" th:text="${ticket.tipo}">TIPO</div>
+              </div>
+              <div class="content-do-card-div status-things">
+                <div class="status-wrapper" th:classappend="${ticket.estado != null ? #strings.toLowerCase(ticket.estado) : ''}">
+                  <div class="status-text" th:text="${ticket.estado}">ABERTO</div>
+                </div>
+              </div>
+            </a>
+            <div class="options-side">
+              <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId})}" class="link-4">8</a>
+            </div>
+          </div>
+        </th:block>
+
+        <div th:if="${tickets == null || #lists.isEmpty(tickets.content)}" class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
+          Nenhum ticket encontrado.
+        </div>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

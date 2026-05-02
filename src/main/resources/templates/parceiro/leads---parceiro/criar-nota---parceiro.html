@@ -1,0 +1,49 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed2f156a89c2b8ea73ade1" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Criar Nota - Parceiro')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a th:href="@{/parceiro/leads/{id}(id=${leadId})}" class="link-5">q</a>
+            <div class="text-block-258">Criar nota</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-504">
+        <div class="w-form">
+          <form id="form-nota">
+            <input type="hidden" id="leadId" th:value="${leadId}">
+            <div class="criar-content-wrapper">
+              <div class="form-field-wrapper">
+                <label class="form-field-lable">Lead</label>
+                <div class="text-block-335" th:text="${lead != null ? lead.nome : 'Lead Desconhecido'}" style="font-weight: 600; font-size: 16px; margin-top: 5px;">Nome do Lead</div>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="nota" class="form-field-lable">Nota</label>
+                <div class="div-block-100"></div>
+                <textarea placeholder="Escreva a sua nota aqui..." maxlength="5000" id="nota" name="nota" class="form-text-field _2 _888 w-input" required style="min-height: 120px;"></textarea>
+              </div>
+              <div class="create-this">
+                <button type="submit" class="button main mobile w-button" style="border: none; width: 100%;">Salvar Nota</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+
+  <script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      const leadId = document.getElementById('leadId').value;
+      Modal.submitJson('form-nota', `/api/leads/${leadId}/notas`, 'POST', `/parceiro/leads/${leadId}`);
+    });
+  </script>
+</body></html>

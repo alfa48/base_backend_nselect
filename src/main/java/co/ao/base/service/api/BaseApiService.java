@@ -29,34 +29,9 @@ public abstract class BaseApiService {
 
     /**
      * Método genérico para execução de chamadas POST.
-     * Centraliza LOGS, Headers e Tratamento de Erros.
      */
     protected <T> T post(String endpoint, Object body, Class<T> responseType) {
-        String url = Constant.BASE_URL + endpoint;
-        try {
-            log.info("API REQUEST: POST {} | Payload: {}", url, body);
-            ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.POST, getRequestEntity(body), responseType);
-            log.info("API RESPONSE: {} | Status: {}", url, response.getStatusCode());
-            return response.getBody();
-        } catch (HttpStatusCodeException e) {
-            if (e.getStatusCode().value() == 401 || e.getStatusCode().value() == 403) {
-                log.warn("Token expirado ({}). A tentar refresh...", e.getStatusCode().value());
-                if (tryRefreshToken()) {
-                    // Retry com novo token
-                    ResponseEntity<T> retry = restTemplate.exchange(url, HttpMethod.POST, getRequestEntity(body), responseType);
-                    log.info("API RETRY RESPONSE: {} | Status: {}", url, retry.getStatusCode());
-                    return retry.getBody();
-                }
-            }
-            log.error("API HTTP ERROR: {} | Status: {} | Body: {}", url, e.getStatusCode(), e.getResponseBodyAsString());
-            throw e;
-        } catch (ResourceAccessException e) {
-            log.error("API CONNECTION ERROR: {} | Message: {}", url, e.getMessage());
-            throw e;
-        } catch (Exception e) {
-            log.error("API UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
-            throw new RestClientException("Erro inesperado na chamada da API: " + e.getMessage(), e);
-        }
+        return execute(endpoint, HttpMethod.POST, getRequestEntity(body), responseType);
     }
 
     /**
@@ -83,53 +58,76 @@ public abstract class BaseApiService {
     }
 
     /**
-     * Método genérico para execução de chamadas PUT.
+     * Método para chamadas MULTIPART (Upload de arquivos) com PUT.
      */
-    protected <T> T put(String endpoint, Object body, Class<T> responseType) {
+    protected <T> T putMultipart(String endpoint, org.springframework.util.MultiValueMap<String, Object> body, Class<T> responseType) {
         String url = Constant.BASE_URL + endpoint;
         try {
-            log.info("API REQUEST: PUT {} | Payload: {}", url, body);
-            ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.PUT, getRequestEntity(body), responseType);
+            HttpHeaders headers = getHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            HttpEntity<org.springframework.util.MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+
+            log.info("API REQUEST (MULTIPART): PUT {}", url);
+            ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.PUT, entity, responseType);
             log.info("API RESPONSE: {} | Status: {}", url, response.getStatusCode());
             return response.getBody();
         } catch (HttpStatusCodeException e) {
-            log.error("API HTTP ERROR: {} | Status: {} | Body: {}", url, e.getStatusCode(), e.getResponseBodyAsString());
+            log.error("API MULTIPART ERROR: {} | Status: {} | Body: {}", url, e.getStatusCode(), e.getResponseBodyAsString());
             throw e;
         } catch (Exception e) {
-            log.error("API UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
-            throw new RestClientException("Erro inesperado na chamada da API: " + e.getMessage(), e);
+            log.error("API MULTIPART UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
+            throw new RestClientException("Erro no upload: " + e.getMessage(), e);
         }
+    }
+
+    /**
+     * Método genérico para execução de chamadas PUT.
+     */
+    protected <T> T put(String endpoint, Object body, Class<T> responseType) {
+        return execute(endpoint, HttpMethod.PUT, getRequestEntity(body), responseType);
+    }
+
+    /**
+     * Método genérico para execução de chamadas PATCH.
+     */
+    protected <T> T patch(String endpoint, Object body, Class<T> responseType) {
+        return execute(endpoint, HttpMethod.PATCH, getRequestEntity(body), responseType);
     }
 
     /**
      * Método genérico para execução de chamadas DELETE.
      */
     protected void delete(String endpoint) {
-        String url = Constant.BASE_URL + endpoint;
-        try {
-            log.info("API REQUEST: DELETE {}", url);
-            restTemplate.exchange(url, HttpMethod.DELETE, getRequestEntity(null), Void.class);
-            log.info("API RESPONSE: {} | Status: 204/200 OK", url);
-        } catch (HttpStatusCodeException e) {
-            log.error("API HTTP ERROR: {} | Status: {} | Body: {}", url, e.getStatusCode(), e.getResponseBodyAsString());
-            throw e;
-        } catch (Exception e) {
-            log.error("API UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
-            throw new RestClientException("Erro inesperado na chamada da API: " + e.getMessage(), e);
-        }
+        execute(endpoint, HttpMethod.DELETE, getRequestEntity(null), Void.class);
     }
 
     /**
      * Método genérico para execução de chamadas GET.
      */
     protected <T> T get(String endpoint, Class<T> responseType) {
+        return execute(endpoint, HttpMethod.GET, getRequestEntity(null), responseType);
+    }
+
+    /**
+     * Método centralizado para execução de chamadas à API com suporte a retries e logging.
+     */
+    protected <T> T execute(String endpoint, HttpMethod method, HttpEntity<?> entity, Class<T> responseType) {
         String url = Constant.BASE_URL + endpoint;
         try {
-            log.info("API REQUEST: GET {}", url);
-            ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.GET, getRequestEntity(null), responseType);
+            log.info("API REQUEST: {} {} | Payload: {}", method, url, entity.getBody());
+            ResponseEntity<T> response = restTemplate.exchange(url, method, entity, responseType);
             log.info("API RESPONSE: {} | Status: {}", url, response.getStatusCode());
             return response.getBody();
         } catch (HttpStatusCodeException e) {
+            if (e.getStatusCode().value() == 401 || e.getStatusCode().value() == 403) {
+                log.warn("Token expirado ({}). A tentar refresh...", e.getStatusCode().value());
+                if (tryRefreshToken()) {
+                    HttpEntity<?> newEntity = new HttpEntity<>(entity.getBody(), getHeaders());
+                    ResponseEntity<T> retry = restTemplate.exchange(url, method, newEntity, responseType);
+                    log.info("API RETRY RESPONSE: {} | Status: {}", url, retry.getStatusCode());
+                    return retry.getBody();
+                }
+            }
             log.error("API HTTP ERROR: {} | Status: {} | Body: {}", url, e.getStatusCode(), e.getResponseBodyAsString());
             throw e;
         } catch (ResourceAccessException e) {
@@ -141,21 +139,30 @@ public abstract class BaseApiService {
         }
     }
 
+
     /**
      * Método genérico para execução de chamadas GET com suporte a Generics (ex: List, Page).
      */
     protected <T> T get(String endpoint, ParameterizedTypeReference<T> responseType) {
+        return execute(endpoint, HttpMethod.GET, getRequestEntity(null), responseType);
+    }
+
+    /**
+     * Método centralizado para execução de chamadas à API (Generics) com suporte a retries e logging.
+     */
+    protected <T> T execute(String endpoint, HttpMethod method, HttpEntity<?> entity, ParameterizedTypeReference<T> responseType) {
         String url = Constant.BASE_URL + endpoint;
         try {
-            log.info("API REQUEST: GET (Generic) {}", url);
-            ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.GET, getRequestEntity(null), responseType);
+            log.info("API REQUEST (Generic): {} {}", method, url);
+            ResponseEntity<T> response = restTemplate.exchange(url, method, entity, responseType);
             log.info("API RESPONSE: {} | Status: {}", url, response.getStatusCode());
             return response.getBody();
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode().value() == 401 || e.getStatusCode().value() == 403) {
                 log.warn("Token expirado ({}). A tentar refresh...", e.getStatusCode().value());
                 if (tryRefreshToken()) {
-                    ResponseEntity<T> retry = restTemplate.exchange(url, HttpMethod.GET, getRequestEntity(null), responseType);
+                    HttpEntity<?> newEntity = new HttpEntity<>(entity.getBody(), getHeaders());
+                    ResponseEntity<T> retry = restTemplate.exchange(url, method, newEntity, responseType);
                     log.info("API RETRY RESPONSE: {} | Status: {}", url, retry.getStatusCode());
                     return retry.getBody();
                 }

@@ -1,0 +1,100 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69ed11beb9682e0bcfb26a77"
+  data-wf-site="69ece585cad09a74baae0d40">
+
+<head th:replace="~{layout/fragments/head :: head('Dashboard - Parceiro')}"></head>
+
+<body>
+  <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
+  <section class="section-3 main">
+    <div class="contain-this">
+      <div>
+        <div class="w-layout-grid grid-50">
+          <div class="div-block-453">
+            <div class="text-block-253">Meus leads</div>
+            <div class="text-block-254" th:text="${overview.totalLeads}">0</div>
+            <div>
+              <div class="kpi-bottom-section">
+                <div class="kpi-stats-wrapper" th:if="${overview != null}">
+                  <div class="kpi-stats" th:classappend="${overview.totalLeadsTrend >= 0 ? 'positive' : 'negative'}">
+                    <div class="icon kpi-stats-icon">
+                      <div class="main-font-icon smaller-icon" th:text="${overview.totalLeadsTrend >= 0 ? '8' : 'trending_down'}">8</div>
+                    </div>
+                    <div class="stats" th:text="${#numbers.formatDecimal(overview.totalLeadsTrend, 1, 2) + '%'}">8.26%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="div-block-453">
+            <div class="text-block-253">Minha faturação</div>
+            <div class="text-block-254"
+              th:text="${'KZ ' + #numbers.formatDecimal(overview.faturacaoTotal, 0, 'POINT', 2, 'COMMA')}">KZ 0,00</div>
+            <div>
+              <div class="kpi-bottom-section">
+                <div class="kpi-stats-wrapper" th:if="${overview != null}">
+                  <div class="kpi-stats" th:classappend="${overview.faturacaoTotalTrend >= 0 ? 'positive' : 'negative'}">
+                    <div class="icon kpi-stats-icon">
+                      <div class="main-font-icon smaller-icon" th:text="${overview.faturacaoTotalTrend >= 0 ? '8' : 'trending_down'}">8</div>
+                    </div>
+                    <div class="stats" th:text="${#numbers.formatDecimal(overview.faturacaoTotalTrend, 1, 2) + '%'}">8.26%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="div-block-454">
+        <div class="text-block-334">Últimos leads</div>
+        <!-- Iterar Últimos Leads -->
+        <th:block th:each="lead : ${recentLeads.content}">
+          <div class="main-card">
+            <a th:href="@{/parceiro/leads/{id}(id=${lead.publicId})}" class="main-items-of-card w-inline-block">
+              <div class="icon-div">
+                <div class="text-block-255">m</div>
+              </div>
+              <div class="content-do-card-div">
+                <div class="text-block-256 main" th:text="${lead.nome}">Nome do lead</div>
+              </div>
+              <div class="content-do-card-div">
+                <div class="text-block-256" th:text="${lead.pacotePreco}">KZ 5.500</div>
+              </div>
+              <div class="content-do-card-div status-things">
+                <div class="status-wrapper" th:classappend="${#strings.toLowerCase(lead.estado)}">
+                  <div class="status-text" th:text="${lead.estado}">LEAD</div>
+                </div>
+              </div>
+            </a>
+            <div class="options-side">
+              <a th:href="@{/parceiro/leads/{id}(id=${lead.publicId})}" class="link-4">8</a>
+              <a th:href="@{/parceiro/leads/editar/{id}(id=${lead.publicId})}" class="link-4">u</a>
+              <button type="button" class="link-4 btn-delete-lead" th:data-id="${lead.publicId}" onclick="return false;">v</button>
+            </div>
+          </div>
+        </th:block>
+
+        <div th:if="${#lists.isEmpty(recentLeads.content)}" class="text-block-256"
+          style="text-align: center; padding: 20px; opacity: 0.6;">
+          Nenhum lead encontrado.
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-4">
+    <a th:href="@{/parceiro/leads/novo}" class="button-6 w-button">Novo Lead</a>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.btn-delete-lead').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          const leadId = this.getAttribute('data-id');
+          Modal.deleteItem(leadId, `/api/leads/${leadId}`, 'este lead');
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

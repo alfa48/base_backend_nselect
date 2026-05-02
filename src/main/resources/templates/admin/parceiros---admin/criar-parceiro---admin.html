@@ -1,0 +1,184 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ecf89200130569cd61c24f" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Criar parceiro - Admin')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a href="#" class="link-5">q</a>
+            <div class="text-block-258">Criar parceiro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-458">
+        <div class="w-form">
+          <form id="form-criar-parceiro" name="email-form" data-name="Email Form" method="post" enctype="multipart/form-data">
+            <div class="criar-content-wrapper">
+              <div class="photo-upload-input-wrapper">
+                <label class="form-field-lable">Imagem (Foto)</label>
+                <div class="photo-upload-input-field" id="foto-box" onclick="document.getElementById('foto').click()" style="cursor: pointer; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #c9d7f0; border-radius: 8px; background-color: #f8fbff; transition: all 0.3s ease;">
+                  <div id="foto-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+                    <div class="icon upload-icon" style="margin-bottom: 10px;">
+                      <div class="main-font-icon">4</div>
+                    </div>
+                    <div class="photo-upload-text" style="margin-bottom: 4px;">Clique para fazer upload</div>
+                  </div>
+                  
+                  <!-- Preview Integrado Foto -->
+                  <div id="foto-preview" style="display:none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;">
+                    <img id="preview-img-foto" src="" style="max-height: 100px; max-width: 100%; object-fit: contain; margin-bottom: 5px;">
+                    <div id="foto-filename" style="font-size: 11px; color: #667999; text-align: center;"></div>
+                  </div>
+                  
+                  <input type="file" id="foto" name="foto" style="display:none" accept="image/*">
+                </div>
+              </div>
+
+              <div class="photo-upload-input-wrapper">
+                <label class="form-field-lable">Anexo (BI, Passaporte)</label>
+                <div class="photo-upload-input-field" id="doc-box" onclick="document.getElementById('documento').click()" style="cursor: pointer; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #c9d7f0; border-radius: 8px; background-color: #f8fbff; transition: all 0.3s ease;">
+                  <div id="doc-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+                    <div class="icon upload-icon" style="margin-bottom: 10px;">
+                      <div class="main-font-icon">4</div>
+                    </div>
+                    <div class="photo-upload-text" style="margin-bottom: 4px;">Clique para fazer upload</div>
+                  </div>
+                  
+                  <!-- Preview Integrado Documento -->
+                  <div id="doc-preview" style="display:none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;">
+                    <div id="doc-icon" class="main-font-icon" style="font-size: 40px; margin-bottom: 10px;">c</div>
+                    <div id="doc-filename" style="font-size: 11px; color: #667999; text-align: center; word-break: break-all;"></div>
+                  </div>
+                  
+                  <input type="file" id="documento" name="documento" style="display:none" accept=".pdf,image/*">
+                </div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="nome" class="form-field-lable">Nome do parceiro</label>
+                <input class="form-text-field w-input" name="nome" placeholder="Nome completo" type="text" id="nome" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="nif" class="form-field-lable">NIF</label>
+                <input class="form-text-field w-input" name="nif" placeholder="Número de Identificação Fiscal" type="text" id="nif" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="iban" class="form-field-lable">IBAN</label>
+                <input class="form-text-field w-input" name="iban" placeholder="AO06..." type="text" id="iban">
+              </div>
+              <div class="form-field-wrapper">
+                <label for="tipoParceiroPublicId" class="form-field-lable">Tipo de parceiro</label>
+                <select id="tipoParceiroPublicId" name="tipoParceiroPublicId" class="select-field w-select" required>
+                  <option value="">Selecione...</option>
+                  <!-- Estes IDs devem vir de um endpoint de enums, mas por agora simulamos -->
+                  <option value="tipo-partner-uuid">Partner</option>
+                  <option value="tipo-representante-uuid">Representante Certificado</option>
+                  <option value="tipo-agente-uuid">Agente</option>
+                </select>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="provinciaPublicId" class="form-field-lable">Província</label>
+                <select id="provinciaPublicId" name="provinciaPublicId" class="select-field w-select" required>
+                  <option value="">Selecione...</option>
+                  <option value="luanda-uuid">Luanda</option>
+                  <option value="benguela-uuid">Benguela</option>
+                  <option value="huambo-uuid">Huambo</option>
+                </select>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="telefone" class="form-field-lable">Nº de telefone</label>
+                <input class="form-text-field w-input" name="telefone" placeholder="Ex: 923..." type="text" id="telefone" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="email" class="form-field-lable">E-mail</label>
+                <input class="form-text-field w-input" name="email" placeholder="email@exemplo.com" type="email" id="email" required>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="password" class="form-field-lable">Senha padrão</label>
+                <input class="form-text-field w-input" name="password" placeholder="Mínimo 8 caracteres" type="password" id="password" required>
+              </div>
+              <div class="create-this">
+                <button type="submit" class="button main mobile w-button">Salvar</button>
+              </div>
+            </div>
+          </form>
+          <script th:inline="javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+              const form = document.getElementById('form-criar-parceiro');
+              const fotoInput = document.getElementById('foto');
+              const docInput = document.getElementById('documento');
+
+              fotoInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                  document.getElementById('foto-placeholder').style.display = 'none';
+                  document.getElementById('foto-preview').style.display = 'flex';
+                  document.getElementById('foto-filename').innerText = file.name;
+                  const reader = new FileReader();
+                  reader.onload = ev => { document.getElementById('preview-img-foto').src = ev.target.result; };
+                  reader.readAsDataURL(file);
+                }
+              });
+
+              docInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                  document.getElementById('doc-placeholder').style.display = 'none';
+                  document.getElementById('doc-preview').style.display = 'flex';
+                  document.getElementById('doc-filename').innerText = file.name;
+                }
+              });
+
+              form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const dados = {
+                  nome: formData.get('nome'),
+                  nif: formData.get('nif'),
+                  iban: formData.get('iban'),
+                  telefone: formData.get('telefone'),
+                  email: formData.get('email'),
+                  password: formData.get('password'),
+                  tipoParceiroPublicId: formData.get('tipoParceiroPublicId'),
+                  provinciaPublicId: formData.get('provinciaPublicId')
+                };
+
+                const multipartData = new FormData();
+                multipartData.append('dados', JSON.stringify(dados));
+                if (fotoInput.files[0]) multipartData.append('foto', fotoInput.files[0]);
+                if (docInput.files[0]) multipartData.append('documento', docInput.files[0]);
+
+                Modal.showLoading('A criar parceiro...');
+                fetch('/api/admin/parceiros', {
+                  method: 'POST',
+                  body: multipartData
+                })
+                .then(res => res.json())
+                .then(data => {
+                  Modal.hideLoading();
+                  if (data.publicId || data.message) {
+                    Modal.toast(data.message || 'Parceiro criado com sucesso!');
+                    setTimeout(() => { window.location.href = '/admin/parceiros'; }, 1500);
+                  } else {
+                    Modal.error(data.error || 'Erro ao criar parceiro');
+                  }
+                })
+                .catch(err => {
+                  Modal.hideLoading();
+                  Modal.error('Erro de rede');
+                });
+              });
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

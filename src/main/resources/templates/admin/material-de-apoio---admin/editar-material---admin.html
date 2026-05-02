@@ -1,0 +1,193 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ed0a5ba55ac9035ef6c845" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Editar material - Admin')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a th:href="@{/admin/materiais}" class="link-5">q</a>
+            <div class="text-block-258">Editar material</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-458">
+        <div class="w-form">
+          <form id="form-editar-material" name="email-form" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="publicId" th:value="${material.publicId}">
+            
+            <div class="criar-content-wrapper">
+              <div class="photo-upload-input-wrapper">
+                <label class="form-field-lable">Ficheiro (PDF ou Imagem) - Opcional para manter o atual</label>
+                <div class="photo-upload-input-field" id="upload-box" onclick="document.getElementById('arquivo').click()" style="cursor: pointer; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #c9d7f0; border-radius: 8px; background-color: #f8fbff;">
+                  <!-- Estado Inicial (Mostra o atual se existir) -->
+                  <div id="upload-placeholder" th:style="${material.arquivoUrl != null} ? 'display: none' : 'display: flex; flex-direction: column; align-items: center;'">
+                    <div class="icon upload-icon" style="margin-bottom: 10px;">
+                      <div class="main-font-icon">4</div>
+                    </div>
+                    <div class="photo-upload-text">Clique para alterar ficheiro</div>
+                  </div>
+                  
+                  <!-- Preview Integrado (Sempre visível se houver arquivoUrl inicial) -->
+                  <div id="integrated-preview" th:style="${material.arquivoUrl != null} ? 'display: flex; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;' : 'display:none;'">
+                    <img id="preview-img-integrated" th:src="${material.arquivoUrl}" th:style="${material.arquivoUrl != null && !material.arquivoUrl.endsWith('.pdf')} ? 'max-height: 80px; max-width: 100%; object-fit: contain; margin-bottom: 10px; display: block;' : 'display: none;'">
+                    <div id="preview-pdf-icon" class="main-font-icon" th:style="${material.arquivoUrl != null && material.arquivoUrl.endsWith('.pdf')} ? 'font-size: 40px; margin-bottom: 10px; display: block;' : 'display: none;'">c</div>
+                    <div id="integrated-filename" th:text="${material.nome}" style="font-size: 13px; color: #667999; font-weight: 500; text-align: center; word-break: break-all; padding: 0 10px;"></div>
+                    <div style="margin-top: 10px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique para trocar</div>
+                  </div>
+                  
+                  <input type="file" id="arquivo" name="arquivo" style="display:none" accept=".pdf,image/*">
+                </div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="nome" class="form-field-lable">Nome do material</label>
+                <input class="form-text-field w-input" name="nome" th:value="${material.nome}" type="text" id="nome" required>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label class="form-field-lable">Para</label>
+                <div class="div-block-100"></div>
+                <label class="w-checkbox checkbox-field-3">
+                  <input type="checkbox" name="tiposParceiro" value="REPRESENTANTE" class="w-checkbox-input checkbox-3" th:checked="${#lists.contains(material.tiposParceiroPublicIds, 'REPRESENTANTE')}">
+                  <span class="checkbox-label-2 w-form-label">Representante Certificado</span>
+                </label>
+                <label class="w-checkbox checkbox-field-3">
+                  <input type="checkbox" name="tiposParceiro" value="AGENTE" class="w-checkbox-input checkbox-3" th:checked="${#lists.contains(material.tiposParceiroPublicIds, 'AGENTE')}">
+                  <span class="checkbox-label-2 w-form-label">Agente</span>
+                </label>
+                <label class="w-checkbox checkbox-field-3">
+                  <input type="checkbox" name="tiposParceiro" value="PARCEIRO" class="w-checkbox-input checkbox-3" th:checked="${#lists.contains(material.tiposParceiroPublicIds, 'PARCEIRO')}">
+                  <span class="checkbox-label-2 w-form-label">Partner</span>
+                </label>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="tipoConteudo" class="form-field-lable">Tipo de conteúdo</label>
+                <select id="tipoConteudo" name="tipoConteudo" class="select-field w-select" required>
+                  <option value="PROMOCIONAL" th:selected="${material.tipoConteudo == 'PROMOCIONAL'}">Promocional</option>
+                  <option value="EDUCATIVO" th:selected="${material.tipoConteudo == 'EDUCATIVO'}">Educativo</option>
+                </select>
+                <div class="div-block-100"></div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="tagPromocional" class="form-field-lable">Promocional (tag)</label>
+                <select id="tagPromocional" name="tagPromocional" class="select-field w-select">
+                  <option value="">Selecione...</option>
+                  <option value="Campanha 2026" th:selected="${material.tagPromocional == 'Campanha 2026'}">Campanha 2026</option>
+                  <option value="Oferta Especial" th:selected="${material.tagPromocional == 'Oferta Especial'}">Oferta Especial</option>
+                </select>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="tagEducativo" class="form-field-lable">Educativo (tag)</label>
+                <select id="tagEducativo" name="tagEducativo" class="select-field w-select">
+                  <option value="">Selecione...</option>
+                  <option value="Manual Técnico" th:selected="${material.tagEducativo == 'Manual Técnico'}">Manual Técnico</option>
+                  <option value="Guia de Vendas" th:selected="${material.tagEducativo == 'Guia de Vendas'}">Guia de Vendas</option>
+                </select>
+              </div>
+
+              <div class="create-this" style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
+                <button type="submit" class="button main mobile w-button" style="margin: 0; flex: 1;">Salvar Alterações</button>
+                <a href="#" id="btn-eliminar" class="action-button cncel w-inline-block" style="margin: 0; height: 100%; display: flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 8px;">
+                  <div class="icon quick-action" style="margin: 0;">
+                    <div class="main-font-icon">v</div>
+                    <div class="button-text quick-action-text">Eliminar</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </form>
+          
+          <script th:inline="javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+              const form = document.getElementById('form-editar-material');
+              const publicId = document.getElementById('publicId').value;
+              const arquivoInput = document.getElementById('arquivo');
+              
+              // Eliminar Material
+              document.getElementById('btn-eliminar').addEventListener('click', function(e) {
+                e.preventDefault();
+                Modal.deleteItem(publicId, `/api/admin/materiais-apoio/${publicId}`, 'este material', () => {
+                  window.location.href = '/admin/materiais';
+                });
+              });
+
+              // Preview logic
+              arquivoInput.addEventListener('change', e => {
+                const file = e.target.files[0];
+                if(file) {
+                  document.getElementById('upload-placeholder').style.display = 'none';
+                  const preview = document.getElementById('integrated-preview');
+                  preview.style.display = 'flex';
+                  document.getElementById('integrated-filename').innerText = file.name;
+                  
+                  if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = ev => {
+                      const img = document.getElementById('preview-img-integrated');
+                      img.src = ev.target.result;
+                      img.style.display = 'block';
+                      document.getElementById('preview-pdf-icon').style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                  } else {
+                    document.getElementById('preview-img-integrated').style.display = 'none';
+                    document.getElementById('preview-pdf-icon').style.display = 'block';
+                  }
+                }
+              });
+
+              form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const tiposParceiro = Array.from(form.querySelectorAll('input[name="tiposParceiro"]:checked')).map(cb => cb.value);
+
+                const dados = {
+                  nome: formData.get('nome'),
+                  tipoConteudo: formData.get('tipoConteudo'),
+                  tagPromocional: formData.get('tagPromocional'),
+                  tagEducativo: formData.get('tagEducativo'),
+                  tiposParceiroPublicIds: tiposParceiro
+                };
+
+                const multipartData = new FormData();
+                if (arquivoInput.files[0]) multipartData.append('arquivo', arquivoInput.files[0]);
+                multipartData.append('dados', JSON.stringify(dados));
+
+                Modal.showLoading('A guardar alterações...');
+                fetch(`/api/admin/materiais-apoio/${publicId}`, {
+                  method: 'PUT',
+                  body: multipartData
+                })
+                .then(res => res.json().catch(() => res.ok ? {message: 'Sucesso'} : {error: 'Erro'}))
+                .then(data => {
+                  Modal.hideLoading();
+                  if (data.message || !data.error) {
+                    Modal.toast(data.message || 'Material atualizado com sucesso!');
+                    setTimeout(() => { window.location.href = '/admin/materiais'; }, 1500);
+                  } else {
+                    Modal.error(data.error || 'Erro ao atualizar material.');
+                  }
+                })
+                .catch(err => {
+                  Modal.hideLoading();
+                  Modal.error('Erro de rede.');
+                });
+              });
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

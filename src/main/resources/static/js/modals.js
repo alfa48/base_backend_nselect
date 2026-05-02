@@ -1,66 +1,205 @@
 /**
- * Helper para gestão de Modais (Fiinika Design System)
+ * Utilitário para exibição de modais modernos usando SweetAlert2
  */
-
-function openModal(type, title, message, confirmUrl, confirmText) {
-    const wrapper = $('.modals-wrapper');
-    const modal = $(`#modal-${type}`);
-
-    if (title) modal.find('.modal-header').text(title);
-    if (message) modal.find('.modal-subtext').text(message);
-    
-    if (type === 'warning' && confirmUrl) {
-        $('#modal-confirm-btn').attr('href', confirmUrl);
-        if (confirmText) $('#modal-confirm-text').text(confirmText);
-    }
-
-    wrapper.show().css('opacity', 1);
-    modal.show().css({
-        'opacity': 1,
-        'transform': 'translate3d(0, 0, 0) scale3d(1, 1, 1)'
-    });
-}
-
-function closeModal() {
-    $('.modals-wrapper').hide().css('opacity', 0);
-    $('.modal').hide().css({
-        'opacity': 0,
-        'transform': 'translate3d(0, -120%, 0) scale3d(1, 1, 1)'
-    });
-}
-
-// Atalhos para facilitar o uso
 const Modal = {
-    success: (msg, title) => openModal('success', title || 'Sucesso!', msg),
-    error: (msg, title) => openModal('error', title || 'Erro!', msg),
-    confirm: (msg, url, title, btnText) => openModal('warning', title || 'Confirmação', msg, url, btnText || 'Sim, continuar')
+    // Modal de sucesso
+    success: (message, title = 'Sucesso!') => {
+        return Swal.fire({
+            title: title,
+            text: message,
+            icon: 'success',
+            confirmButtonColor: '#007bff'
+        });
+    },
+
+    // Modal de erro
+    error: (message, title = 'Erro') => {
+        return Swal.fire({
+            title: title,
+            text: message,
+            icon: 'error',
+            confirmButtonColor: '#ff4d4d'
+        });
+    },
+
+    // Modal de aviso
+    warning: (message, title = 'Aviso') => {
+        return Swal.fire({
+            title: title,
+            text: message,
+            icon: 'warning',
+            confirmButtonColor: '#ffc107'
+        });
+    },
+
+    // Modal de confirmação para ações perigosas
+    confirm: (title, message, confirmText = 'Sim, eliminar!', cancelText = 'Cancelar') => {
+        return Swal.fire({
+            title: title || 'Tens a certeza?',
+            text: message,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff4d4d',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: confirmText,
+            cancelButtonText: cancelText
+        });
+    },
+
+    // Atalho para eliminar itens via AJAX
+    deleteItem: (id, url, itemName = 'este item', successCallback) => {
+        Modal.confirm('Eliminar', `Deseja realmente eliminar ${itemName}?`).then((result) => {
+            if (result.isConfirmed) {
+                Modal.showLoading('A eliminar...');
+                fetch(url, { method: 'DELETE' })
+                    .then(res => res.json())
+                    .then(data => {
+                        Modal.hideLoading();
+                        if (data.message) {
+                            Modal.toast(data.message, 'success');
+                            if (successCallback) successCallback(data);
+                            else setTimeout(() => location.reload(), 1500);
+                        } else {
+                            Modal.error(data.error || 'Erro ao eliminar item.');
+                        }
+                    })
+                    .catch(err => {
+                        Modal.hideLoading();
+                        Modal.error('Erro de rede ao tentar eliminar.');
+                    });
+            }
+        });
+    },
+
+    // Atalho para submeter formulários via AJAX (Multipart ou JSON)
+    submitForm: (formId, url, method = 'POST', successUrlOrCallback) => {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            Modal.showLoading('A processar...');
+
+            fetch(url, {
+                method: method,
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                Modal.hideLoading();
+                if (data.message) {
+                    Modal.toast(data.message, 'success');
+                    if (typeof successUrlOrCallback === 'function') {
+                        successUrlOrCallback(data);
+                    } else if (successUrlOrCallback) {
+                        setTimeout(() => { window.location.href = successUrlOrCallback.replace('{id}', data.publicId || ''); }, 1500);
+                    } else {
+                        setTimeout(() => location.reload(), 1500);
+                    }
+                } else {
+                    Modal.error(data.error || 'Ocorreu um erro no processamento.');
+                }
+            })
+            .catch(err => {
+                Modal.hideLoading();
+                Modal.error('Erro de rede ao submeter formulário.');
+            });
+        });
+    },
+
+    // Modal de carregamento (Progress indeterminado)
+    showLoading: (message = 'A processar...', title = 'Aguarde um momento') => {
+        Swal.fire({
+            title: title,
+            text: message,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+    },
+
+    // Fechar modal de carregamento
+    hideLoading: () => {
+        Swal.close();
+    },
+
+    // Notificação rápida (Toast)
+    toast: (message, icon = 'success') => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+        Toast.fire({
+            icon: icon,
+            title: message
+        });
+    },
+
+    // Atalho para submeter JSON via AJAX
+    submitJson: (formId, url, method = 'POST', successUrlOrCallback) => {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const jsonData = {};
+            formData.forEach((value, key) => jsonData[key] = value);
+            
+            Modal.showLoading('A processar...');
+
+            fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jsonData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                Modal.hideLoading();
+                if (data.message) {
+                    Modal.toast(data.message, 'success');
+                    if (typeof successUrlOrCallback === 'function') {
+                        successUrlOrCallback(data);
+                    } else if (successUrlOrCallback) {
+                        setTimeout(() => { window.location.href = successUrlOrCallback.replace('{id}', data.publicId || ''); }, 1500);
+                    } else {
+                        setTimeout(() => location.reload(), 1500);
+                    }
+                } else {
+                    Modal.error(data.error || 'Ocorreu um erro no processamento.');
+                }
+            })
+            .catch(err => {
+                Modal.hideLoading();
+                Modal.error('Erro de rede ao submeter.');
+            });
+        });
+    },
+
+    // Mostrar modal se houver mensagem no URL ou no model (Thymeleaf)
+    checkMessages: () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+            Modal.toast(urlParams.get('success'), 'success');
+        }
+        if (urlParams.has('error')) {
+            Modal.error(urlParams.get('error'));
+        }
+    }
 };
 
-// Auto-trigger baseado em parâmetros de URL ou elementos ocultos
-$(document).ready(function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    // Sucesso via URL
-    if (urlParams.has('loginSuccess')) {
-        Modal.success('Bem-vindo de volta! Login efetuado com sucesso.', 'Olá!');
-        window.history.replaceState({}, document.title, window.location.pathname);
-    }
-
-    // Sucesso via Elemento Oculto (Flash Attribute do Thymeleaf)
-    const successMsg = $('#server-success-message').val();
-    if (successMsg) {
-        Modal.success(successMsg, 'Sucesso!');
-    }
-
-    // Erro via Elemento Oculto (Thymeleaf)
-    const serverError = $('#server-error-message').val();
-    if (serverError) {
-        Modal.error(serverError, 'Erro de Autenticação');
-    }
-
-    // Erro de operação (criar/editar)
-    const operationError = $('#operation-error-message').val();
-    if (operationError) {
-        Modal.error(operationError, 'Erro!');
-    }
+// Verificar mensagens ao carregar
+document.addEventListener('DOMContentLoaded', () => {
+    Modal.checkMessages();
 });

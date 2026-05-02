@@ -1,0 +1,223 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ecfc86e511f7f8461b54ce" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Editar parceiro - Admin')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a th:href="@{/admin/parceiros}" class="link-5">q</a>
+            <div class="text-block-258">Editar parceiro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="div-block-458">
+        <div class="w-form">
+          <form id="form-editar-parceiro" name="email-form" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="publicId" th:value="${parceiro.publicId}">
+            <div class="criar-content-wrapper">
+              <div class="photo-upload-input-wrapper">
+                <label class="form-field-lable">Imagem (Foto)</label>
+                <div class="photo-upload-input-field" id="foto-box" onclick="document.getElementById('foto').click()" style="cursor: pointer; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #c9d7f0; border-radius: 8px; background-color: #f8fbff;">
+                  <!-- Placeholder -->
+                  <div id="foto-placeholder" th:style="${parceiro.getFotoUrl() != null} ? 'display: none' : 'display: flex; flex-direction: column; align-items: center;'">
+                    <div class="icon upload-icon" style="margin-bottom: 10px;">
+                      <div class="main-font-icon">4</div>
+                    </div>
+                    <div class="photo-upload-text">Clique para alterar a foto</div>
+                  </div>
+                  
+                  <!-- Preview Integrado -->
+                  <div id="foto-preview" th:style="${parceiro.getFotoUrl() != null} ? 'display: flex; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;' : 'display:none;'">
+                    <img id="preview-img-foto" th:src="${parceiro.getFotoUrl()}" style="max-height: 100px; max-width: 100%; object-fit: contain; margin-bottom: 5px;">
+                    <div id="foto-filename" th:text="${parceiro.nome + ' - Foto'}" style="font-size: 11px; color: #667999; text-align: center;"></div>
+                    <div style="margin-top: 5px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique para trocar</div>
+                  </div>
+                  
+                  <input type="file" id="foto" name="foto" style="display:none" accept="image/*">
+                </div>
+              </div>
+              
+              <div class="photo-upload-input-wrapper">
+                <label class="form-field-lable">Anexo (BI, Passaporte)</label>
+                <div class="photo-upload-input-field" id="doc-box" onclick="document.getElementById('documento').click()" style="cursor: pointer; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #c9d7f0; border-radius: 8px; background-color: #f8fbff;">
+                  <!-- Placeholder -->
+                  <div id="doc-placeholder" th:style="${parceiro.getDocumentoUrl() != null} ? 'display: none' : 'display: flex; flex-direction: column; align-items: center;'">
+                    <div class="icon upload-icon" style="margin-bottom: 10px;">
+                      <div class="main-font-icon">4</div>
+                    </div>
+                    <div class="photo-upload-text">Clique para alterar o documento</div>
+                  </div>
+                  
+                  <!-- Preview Integrado -->
+                  <div id="doc-preview" th:style="${parceiro.getDocumentoUrl() != null} ? 'display: flex; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;' : 'display:none;'">
+                    <div class="main-font-icon" style="font-size: 40px; margin-bottom: 10px;">c</div>
+                    <div id="doc-filename" th:text="${parceiro.nome + ' - Documento'}" style="font-size: 11px; color: #667999; text-align: center; word-break: break-all;"></div>
+                    <div style="margin-top: 5px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique para trocar</div>
+                  </div>
+                  
+                  <input type="file" id="documento" name="documento" style="display:none" accept=".pdf,image/*">
+                </div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="nome" class="form-field-lable">Nome do parceiro</label>
+                <input class="form-text-field w-input" name="nome" th:value="${parceiro.nome}" type="text" id="nome" required>
+              </div>
+              
+              <div class="form-field-wrapper">
+                <label for="nif" class="form-field-lable">NIF</label>
+                <input class="form-text-field w-input" name="nif" th:value="${parceiro.nif}" type="text" id="nif">
+              </div>
+              
+              <div class="form-field-wrapper">
+                <label for="iban" class="form-field-lable">IBAN</label>
+                <input class="form-text-field w-input" name="iban" th:value="${parceiro.iban}" type="text" id="iban">
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="tipoParceiroPublicId" class="form-field-lable">Tipo de parceiro</label>
+                <select id="tipoParceiroPublicId" name="tipoParceiroPublicId" class="select-field w-select">
+                  <option value="tipo-partner-uuid" th:selected="${parceiro.tipoParceiroNome == 'PARCEIRO'}">Partner</option>
+                  <option value="tipo-representante-uuid" th:selected="${parceiro.tipoParceiroNome == 'REPRESENTANTE'}">Representante Certificado</option>
+                  <option value="tipo-agente-uuid" th:selected="${parceiro.tipoParceiroNome == 'AGENTE'}">Agente</option>
+                </select>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="provinciaPublicId" class="form-field-lable">Província</label>
+                <select id="provinciaPublicId" name="provinciaPublicId" class="select-field w-select">
+                  <option value="luanda-uuid" th:selected="${parceiro.provinciaNome == 'Luanda'}">Luanda</option>
+                  <option value="benguela-uuid" th:selected="${parceiro.provinciaNome == 'Benguela'}">Benguela</option>
+                </select>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="telefone" class="form-field-lable">Nº de telefone</label>
+                <input class="form-text-field w-input" name="telefone" th:value="${parceiro.telefone}" type="text" id="telefone">
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="email" class="form-field-lable">E-mail</label>
+                <input class="form-text-field w-input" name="email" th:value="${parceiro.email}" type="email" id="email">
+              </div>              <div class="create-this" style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
+                <button type="submit" class="button main mobile w-button" style="margin: 0; flex: 1;">Salvar Alterações</button>
+                <a href="#" id="btn-eliminar" class="action-button cncel w-inline-block" style="margin: 0; height: 100%; display: flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 8px;">
+                  <div class="icon quick-action" style="margin: 0;">
+                    <div class="main-font-icon">v</div>
+                    <div class="button-text quick-action-text">Eliminar</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+
+  <script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('form-editar-parceiro');
+      const publicId = document.getElementById('publicId').value;
+      
+      // Handlers para preview de Foto
+      document.getElementById('foto').addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+          document.getElementById('foto-placeholder').style.display = 'none';
+          document.getElementById('foto-preview').style.display = 'flex';
+          document.getElementById('foto-filename').innerText = file.name;
+          
+          const reader = new FileReader();
+          reader.onload = e => {
+            document.getElementById('preview-img-foto').src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Handlers para preview de Documento
+      document.getElementById('documento').addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+          document.getElementById('doc-placeholder').style.display = 'none';
+          document.getElementById('doc-preview').style.display = 'flex';
+          document.getElementById('doc-filename').innerText = file.name;
+        }
+      });
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const dados = {
+          nome: formData.get('nome'),
+          nif: formData.get('nif'),
+          iban: formData.get('iban'),
+          telefone: formData.get('telefone'),
+          email: formData.get('email'),
+          tipoParceiroPublicId: formData.get('tipoParceiroPublicId'),
+          provinciaPublicId: formData.get('provinciaPublicId')
+        };
+
+        const multipartData = new FormData();
+        const fotoInput = document.getElementById('foto');
+        const docInput = document.getElementById('documento');
+        
+        if (fotoInput.files[0]) multipartData.append('foto', fotoInput.files[0]);
+        if (docInput.files[0]) multipartData.append('documento', docInput.files[0]);
+        multipartData.append('dados', JSON.stringify(dados));
+
+        Modal.showLoading('A guardar alterações...');
+        fetch(`/api/admin/parceiros/${publicId}`, {
+          method: 'PUT',
+          body: multipartData
+        })
+        .then(response => {
+          Modal.hideLoading();
+          if (response.ok) {
+            Modal.toast('Parceiro atualizado com sucesso!');
+            setTimeout(() => {
+              window.location.href = '/admin/parceiros';
+            }, 1500);
+          } else {
+            Modal.error('Erro ao atualizar parceiro.');
+          }
+        })
+        .catch(error => {
+          Modal.hideLoading();
+          console.error('Error:', error);
+          Modal.error('Erro de rede ao atualizar parceiro.');
+        });
+      });
+
+      // Eliminar
+      document.getElementById('btn-eliminar').addEventListener('click', function(e) {
+        e.preventDefault();
+        Modal.confirm('Tem a certeza que deseja apagar este parceiro?', () => {
+          Modal.showLoading('A eliminar parceiro...');
+          fetch(`/api/admin/parceiros/${publicId}`, {
+            method: 'DELETE'
+          })
+          .then(response => {
+            Modal.hideLoading();
+            if (response.ok) {
+              window.location.href = '/admin/parceiros?success=Parceiro+apagado+com+sucesso';
+            } else {
+              Modal.error('Erro ao apagar parceiro.');
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+</body>
+</html>

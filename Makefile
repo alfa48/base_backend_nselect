@@ -37,5 +37,17 @@ shell: ## Abre um terminal interativo dentro do contentor da aplicação
 test: ## Executa os testes unitários dentro do ambiente Docker
 	sudo docker compose run --rm app ./mvnw test
 
-dev: ## Executa a aplicação localmente (fora do Docker) para desenvolvimento
-	mvn spring-boot:run
+dev: ## Executa a aplicação localmente (fora do Docker) com perfil 'dev'
+	SPRING_PROFILES_ACTIVE=dev mvn spring-boot:run
+
+mock-up: ## Inicia o ambiente mock (API + DB) para testes
+	sudo docker compose -f docker-compose.mock.yml up -d
+
+mock-down: ## Para o ambiente mock
+	sudo docker compose -f docker-compose.mock.yml down
+
+mock-logs: ## Mostra os logs da API mock
+	sudo docker compose -f docker-compose.mock.yml logs -f api
+
+mock-db-shell: ## Entra no terminal da base de dados mock
+	sudo docker exec -it mock-db psql -U postgres -d libera_db

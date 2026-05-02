@@ -1,53 +1,42 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69e60b2f16d9365e83a9cc55"
-  data-wf-site="69e60b2f16d9365e83a9cc56">
-
-<head th:replace="~{layout/fragments/auth :: head('Login - Fiinika Comercial')}">
-</head>
-
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69ece585cad09a74baae0d43" data-wf-site="69ece585cad09a74baae0d40">
+<head th:replace="~{layout/fragments/head :: head('Dexa Contas')}"></head>
 <body>
   <div class="auth-bg">
     <div class="auth-form-wrapper w-form">
-
-      <form id="wf-form-Login" name="wf-form-Login" data-name="Login" th:action="@{/autenticar}" th:object="${loginRequest}"
-        method="post" class="auth-form">
-
+      <form id="wf-form-Login" name="wf-form-Login" data-name="Login" th:action="@{/autenticar}" method="post" class="auth-form" data-wf-page-id="69ece585cad09a74baae0d43" data-wf-element-id="8baebe63-9127-f0b4-2a38-35a779b5cb60">
         <div class="form-content">
-
-          <div th:replace="~{layout/fragments/auth :: logoHeader}"></div>
-
-          <div class="form-header">
-            <h1 class="pages-h2">Faça login para continuar</h1>
+          <div class="form-header flex">
+            <div class="form-logo-wrapper"><img sizes="(max-width: 750px) 100vw, 750px" th:srcset="@{/images/dexa-contas.logo-p-500.png} + ' 500w, ' + @{/images/dexa-contas.logo.png} + ' 750w'" th:src="@{/images/dexa-contas.logo.png}" loading="eager" alt="Jornal O Pais - Logotipo"></div>
           </div>
-
-          <div th:if="${error}">
-             <input type="hidden" id="server-error-message" th:value="${error}">
-          </div>
-
-          <div class="form-field-wrapper-2">
-            <label for="username" class="field-lable">Email</label>
-            <input class="text-field w-input" maxlength="256" name="username" data-name="Email"
-              placeholder="seu@email.com" type="email" id="username" required="" th:field="*{username}">
-          </div>
-          <div class="form-field-wrapper-2">
-            <label for="password" class="field-lable">Senha</label>
-            <input class="text-field w-input" maxlength="256" name="senha" data-name="Senha" placeholder="••••••••"
-              type="password" id="password" required="">
+          <div class="form-field-wrapper-2"><label for="Telemovel" class="field-lable">Email</label><input class="text-field w-input" maxlength="256" name="username" data-name="Telemovel" placeholder="" type="text" id="Telemovel" required=""></div>
+          <div class="form-field-wrapper-2"><label for="Senha" class="field-lable">Senha</label><input class="text-field w-input" maxlength="256" name="senha" data-name="Senha" placeholder="" type="password" id="Senha" required="">
             <div class="restore-password-cta-wrapper">
-              <div class="restore-password-cta-text">Esqueceu a senha? <a href="#" class="form-cta">Repor senha</a>
+              <div class="restore-password-cta-text">Esqueceu a senha? <a th:href="@{/dexa/seguranca/esqueceu-a-senha}" class="form-cta">Repor senha</a>
               </div>
             </div>
           </div>
-          <button type="submit" class="submit-button" style="width: 100%; border: none; cursor: pointer;">Iniciar
-            sessão</button>
+          <button type="submit" class="submit-button">Iniciar sessão</button>
+          <a th:href="@{/parceiro/dashboard}" class="link-44">Agente</a>
         </div>
       </form>
+      <div class="w-form-done">
+        <div>Thank you! Your submission has been received!</div>
+      </div>
+      <div class="w-form-fail">
+        <div>Oops! Something went wrong while submitting the form.</div>
+      </div>
     </div>
     <div class="auth-image-overlay"></div>
   </div>
-
-  <div th:replace="~{layout/fragments/auth :: scripts}"></div>
-
+  <div class="not-valid">
+    <div class="text-block-116">Dimensão de ecrã não suportada...</div>
+  </div>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+  <script>
+    document.getElementById('wf-form-Login').addEventListener('submit', function() {
+      Modal.showLoading('A autenticar...', 'Bem-vindo');
+    });
+  </script>
 </body>
-
 </html>

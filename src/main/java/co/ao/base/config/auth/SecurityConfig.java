@@ -27,7 +27,8 @@ public class SecurityConfig {
             .authenticationProvider(customAuthenticationProvider)
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/", "/inscricao", "/css/**", "/js/**", "/images/**", "/fonts/**").permitAll();
-                auth.requestMatchers("/utilizadores", "/utilizadores/**").hasRole("Administrador");
+                auth.requestMatchers("/admin/**").hasRole("ADMIN");
+                auth.requestMatchers("/parceiro/**").hasRole("PARCEIRO");
                 auth.anyRequest().authenticated();
             })
             .formLogin(login -> login

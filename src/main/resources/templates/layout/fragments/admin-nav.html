@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section th:fragment="nav" class="nav-nvo">
+  <div data-animation="over-right" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+    <div class="contain-this">
+      <a th:href="@{/admin/dashboard}" class="brand w-nav-brand"></a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        <a th:href="@{/admin/dashboard}" class="nav-link w-nav-link">Início</a>
+        <a th:href="@{/admin/parceiros}" class="nav-link w-nav-link">Parceiros</a>
+        <a th:href="@{/admin/leads}" class="nav-link w-nav-link">Leads</a>
+        <a th:href="@{/admin/materiais}" class="nav-link w-nav-link">Material de apoio</a>
+        <a th:href="@{/admin/tickets}" class="nav-link w-nav-link">Tickets</a>
+        <div class="div-block-452">
+          <div data-delay="0" data-hover="false" class="dropdown-3 w-dropdown">
+            <div class="dropdown-toggle-2 w-dropdown-toggle">
+              <div class="w-icon-dropdown-toggle"></div>
+              <div>Criar novo</div>
+            </div>
+            <nav class="dropdown-list-3 w-dropdown-list">
+              <a th:href="@{/admin/parceiros/novo}" class="dropdown-link w-dropdown-link">Criar Parceiro</a>
+              <a th:href="@{/admin/materiais/novo}" class="dropdown-link w-dropdown-link">Criar material de apoio</a>
+            </nav>
+          </div>
+        </div>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="submit" class="nav-link w-nav-link" style="background: none; border: none; cursor: pointer;">Sair</button>
+        </form>
+      </nav>
+      <div class="menu-button w-nav-button">
+        <div class="w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</html>

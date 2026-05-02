@@ -1,0 +1,75 @@
+<!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="69ecfcfd5a77c6e3f4ab6ab0" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments/head :: head('Ver parceiro - Admin')}"></head>
+<body>
+  <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
+  <section class="section-3 no-shad">
+    <div class="horizontal-navigation">
+      <div class="contain-this">
+        <div class="div-block-455">
+          <div class="div-block-456">
+            <a th:href="@{/admin/parceiros}" class="link-5">q</a>
+            <div class="text-block-258">Parceiro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain-this">
+      <div class="w-layout-grid grid-2 _2">
+        <div class="img-wrapper cliente _4545">
+          <img th:src="${parceiro.fotoUrl != null ? parceiro.fotoUrl : '/images/avatar-placeholder.png'}" loading="lazy" alt="" class="img is--contain parceiro">
+        </div>
+        <div id="w-node-_99519bea-fcd1-d429-4bbc-ad8370f6a242-f4ab6ab0" class="div-block-6">
+          <div class="w-layout-grid grid-3">
+            <div id="w-node-_99519bea-fcd1-d429-4bbc-ad8370f6a244-f4ab6ab0">
+              <div class="list-item">
+                <div class="list-item-lable">Nome</div>
+                <div class="list-item" th:text="${parceiro.nome}">Nome do parceiro</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-lable">NIF</div>
+                <div class="list-item" th:text="${parceiro.nif}">NIF</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-lable">Telemóvel</div>
+                <div class="list-item" th:text="${parceiro.telefone}">Telefone</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-lable">Email</div>
+                <div class="list-item" th:text="${parceiro.email}">Email</div>
+              </div>
+            </div>
+            <div id="w-node-_99519bea-fcd1-d429-4bbc-ad8370f6a259-f4ab6ab0">
+              <div class="list-item">
+                <div class="list-item-lable">Província</div>
+                <div class="list-item" th:text="${parceiro.provinciaNome}">Província</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-lable">Tipo de parceiro</div>
+                <div class="list-item" th:text="${parceiro.tipoParceiroNome}">Tipo</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-lable">Data de criação</div>
+                <div class="list-item" th:text="${#temporals.format(parceiro.createdAt, 'dd/MM/yyyy HH:mm')}">Data</div>
+              </div>
+              <a href="#" class="action-button full w-inline-block" th:if="${parceiro.temAnexo}">
+                <div class="icon quick-action">
+                  <div class="main-font-icon">2</div>
+                  <div class="button-text quick-action-text">Baixar anexo</div>
+                </div>
+              </a>
+              <a th:href="@{/admin/parceiros/editar/{id}(id=${parceiro.publicId})}" class="action-button full w-inline-block">
+                <div class="icon quick-action">
+                  <div class="main-font-icon">u</div>
+                  <div class="button-text quick-action-text">Editar este parceiro</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+</body>
+</html>
