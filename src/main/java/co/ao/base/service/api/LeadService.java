@@ -66,12 +66,15 @@ public class LeadService extends BaseApiService {
     public void uploadComprovativo(String publicId, MultipartFile file) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", file.getResource());
-        postMultipart("/leads/" + publicId + "/comprovativo", body, String.class);
+        patchMultipart("/leads/" + publicId + "/comprovativo", body, String.class);
     }
 
+
     public Map<String, Object> getOverview() {
+        // A API real retorna: { "totalLeads": Long, "totalFaturacao": Double }
         return get("/leads/overview", Map.class);
     }
+
 
     // Notas
     public String adicionarNota(String leadPublicId, String nota) {

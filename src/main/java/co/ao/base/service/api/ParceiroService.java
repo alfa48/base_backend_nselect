@@ -62,10 +62,6 @@ public class ParceiroService extends BaseApiService {
             body.add("documento", documento.getResource());
         }
 
-        // BaseApiService doesn't have putMultipart, I might need to add it or use post if the API allows
-        // The API.md says PUT /api/v1/admin/parceiros/{publicId}
-        // Let's assume postMultipart can be adapted or I should add putMultipart to BaseApiService
-        // Actually, many APIs use POST for multipart updates too, but let's check BaseApiService
         putMultipart("/admin/parceiros/" + publicId, body, Void.class);
     }
 

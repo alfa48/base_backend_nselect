@@ -3,14 +3,15 @@ package co.ao.base.service.api;
 import co.ao.base.model.PageResponse;
 import co.ao.base.model.UserDTO;
 import co.ao.base.model.UsuarioCreateRequest;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 
-@Slf4j
 @Service
 public class UsuarioService extends BaseApiService {
+    private static final Logger log = LoggerFactory.getLogger(UsuarioService.class);
 
     /**
      * Lista os utilizadores do cliente autenticado.

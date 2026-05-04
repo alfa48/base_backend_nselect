@@ -40,10 +40,7 @@
                 <label for="pacotePublicId" class="form-field-lable">Pacote que o lead pretende comprar</label>
                 <select id="pacotePublicId" name="pacotePublicId" class="select-field w-select" required>
                   <option value="">Selecione...</option>
-                  <option value="pac_1" th:selected="${lead.pacotePublicId == 'pac_1'}">KZ 5.500</option>
-                  <option value="pac_2" th:selected="${lead.pacotePublicId == 'pac_2'}">KZ 30.000</option>
-                  <option value="pac_3" th:selected="${lead.pacotePublicId == 'pac_3'}">KZ 60.000</option>
-                  <option value="pac_4" th:selected="${lead.pacotePublicId == 'pac_4'}">KZ 118.000</option>
+                  <option th:each="p : ${pacotes}" th:value="${p.publicId}" th:text="${p.nome}" th:selected="${lead.pacotePublicId == p.publicId}"></option>
                 </select>
               </div>
               <div class="form-field-wrapper">

@@ -23,9 +23,10 @@ public class MaterialApoioService extends BaseApiService {
     }
 
     public PageResponse<MaterialApoioDTO> listarMateriaisAdmin(int pagina, int tamanho, String nome, String tipoConteudo) {
-        StringBuilder url = new StringBuilder("/admin/materiais-apoio?pagina=").append(pagina).append("&tamanho=").append(tamanho);
+        StringBuilder url = new StringBuilder("/materiais-apoio?pagina=").append(pagina).append("&tamanho=").append(tamanho);
         if (nome != null && !nome.isEmpty()) url.append("&nome=").append(nome);
         if (tipoConteudo != null && !tipoConteudo.isEmpty()) url.append("&tipoConteudo=").append(tipoConteudo);
+
         
         return get(url.toString(), new ParameterizedTypeReference<PageResponse<MaterialApoioDTO>>() {});
     }

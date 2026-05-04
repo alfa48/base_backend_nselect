@@ -28,10 +28,21 @@ public class ParceiroViewController {
     @Autowired
     private ParceiroService parceiroService;
 
+    @Autowired
+    private co.ao.base.service.api.DominioService dominioService;
+
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
-        model.addAttribute("overview", parceiroService.getOverview());
-        model.addAttribute("recentLeads", leadService.listarLeads(0, 5, null, null, null));
+        try {
+            model.addAttribute("overview", parceiroService.getOverview());
+        } catch (Exception e) {
+            model.addAttribute("overview", java.util.Map.of("totalLeads", 0L, "totalFaturacao", 0.0));
+        }
+        try {
+            model.addAttribute("recentLeads", leadService.listarLeads(0, 5, null, null, null));
+        } catch (Exception e) {
+            model.addAttribute("recentLeads", new co.ao.base.model.PageResponse<>());
+        }
         return "parceiro/dashboard-parceiros---parceiro";
     }
 
@@ -48,12 +59,22 @@ public class ParceiroViewController {
 
     @GetMapping("/leads/novo")
     public String novoLead(Model model) {
+        try {
+            model.addAttribute("pacotes", dominioService.listarPacotes());
+        } catch (Exception e) {
+            model.addAttribute("pacotes", java.util.Collections.emptyList());
+        }
         return "parceiro/leads---parceiro/novo-lead---parceiro";
     }
 
     @GetMapping("/leads/editar/{id}")
     public String editarLead(@PathVariable String id, Model model) {
         model.addAttribute("lead", leadService.buscarLead(id));
+        try {
+            model.addAttribute("pacotes", dominioService.listarPacotes());
+        } catch (Exception e) {
+            model.addAttribute("pacotes", java.util.Collections.emptyList());
+        }
         return "parceiro/leads---parceiro/editar-lead---parceiro";
     }
 

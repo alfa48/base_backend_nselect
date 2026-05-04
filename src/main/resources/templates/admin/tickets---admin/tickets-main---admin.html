@@ -47,7 +47,7 @@
         <div th:if="${error}" class="text-block-256" style="color: #ff4d4d; text-align: center; padding: 20px;" th:text="${error}">Erro ao carregar dados.</div>
 
         <!-- Iterar Tickets -->
-        <th:block th:if="${tickets != null}" th:each="ticket : ${tickets.content}">
+        <th:block th:if="${tickets != null && tickets.content != null}" th:each="ticket : ${tickets.content}">
           <div class="main-card">
             <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId})}" class="main-items-of-card w-inline-block">
               <div class="icon-div">
@@ -71,9 +71,10 @@
           </div>
         </th:block>
 
-        <div th:if="${tickets == null || #lists.isEmpty(tickets.content)}" class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
+        <div th:if="${tickets == null || tickets.content == null || #lists.isEmpty(tickets.content)}" class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
           Nenhum ticket encontrado.
         </div>
+
       </div>
     </div>
   </section>

@@ -11,9 +11,17 @@ import java.util.List;
 public class PageResponse<T> {
     private List<T> content;
     private int number;
+
+    public List<T> getContent() {
+        return content;
+    }
     private int size;
     private long totalElements;
     private int totalPages;
+
+    public long getTotalElements() {
+        return totalElements;
+    }
     private boolean first;
     private boolean last;
 }

@@ -33,6 +33,9 @@ public class AdminViewController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private co.ao.base.service.api.DominioService dominioService;
+
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         model.addAttribute("pageTitle", "Dashboard Admin");
@@ -80,12 +83,26 @@ public class AdminViewController {
 
     @GetMapping("/parceiros/novo")
     public String novoParceiro(Model model) {
+        try {
+            model.addAttribute("provincias", dominioService.listarProvincias());
+            model.addAttribute("tiposParceiro", dominioService.listarTiposParceiro());
+        } catch (Exception e) {
+            model.addAttribute("provincias", java.util.Collections.emptyList());
+            model.addAttribute("tiposParceiro", java.util.Collections.emptyList());
+        }
         return "admin/parceiros---admin/criar-parceiro---admin";
     }
 
     @GetMapping("/parceiros/editar/{id}")
     public String editarParceiro(@PathVariable String id, Model model) {
         model.addAttribute("parceiro", parceiroService.buscarParceiro(id));
+        try {
+            model.addAttribute("provincias", dominioService.listarProvincias());
+            model.addAttribute("tiposParceiro", dominioService.listarTiposParceiro());
+        } catch (Exception e) {
+            model.addAttribute("provincias", java.util.Collections.emptyList());
+            model.addAttribute("tiposParceiro", java.util.Collections.emptyList());
+        }
         return "admin/parceiros---admin/editar-parceiro---admin";
     }
 
@@ -119,18 +136,34 @@ public class AdminViewController {
                                  @RequestParam(required = false) String nome,
                                  @RequestParam(required = false) String tipo,
                                  Model model) {
-        model.addAttribute("materiais", materialApoioService.listarMateriaisAdmin(pagina, tamanho, nome, tipo));
+        try {
+            model.addAttribute("materiais", materialApoioService.listarMateriaisAdmin(pagina, tamanho, nome, tipo));
+        } catch (Exception e) {
+            model.addAttribute("materiais", new co.ao.base.model.PageResponse<>());
+            model.addAttribute("error", "Não foi possível carregar os materiais no momento.");
+        }
         return "admin/material-de-apoio---admin/material-de-apoio---admin";
     }
 
+
     @GetMapping("/materiais/novo")
     public String novoMaterial(Model model) {
+        try {
+            model.addAttribute("tiposParceiro", dominioService.listarTiposParceiro());
+        } catch (Exception e) {
+            model.addAttribute("tiposParceiro", java.util.Collections.emptyList());
+        }
         return "admin/material-de-apoio---admin/criar-material---admin";
     }
 
     @GetMapping("/materiais/editar/{id}")
     public String editarMaterial(@PathVariable String id, Model model) {
         model.addAttribute("material", materialApoioService.buscarMaterial(id));
+        try {
+            model.addAttribute("tiposParceiro", dominioService.listarTiposParceiro());
+        } catch (Exception e) {
+            model.addAttribute("tiposParceiro", java.util.Collections.emptyList());
+        }
         return "admin/material-de-apoio---admin/editar-material---admin";
     }
 
@@ -146,11 +179,12 @@ public class AdminViewController {
         try {
             model.addAttribute("tickets", ticketService.listarTickets(pagina, tamanho));
         } catch (Exception e) {
-            model.addAttribute("tickets", null);
+            model.addAttribute("tickets", new co.ao.base.model.PageResponse<>());
             model.addAttribute("error", "Não foi possível carregar os tickets no momento.");
         }
         return "admin/tickets---admin/tickets-main---admin";
     }
+
 
     @GetMapping("/tickets/{id}")
     public String verTicket(@PathVariable String id, Model model) {

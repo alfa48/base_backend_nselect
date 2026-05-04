@@ -82,17 +82,20 @@
               <div class="form-field-wrapper">
                 <label for="tipoParceiroPublicId" class="form-field-lable">Tipo de parceiro</label>
                 <select id="tipoParceiroPublicId" name="tipoParceiroPublicId" class="select-field w-select">
-                  <option value="tipo-partner-uuid" th:selected="${parceiro.tipoParceiroNome == 'PARCEIRO'}">Partner</option>
-                  <option value="tipo-representante-uuid" th:selected="${parceiro.tipoParceiroNome == 'REPRESENTANTE'}">Representante Certificado</option>
-                  <option value="tipo-agente-uuid" th:selected="${parceiro.tipoParceiroNome == 'AGENTE'}">Agente</option>
+                  <option th:each="tipo : ${tiposParceiro}" 
+                          th:value="${tipo.publicId}" 
+                          th:text="${tipo.nome}"
+                          th:selected="${parceiro.tipoParceiroPublicId == tipo.publicId}"></option>
                 </select>
               </div>
 
               <div class="form-field-wrapper">
                 <label for="provinciaPublicId" class="form-field-lable">Província</label>
                 <select id="provinciaPublicId" name="provinciaPublicId" class="select-field w-select">
-                  <option value="luanda-uuid" th:selected="${parceiro.provinciaNome == 'Luanda'}">Luanda</option>
-                  <option value="benguela-uuid" th:selected="${parceiro.provinciaNome == 'Benguela'}">Benguela</option>
+                  <option th:each="prov : ${provincias}" 
+                          th:value="${prov.publicId}" 
+                          th:text="${prov.nome}"
+                          th:selected="${parceiro.provinciaPublicId == prov.publicId}"></option>
                 </select>
               </div>
 

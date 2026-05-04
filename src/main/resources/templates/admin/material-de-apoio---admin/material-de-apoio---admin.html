@@ -20,7 +20,7 @@
     <div class="contain-this">
       <div class="_8">
         <!-- Iterar Materiais -->
-        <th:block th:each="material : ${materiais.content}">
+        <th:block th:if="${materiais != null && materiais.content != null}" th:each="material : ${materiais.content}">
           <div class="main-card">
             <a th:href="${material.arquivoUrl}" target="_blank" class="main-items-of-card w-inline-block">
               <div class="icon-div">
@@ -45,9 +45,10 @@
           </div>
         </th:block>
         
-        <div th:if="${#lists.isEmpty(materiais.content)}" class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
+        <div th:if="${materiais == null || materiais.content == null || #lists.isEmpty(materiais.content)}" class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
           Nenhum material de apoio encontrado.
         </div>
+
       </div>
     </div>
   </section>

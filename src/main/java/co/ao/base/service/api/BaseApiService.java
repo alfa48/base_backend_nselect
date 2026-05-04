@@ -1,7 +1,6 @@
 package co.ao.base.service.api;
 
 import co.ao.base.util.Constant;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -17,9 +16,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import co.ao.base.model.UserDTO;
 
-@Slf4j
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public abstract class BaseApiService {
+    protected static final Logger log = LoggerFactory.getLogger(BaseApiService.class);
 
     @Autowired
     protected RestTemplate restTemplate;
@@ -81,9 +83,33 @@ public abstract class BaseApiService {
     }
 
     /**
+     * Método para chamadas MULTIPART (Upload de arquivos) com PATCH.
+     */
+    protected <T> T patchMultipart(String endpoint, org.springframework.util.MultiValueMap<String, Object> body, Class<T> responseType) {
+        String url = Constant.BASE_URL + endpoint;
+        try {
+            HttpHeaders headers = getHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            HttpEntity<org.springframework.util.MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+
+            log.info("API REQUEST (MULTIPART): PATCH {}", url);
+            ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.PATCH, entity, responseType);
+            log.info("API RESPONSE: {} | Status: {}", url, response.getStatusCode());
+            return response.getBody();
+        } catch (HttpStatusCodeException e) {
+            log.error("API MULTIPART ERROR: {} | Status: {} | Body: {}", url, e.getStatusCode(), e.getResponseBodyAsString());
+            throw e;
+        } catch (Exception e) {
+            log.error("API MULTIPART UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
+            throw new RestClientException("Erro no upload: " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * Método genérico para execução de chamadas PUT.
      */
     protected <T> T put(String endpoint, Object body, Class<T> responseType) {
+
         return execute(endpoint, HttpMethod.PUT, getRequestEntity(body), responseType);
     }
 

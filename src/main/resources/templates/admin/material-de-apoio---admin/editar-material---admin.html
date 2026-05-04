@@ -52,17 +52,9 @@
               <div class="form-field-wrapper">
                 <label class="form-field-lable">Para</label>
                 <div class="div-block-100"></div>
-                <label class="w-checkbox checkbox-field-3">
-                  <input type="checkbox" name="tiposParceiro" value="REPRESENTANTE" class="w-checkbox-input checkbox-3" th:checked="${#lists.contains(material.tiposParceiroPublicIds, 'REPRESENTANTE')}">
-                  <span class="checkbox-label-2 w-form-label">Representante Certificado</span>
-                </label>
-                <label class="w-checkbox checkbox-field-3">
-                  <input type="checkbox" name="tiposParceiro" value="AGENTE" class="w-checkbox-input checkbox-3" th:checked="${#lists.contains(material.tiposParceiroPublicIds, 'AGENTE')}">
-                  <span class="checkbox-label-2 w-form-label">Agente</span>
-                </label>
-                <label class="w-checkbox checkbox-field-3">
-                  <input type="checkbox" name="tiposParceiro" value="PARCEIRO" class="w-checkbox-input checkbox-3" th:checked="${#lists.contains(material.tiposParceiroPublicIds, 'PARCEIRO')}">
-                  <span class="checkbox-label-2 w-form-label">Partner</span>
+                <label class="w-checkbox checkbox-field-3" th:each="tipo : ${tiposParceiro}">
+                  <input type="checkbox" name="tiposParceiro" th:value="${tipo.publicId}" class="w-checkbox-input checkbox-3" th:checked="${material.tiposParceiroPublicIds != null and #lists.contains(material.tiposParceiroPublicIds, tipo.publicId)}">
+                  <span class="checkbox-label-2 w-form-label" th:text="${tipo.nome}"></span>
                 </label>
               </div>
 
