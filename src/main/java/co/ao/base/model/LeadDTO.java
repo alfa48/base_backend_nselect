@@ -1,5 +1,6 @@
 package co.ao.base.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,7 +21,9 @@ public class LeadDTO {
     private String parceiroNome;
     private String usuarioPublicId;
     private String usuarioNome;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdAt;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime updatedAt;
     private List<LeadNotaDTO> notas;
 
@@ -48,7 +51,9 @@ public class LeadDTO {
         private String nota;
         private String usuarioPublicId;
         private String usuarioNome;
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
         private LocalDateTime createdAt;
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
         private LocalDateTime updatedAt;
 
         public String getPublicId() { return publicId; }

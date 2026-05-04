@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminViewController {
+    private static final Logger log = LoggerFactory.getLogger(AdminViewController.class);
 
     @Autowired
     private ParceiroService parceiroService;
@@ -77,7 +80,16 @@ public class AdminViewController {
                                  @RequestParam(required = false) String provincia,
                                  @RequestParam(required = false) String tipo,
                                  Model model) {
-        model.addAttribute("parceiros", parceiroService.listarParceiros(pagina, tamanho, nome, provincia, tipo));
+        try {
+            model.addAttribute("provincias", dominioService.listarProvincias());
+            model.addAttribute("tipos", dominioService.listarTiposParceiro());
+            model.addAttribute("parceiros", parceiroService.listarParceiros(pagina, tamanho, nome, provincia, tipo));
+        } catch (Exception e) {
+            log.error("Erro ao listar parceiros: {}", e.getMessage());
+            model.addAttribute("parceiros", new co.ao.base.model.PageResponse<>());
+            model.addAttribute("provincias", java.util.Collections.emptyList());
+            model.addAttribute("tipos", java.util.Collections.emptyList());
+        }
         return "admin/parceiros---admin/parceiros-main---admin";
     }
 
@@ -95,20 +107,25 @@ public class AdminViewController {
 
     @GetMapping("/parceiros/editar/{id}")
     public String editarParceiro(@PathVariable String id, Model model) {
-        model.addAttribute("parceiro", parceiroService.buscarParceiro(id));
         try {
+            model.addAttribute("parceiro", parceiroService.buscarParceiro(id));
             model.addAttribute("provincias", dominioService.listarProvincias());
             model.addAttribute("tiposParceiro", dominioService.listarTiposParceiro());
         } catch (Exception e) {
-            model.addAttribute("provincias", java.util.Collections.emptyList());
-            model.addAttribute("tiposParceiro", java.util.Collections.emptyList());
+            log.error("Erro ao carregar parceiro para edição: {}", e.getMessage());
+            return "redirect:/admin/parceiros?error=Erro ao carregar dados";
         }
         return "admin/parceiros---admin/editar-parceiro---admin";
     }
 
     @GetMapping("/parceiros/ver/{id}")
     public String verParceiro(@PathVariable String id, Model model) {
-        model.addAttribute("parceiro", parceiroService.buscarParceiro(id));
+        try {
+            model.addAttribute("parceiro", parceiroService.buscarParceiro(id));
+        } catch (Exception e) {
+            log.error("Erro ao ver parceiro: {}", e.getMessage());
+            return "redirect:/admin/parceiros?error=Parceiro não encontrado";
+        }
         return "admin/parceiros---admin/ver-parceiro---admin";
     }
 
@@ -120,13 +137,23 @@ public class AdminViewController {
                               @RequestParam(required = false) String dataFinal,
                               @RequestParam(required = false) String parceiro,
                               Model model) {
-        model.addAttribute("leads", leadService.listarTodosLeadsAdmin(pagina, tamanho, estado, dataInicial, dataFinal, parceiro));
+        try {
+            model.addAttribute("leads", leadService.listarTodosLeadsAdmin(pagina, tamanho, estado, dataInicial, dataFinal, parceiro));
+        } catch (Exception e) {
+            log.error("Erro ao listar leads: {}", e.getMessage());
+            model.addAttribute("leads", new co.ao.base.model.PageResponse<>());
+        }
         return "admin/leads---admin/leads-main---admin";
     }
 
     @GetMapping("/leads/{id}")
     public String verLead(@PathVariable String id, Model model) {
-        model.addAttribute("lead", leadService.buscarLead(id));
+        try {
+            model.addAttribute("lead", leadService.buscarLead(id));
+        } catch (Exception e) {
+            log.error("Erro ao ver lead: {}", e.getMessage());
+            return "redirect:/admin/leads?error=Lead não encontrado";
+        }
         return "admin/leads---admin/lead-individual---admin";
     }
 
@@ -158,11 +185,12 @@ public class AdminViewController {
 
     @GetMapping("/materiais/editar/{id}")
     public String editarMaterial(@PathVariable String id, Model model) {
-        model.addAttribute("material", materialApoioService.buscarMaterial(id));
         try {
+            model.addAttribute("material", materialApoioService.buscarMaterial(id));
             model.addAttribute("tiposParceiro", dominioService.listarTiposParceiro());
         } catch (Exception e) {
-            model.addAttribute("tiposParceiro", java.util.Collections.emptyList());
+            log.error("Erro ao carregar material para edição: {}", e.getMessage());
+            return "redirect:/admin/materiais?error=Erro ao carregar dados";
         }
         return "admin/material-de-apoio---admin/editar-material---admin";
     }
@@ -188,7 +216,12 @@ public class AdminViewController {
 
     @GetMapping("/tickets/{id}")
     public String verTicket(@PathVariable String id, Model model) {
-        model.addAttribute("ticket", ticketService.buscarTicket(id));
+        try {
+            model.addAttribute("ticket", ticketService.buscarTicket(id));
+        } catch (Exception e) {
+            log.error("Erro ao ver ticket: {}", e.getMessage());
+            return "redirect:/admin/tickets?error=Ticket não encontrado";
+        }
         return "admin/tickets---admin/ticket-individual---admin";
     }
 }

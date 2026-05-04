@@ -1,5 +1,6 @@
 package co.ao.base.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,5 +14,6 @@ public class MaterialApoioDTO {
     private String tagPromocional;
     private String tagEducativo;
     private List<String> tiposParceiroPublicIds;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdAt;
 }

@@ -12,8 +12,8 @@
         <div>
           <a th:href="@{/parceiro/leads/novo}" class="button-5 w-button">Novo Lead</a>
         </div>
-        <form th:action="@{/logout}" method="post" style="display: inline;">
-          <button type="submit" class="nav-link w-nav-link" style="background: none; border: none; cursor: pointer;">Sair</button>
+        <form id="logout-form-parceiro" th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="button" class="nav-link w-nav-link" style="background: none; border: none; cursor: pointer;" onclick="Modal.confirmLogout('logout-form-parceiro')">Sair</button>
         </form>
       </nav>
       <div class="menu-button w-nav-button">

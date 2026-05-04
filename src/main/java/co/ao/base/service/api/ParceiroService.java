@@ -74,6 +74,6 @@ public class ParceiroService extends BaseApiService {
      * Inclui total de leads, leads convertidos, faturação e tendências (%) de crescimento.
      */
     public Map<String, Object> getOverview() {
-        return get("/parceiro/overview", Map.class);
+        return get("/leads/overview", Map.class);
     }
 }

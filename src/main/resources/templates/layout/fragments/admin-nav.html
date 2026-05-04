@@ -22,8 +22,8 @@
             </nav>
           </div>
         </div>
-        <form th:action="@{/logout}" method="post" style="display: inline;">
-          <button type="submit" class="nav-link w-nav-link" style="background: none; border: none; cursor: pointer;">Sair</button>
+        <form id="logout-form-admin" th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="button" class="nav-link w-nav-link" style="background: none; border: none; cursor: pointer;" onclick="Modal.confirmLogout('logout-form-admin')">Sair</button>
         </form>
       </nav>
       <div class="menu-button w-nav-button">

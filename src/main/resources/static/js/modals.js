@@ -186,6 +186,15 @@ const Modal = {
             });
         });
     },
+    
+    // Confirmação de logout
+    confirmLogout: (formId) => {
+        Modal.confirm('Sair', 'Deseja realmente terminar a sua sessão?', 'Sim, sair', 'Continuar').then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(formId).submit();
+            }
+        });
+    },
 
     // Mostrar modal se houver mensagem no URL ou no model (Thymeleaf)
     checkMessages: () => {
