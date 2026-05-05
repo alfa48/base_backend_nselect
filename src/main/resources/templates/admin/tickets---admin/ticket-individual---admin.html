@@ -8,8 +8,8 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a th:href="@{/admin/tickets}" class="link-5">q</a>
-            <div class="text-block-258" th:text="'Ticket #' + ${#strings.substring(ticket.publicId, 0, 8)}">Ticket #5546</div>
+            <a href="javascript:history.back()" class="link-5">q</a>
+            <div class="text-block-258" th:text="'# ' + ${#strings.substring(ticket.publicId, 0, 8)}">#5546</div>
           </div>
         </div>
       </div>
@@ -27,23 +27,29 @@
             </div>
             <div class="list-item">
               <div class="list-item-lable">Tipo</div>
-              <div class="list-item" th:text="${ticket.tipo}">TIPO</div>
+              <div th:if="${ticket.tipo == 'CANCELAR'}" class="list-item redd">Cancelar subscrição</div>
+              <div th:if="${ticket.tipo == 'BUG'}" class="list-item pendente">Bug no sistema</div>
+              <div th:if="${ticket.tipo == 'RECLAMACAO'}" class="list-item blue">Reclamação</div>
+              <div th:if="${ticket.tipo == 'OUTRO'}" class="list-item outro">Outro</div>
             </div>
             <div class="list-item">
               <div class="list-item-lable">Estado Atual</div>
-              <div class="list-item" th:classappend="${ticket.estado == 'RESOLVIDO' ? 'green' : 'redd'}" th:text="${ticket.estado}">ABERTO</div>
+              <div th:if="${#strings.toLowerCase(ticket.estado) == 'aberto'}" class="list-item redd">Aberto</div>
+              <div th:if="${#strings.toLowerCase(ticket.estado) == 'progresso'}" class="list-item blue">Em progresso</div>
+              <div th:if="${#strings.toLowerCase(ticket.estado) == 'resolvido'}" class="list-item green">Resolvido</div>
             </div>
-            <div class="w-form">
+            
+            <div class="w-form" style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee;">
               <form id="form-status-ticket">
                 <input type="hidden" id="ticketId" th:value="${ticket.publicId}">
                 <label for="estado" class="form-field-lable">Alterar Estado</label>
                 <select id="estado" name="estado" class="select-field _9 w-select">
                   <option value="">Selecione...</option>
                   <option value="ABERTO" th:selected="${ticket.estado == 'ABERTO'}">Aberto</option>
-                  <option value="EM_PROGRESSO" th:selected="${ticket.estado == 'EM_PROGRESSO'}">Em progresso</option>
+                  <option value="PROGRESSO" th:selected="${ticket.estado == 'PROGRESSO'}">Em progresso</option>
                   <option value="RESOLVIDO" th:selected="${ticket.estado == 'RESOLVIDO'}">Resolvido</option>
                 </select>
-                <button type="submit" class="button main mobile w-button" style="width: 100%; border: none; margin-top: 10px;">Atualizar</button>
+                <button type="submit" class="button main mobile w-button" style="width: 100%; border: none; margin-top: 15px; background-color: var(--main); color: white;">Atualizar Estado</button>
               </form>
             </div>
           </div>
@@ -73,19 +79,19 @@
           conteudo: /*[[${ticket.conteudo}]]*/ ''
         })
       })
-      .then(res => res.json())
-      .then(data => {
+      .then(async res => {
+        const data = await res.json();
         Modal.hideLoading();
-        if (data.message) {
-          Modal.toast(data.message);
+        if (res.ok) {
+          Modal.success(data.msg || 'Estado atualizado com sucesso!');
           setTimeout(() => location.reload(), 1500);
         } else {
-          Modal.error(data.error || 'Erro ao atualizar ticket');
+          Modal.error(data.msg || 'Erro ao atualizar ticket');
         }
       })
       .catch(err => {
         Modal.hideLoading();
-        Modal.error('Erro de rede');
+        Modal.error('Erro de rede ao atualizar ticket');
       });
     });
   </script>

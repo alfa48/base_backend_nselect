@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+  <!-- Fragment for Lead Card -->
+  <div th:fragment="lead-card(lead, extraClass, linkUrl)" class="pipeline-cardwp" th:classappend="${extraClass}">
+    <div class="div-block-497">
+      <div class="text-block-327" th:text="${lead.pacoteNome != null ? lead.pacoteNome : 'Sem pacote'}">Deal name</div>
+      <div class="text-block-328" th:text="${lead.pacotePreco != null ? 'KZ ' + #numbers.formatDecimal(lead.pacotePreco, 1, 'POINT', 0, 'COMMA') : '---'}">KZ 9.000</div>
+    </div>
+    <div class="div-block-498">
+      <div class="text-block-329" th:text="${lead.nome}">Name of client</div>
+      <a th:href="${linkUrl}" class="link-42">8</a>
+    </div>
+    <div class="div-block-499">
+      <img th:src="@{/images/profile-circle-icon-2048x2048-cqe5466q.png}" loading="lazy" class="image-15">
+      <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
+    </div>
+  </div>
+
+  <!-- Fragment for Column Header -->
+  <div th:fragment="column-header(title, pageResponse)" class="phase-name-wp">
+    <div class="text-block-324" th:text="${title}">LEADS</div>
+    <div class="div-block-496" th:with="list=${pageResponse != null ? pageResponse.content : null}, sum=${(list != null and !#lists.isEmpty(list)) ? #aggregates.sum(list.![pacotePreco]) : 0}">
+      <div class="text-block-326" th:text="${'KZ ' + #numbers.formatDecimal(sum != null ? sum : 0, 1, 'POINT', 0, 'COMMA')}">KZ 0,00</div>
+      <div class="text-block-325" th:text="${'Deals: ' + (pageResponse != null ? pageResponse.totalElements : 0)}">Deals: 0</div>
+    </div>
+  </div>
+
+  <!-- Fragment for Ver Mais Button -->
+  <div th:fragment="ver-mais(pageResponse, targetUrl)" th:if="${pageResponse != null and pageResponse.totalElements > pageResponse.size}" class="ver-mais-wrapper" style="text-align: center; padding: 10px;">
+    <a th:href="${targetUrl}" class="link-ver-mais" style="opacity: 0.6; text-decoration: none; font-size: 14px; color: inherit; font-weight: bold;">Ver mais...</a>
+  </div>
+
+</body>
+
+</html>

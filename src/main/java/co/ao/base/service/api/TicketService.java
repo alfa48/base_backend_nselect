@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 public class TicketService extends BaseApiService {
 
     public PageResponse<TicketDTO> listarTickets(int pagina, int tamanho) {
-        return get("/tickets?pagina=" + pagina + "&tamanho=" + tamanho, new ParameterizedTypeReference<PageResponse<TicketDTO>>() {});
+        // Testando se existe uma rota de admin para tickets (pode não estar no swagger)
+        return get("/admin/tickets?pagina=" + pagina + "&tamanho=" + tamanho, new ParameterizedTypeReference<PageResponse<TicketDTO>>() {});
     }
 
     public TicketDTO buscarTicket(String publicId) {

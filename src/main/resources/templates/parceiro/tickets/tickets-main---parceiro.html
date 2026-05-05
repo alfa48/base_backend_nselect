@@ -1,6 +1,9 @@
 <!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="69ed34a962f2384d85097d14" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<html data-wf-page="69ed34a962f2384d85097d14" data-wf-site="69ece585cad09a74baae0d40"
+  xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{layout/fragments/head :: head('Ticket - Parceiro')}"></head>
+
 <body>
   <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
   <section class="section-3 no-shad _500">
@@ -8,18 +11,25 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a th:href="@{/parceiro/dashboard-parceiros---parceiro}" class="link-5">q</a>
+            <a href="javascript:history.back()" class="link-5">q</a>
             <div class="text-block-258">Tickets</div>
-            <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256" name="query" placeholder="Pesquisar" type="search" id="search" required=""><input type="submit" class="search-button w-button" value="x"></form>
+            <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256"
+                name="query" placeholder="Pesquisar" type="search" id="search" required=""><input type="submit"
+                class="search-button w-button" value="x"></form>
           </div>
           <div class="div-block-457">
             <div class="form-block-2 w-form">
-              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3" data-wf-page-id="69ed34a962f2384d85097d14" data-wf-element-id="709a0897-6eca-2ab4-da8c-b674fa6c19d8"><select id="field" name="field" data-name="Field" class="select-field-2 _2 w-select">
+              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3"
+                data-wf-page-id="69ed34a962f2384d85097d14" data-wf-element-id="709a0897-6eca-2ab4-da8c-b674fa6c19d8">
+                <select id="field" name="field" data-name="Field" class="select-field-2 _2 w-select">
                   <option value="">Tipo</option>
                   <option value="First">First choice</option>
                   <option value="Second">Second choice</option>
                   <option value="Third">Third choice</option>
-                </select></form>
+                </select>
+                </select>
+                <a th:href="@{/parceiro/tickets/novo}" class="link-43">Novo ticket</a>
+              </form>
               <div class="w-form-done">
                 <div>Thank you! Your submission has been received!</div>
               </div>
@@ -41,13 +51,15 @@
                 <div class="text-block-255">2</div>
               </div>
               <div class="content-do-card-div">
-                <div class="text-block-256 main" th:text="${#strings.abbreviate(ticket.conteudo, 50)}">Parte do conteudo do ticket</div>
+                <div class="text-block-256 main" th:text="${#strings.abbreviate(ticket.conteudo, 50)}">Parte do conteudo
+                  do ticket</div>
               </div>
               <div class="content-do-card-div">
                 <div class="text-block-256" th:text="${ticket.tipo}">Tipo</div>
               </div>
               <div class="content-do-card-div status-things">
-                <div class="status-wrapper" th:classappend="${#strings.toLowerCase(ticket.estado) == 'resolvido' ? 'pago' : (#strings.toLowerCase(ticket.estado) == 'aberto' ? 'reembolso' : 'nao-pago')}">
+                <div class="status-wrapper"
+                  th:classappend="${#strings.toLowerCase(ticket.estado) == 'resolvido' ? 'pago' : (#strings.toLowerCase(ticket.estado) == 'aberto' ? 'reembolso' : 'nao-pago')}">
                   <div class="status-text" th:text="${ticket.estado}">em progresso</div>
                 </div>
               </div>
@@ -58,7 +70,8 @@
           </div>
         </th:block>
 
-        <div th:if="${#lists.isEmpty(tickets.content)}" class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
+        <div th:if="${#lists.isEmpty(tickets.content)}" class="text-block-256"
+          style="text-align: center; padding: 40px; opacity: 0.6;">
           Nenhum ticket encontrado.
         </div>
       </div>
@@ -69,4 +82,5 @@
   </section>
   <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
 </body>
+
 </html>

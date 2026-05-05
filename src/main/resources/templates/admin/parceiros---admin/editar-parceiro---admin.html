@@ -8,7 +8,7 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a th:href="@{/admin/parceiros}" class="link-5">q</a>
+            <a href="javascript:history.back()" class="link-5">q</a>
             <div class="text-block-258">Editar parceiro</div>
           </div>
         </div>
@@ -32,8 +32,8 @@
                   </div>
                   
                   <!-- Preview Integrado -->
-                  <div id="foto-preview" th:style="${parceiro.getFotoUrl() != null} ? 'display: flex; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;' : 'display:none;'">
-                    <img id="preview-img-foto" th:src="${parceiro.getFotoUrl()}" style="max-height: 100px; max-width: 100%; object-fit: contain; margin-bottom: 5px;">
+                  <div id="foto-preview" th:style="${parceiro.fotoUrl != null && !parceiro.fotoUrl.contains('avatar-placeholder')} ? 'display: flex; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;' : 'display:none;'">
+                    <img id="preview-img-foto" th:src="@{${parceiro.fotoUrl}}" style="max-height: 100px; max-width: 100%; object-fit: contain; margin-bottom: 5px;">
                     <div id="foto-filename" th:text="${parceiro.nome + ' - Foto'}" style="font-size: 11px; color: #667999; text-align: center;"></div>
                     <div style="margin-top: 5px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique para trocar</div>
                   </div>
@@ -182,7 +182,7 @@
           method: 'PUT',
           body: multipartData
         })
-        .then(response => {
+        .then(async response => {
           Modal.hideLoading();
           if (response.ok) {
             Modal.toast('Parceiro atualizado com sucesso!');
@@ -190,7 +190,12 @@
               window.location.href = '/admin/parceiros';
             }, 1500);
           } else {
-            Modal.error('Erro ao atualizar parceiro.');
+            try {
+              const errorData = await response.json();
+              Modal.error(errorData.msg || 'Erro ao atualizar parceiro.');
+            } catch (e) {
+              Modal.error('Erro ao atualizar parceiro.');
+            }
           }
         })
         .catch(error => {
@@ -203,19 +208,26 @@
       // Eliminar
       document.getElementById('btn-eliminar').addEventListener('click', function(e) {
         e.preventDefault();
-        Modal.confirm('Tem a certeza que deseja apagar este parceiro?', () => {
-          Modal.showLoading('A eliminar parceiro...');
-          fetch(`/api/admin/parceiros/${publicId}`, {
-            method: 'DELETE'
-          })
-          .then(response => {
-            Modal.hideLoading();
-            if (response.ok) {
-              window.location.href = '/admin/parceiros?success=Parceiro+apagado+com+sucesso';
-            } else {
-              Modal.error('Erro ao apagar parceiro.');
-            }
-          });
+        Modal.confirm('Eliminar Parceiro', 'Tem a certeza que deseja apagar este parceiro?').then((result) => {
+          if (result.isConfirmed) {
+            Modal.showLoading('A eliminar parceiro...');
+            fetch(`/api/admin/parceiros/${publicId}`, {
+              method: 'DELETE'
+            })
+            .then(async response => {
+              Modal.hideLoading();
+              if (response.ok) {
+                window.location.href = '/admin/parceiros?success=Parceiro+apagado+com+sucesso';
+              } else {
+                try {
+                  const errorData = await response.json();
+                  Modal.error(errorData.msg || 'Erro ao apagar parceiro.');
+                } catch (e) {
+                  Modal.error('Erro ao processar resposta do servidor.');
+                }
+              }
+            });
+          }
         });
       });
     });

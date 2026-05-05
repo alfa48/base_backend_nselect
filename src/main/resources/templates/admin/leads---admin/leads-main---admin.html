@@ -8,32 +8,39 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a href="#" class="link-5">q</a>
+            <a href="javascript:history.back()" class="link-5">q</a>
             <div class="text-block-258">Leads</div>
           </div>
           <div class="div-block-457">
             <div class="form-block-2 w-form">
-              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3" data-wf-page-id="69ed00598e555cf1c7a74a5b" data-wf-element-id="35d8065a-d4bc-6c01-e5c4-9982cc0018de"><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+              <form id="email-form" name="email-form" th:action="@{/admin/leads}" method="get" class="form-3">
+                <select id="ano" name="ano" class="select-field-2 w-select" onchange="this.form.submit()">
                   <option value="">Ano</option>
-                  <option value="First">First choice</option>
-                  <option value="Second">Second choice</option>
-                  <option value="Third">Third choice</option>
-                </select><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option th:each="y : ${#numbers.sequence(#temporals.year(#temporals.createNow()), 2024)}" 
+                          th:value="${y}" th:text="${y}" th:selected="${y == anoSel}"></option>
+                </select>
+                <select id="mes" name="mes" class="select-field-2 w-select" onchange="this.form.submit()">
                   <option value="">Mês</option>
-                  <option value="First">First choice</option>
-                  <option value="Second">Second choice</option>
-                  <option value="Third">Third choice</option>
-                </select><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option th:each="m : ${meses}" 
+                          th:value="${m.id}" 
+                          th:text="${m.nome}"
+                          th:selected="${m.id == mesSel}"></option>
+                </select>
+                <select id="estado" name="estado" class="select-field-2 w-select" onchange="this.form.submit()">
                   <option value="">Fase</option>
-                  <option value="First">First choice</option>
-                  <option value="Second">Second choice</option>
-                  <option value="Third">Third choice</option>
-                </select><select id="field" name="field" data-name="Field" class="select-field-2 w-select">
+                  <option value="LEAD" th:selected="${estadoSel == 'LEAD'}">Leads</option>
+                  <option value="PENDENTE" th:selected="${estadoSel == 'PENDENTE'}">Pendente</option>
+                  <option value="CONVERTIDO" th:selected="${estadoSel == 'CONVERTIDO'}">Convertido</option>
+                  <option value="PERDIDO" th:selected="${estadoSel == 'PERDIDO'}">Perdido</option>
+                </select>
+                <select id="parceiro" name="parceiro" class="select-field-2 w-select" onchange="this.form.submit()">
                   <option value="">Parceiro</option>
-                  <option value="First">First choice</option>
-                  <option value="Second">Second choice</option>
-                  <option value="Third">Third choice</option>
-                </select></form>
+                  <option th:each="p : ${parceiros}" 
+                          th:value="${p.publicId}" 
+                          th:text="${p.nome}"
+                          th:selected="${p.publicId == parceiroSel}"></option>
+                </select>
+              </form>
               <div class="w-form-done">
                 <div>Thank you! Your submission has been received!</div>
               </div>
@@ -49,91 +56,41 @@
       <div class="div-block-500">
         <!-- Coluna: LEADS -->
         <div class="phase-content-wp">
-          <div class="phase-name-wp">
-            <div class="text-block-324">LEADS</div>
-          </div>
-          <th:block th:each="lead : ${leads.content}" th:if="${lead.estado == 'LEAD'}">
-            <div class="pipeline-cardwp">
-              <div class="div-block-497">
-                <div class="text-block-327" th:text="${lead.nome}">Deal name</div>
-                <div class="text-block-328" th:text="${lead.pacotePreco}">$ 9.000</div>
-              </div>
-              <div class="div-block-498">
-                <div class="text-block-329" th:text="${lead.parceiroNome}">Name of partner</div>
-                <a th:href="@{/admin/leads/{id}(id=${lead.publicId})}" class="link-42">8</a>
-              </div>
-              <div class="div-block-499">
-                <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
-              </div>
-            </div>
+          <div th:replace="~{layout/fragments/leads :: column-header('LEADS', ${leadsLead})}"></div>
+          <th:block th:if="${leadsLead != null}" th:each="lead : ${leadsLead.content}">
+            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, '', @{/admin/leads/{id}(id=${lead.publicId})})}"></div>
           </th:block>
+          <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsLead}, @{/admin/leads(estado='LEAD', mes=${mesSel}, ano=${anoSel}, parceiro=${parceiroSel}, tamanho=${tamanhoSel + 10})})}"></div>
         </div>
 
         <!-- Coluna: PENDENTE -->
         <div class="phase-content-wp">
-          <div class="phase-name-wp">
-            <div class="text-block-324">PENDENTE</div>
-          </div>
-          <th:block th:each="lead : ${leads.content}" th:if="${lead.estado == 'PENDENTE'}">
-            <div class="pipeline-cardwp col-2">
-              <div class="div-block-497">
-                <div class="text-block-327" th:text="${lead.nome}">Deal name</div>
-                <div class="text-block-328" th:text="${lead.pacotePreco}">$ 9.000</div>
-              </div>
-              <div class="div-block-498">
-                <div class="text-block-329" th:text="${lead.parceiroNome}">Name of partner</div>
-                <a th:href="@{/admin/leads/{id}(id=${lead.publicId})}" class="link-42">8</a>
-              </div>
-              <div class="div-block-499">
-                <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
-              </div>
-            </div>
+          <div th:replace="~{layout/fragments/leads :: column-header('PENDENTE', ${leadsPendente})}"></div>
+          <th:block th:if="${leadsPendente != null}" th:each="lead : ${leadsPendente.content}">
+            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'col-2', @{/admin/leads/{id}(id=${lead.publicId})})}"></div>
           </th:block>
+          <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsPendente}, @{/admin/leads(estado='PENDENTE', mes=${mesSel}, ano=${anoSel}, parceiro=${parceiroSel}, tamanho=${tamanhoSel + 10})})}"></div>
         </div>
 
         <!-- Coluna: CONVERTIDO -->
         <div class="phase-content-wp">
-          <div class="phase-name-wp">
-            <div class="text-block-324">CONVERTIDO</div>
-          </div>
-          <th:block th:each="lead : ${leads.content}" th:if="${lead.estado == 'CONVERTIDO'}">
-            <div class="pipeline-cardwp won">
-              <div class="div-block-497">
-                <div class="text-block-327" th:text="${lead.nome}">Deal name</div>
-                <div class="text-block-328" th:text="${lead.pacotePreco}">$ 9.000</div>
-              </div>
-              <div class="div-block-498">
-                <div class="text-block-329" th:text="${lead.parceiroNome}">Name of partner</div>
-                <a th:href="@{/admin/leads/{id}(id=${lead.publicId})}" class="link-42">8</a>
-              </div>
-              <div class="div-block-499">
-                <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
-              </div>
-            </div>
+          <div th:replace="~{layout/fragments/leads :: column-header('CONVERTIDO', ${leadsConvertido})}"></div>
+          <th:block th:if="${leadsConvertido != null}" th:each="lead : ${leadsConvertido.content}">
+            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'won', @{/admin/leads/{id}(id=${lead.publicId})})}"></div>
           </th:block>
+          <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsConvertido}, @{/admin/leads(estado='CONVERTIDO', mes=${mesSel}, ano=${anoSel}, parceiro=${parceiroSel}, tamanho=${tamanhoSel + 10})})}"></div>
         </div>
 
         <!-- Coluna: PERDIDO -->
         <div class="phase-content-wp">
-          <div class="phase-name-wp">
-            <div class="text-block-324">PERDIDO</div>
-          </div>
-          <th:block th:each="lead : ${leads.content}" th:if="${lead.estado == 'PERDIDO'}">
-            <div class="pipeline-cardwp lost">
-              <div class="div-block-497">
-                <div class="text-block-327" th:text="${lead.nome}">Deal name</div>
-                <div class="text-block-328" th:text="${lead.pacotePreco}">$ 9.000</div>
-              </div>
-              <div class="div-block-498">
-                <div class="text-block-329" th:text="${lead.parceiroNome}">Name of partner</div>
-                <a th:href="@{/admin/leads/{id}(id=${lead.publicId})}" class="link-42">8</a>
-              </div>
-              <div class="div-block-499">
-                <div class="text-block-330" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy')}">20/02/2026</div>
-              </div>
-            </div>
+          <div th:replace="~{layout/fragments/leads :: column-header('PERDIDO', ${leadsPerdido})}"></div>
+          <th:block th:if="${leadsPerdido != null}" th:each="lead : ${leadsPerdido.content}">
+            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'lost', @{/admin/leads/{id}(id=${lead.publicId})})}"></div>
           </th:block>
+          <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsPerdido}, @{/admin/leads(estado='PERDIDO', mes=${mesSel}, ano=${anoSel}, parceiro=${parceiroSel}, tamanho=${tamanhoSel + 10})})}"></div>
         </div>
+      </div>
+    </div>
       </div>
     </div>
   </section>

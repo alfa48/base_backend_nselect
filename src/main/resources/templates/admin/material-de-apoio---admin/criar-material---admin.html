@@ -8,7 +8,7 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a href="#" class="link-5">q</a>
+            <a href="javascript:history.back()" class="link-5">q</a>
             <div class="text-block-258">Novo material</div>
           </div>
         </div>
@@ -38,17 +38,17 @@
                     <div style="margin-top: 10px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique para trocar</div>
                   </div>
                   
-                  <input type="file" id="arquivo" name="arquivo" style="display:none" accept=".pdf,image/*" required>
+                  <input type="file" id="arquivo" name="arquivo" style="display:none" accept=".pdf,image/*">
                 </div>
               </div>
 
               <div class="form-field-wrapper">
                 <label for="nome" class="form-field-lable">Nome do material</label>
-                <input class="form-text-field w-input" name="nome" placeholder="Ex: Manual do Parceiro" type="text" id="nome" required>
+                <input class="form-text-field w-input" name="nome" placeholder="Ex: Manual do Parceiro" type="text" id="nome" required minlength="1">
               </div>
 
               <div class="form-field-wrapper">
-                <label class="form-field-lable">Para</label>
+                <label class="form-field-lable">Disponível para os seguintes Parceiros:</label>
                 <div class="div-block-100"></div>
                 <label class="w-checkbox checkbox-field-3" th:each="tipo : ${tiposParceiro}">
                   <input type="checkbox" name="tiposParceiro" th:value="${tipo.publicId}" class="w-checkbox-input checkbox-3">
@@ -128,16 +128,23 @@
                 const formData = new FormData(form);
                 const tiposParceiro = Array.from(form.querySelectorAll('input[name="tiposParceiro"]:checked')).map(cb => cb.value);
 
+                if (tiposParceiro.length === 0) {
+                  Modal.error('Por favor, selecione pelo menos um tipo de parceiro.');
+                  return;
+                }
+
                 const dados = {
                   nome: formData.get('nome'),
                   tipoConteudo: formData.get('tipoConteudo'),
-                  tagPromocional: formData.get('tagPromocional'),
-                  tagEducativo: formData.get('tagEducativo'),
+                  tagPromocional: formData.get('tagPromocional') || null,
+                  tagEducativo: formData.get('tagEducativo') || null,
                   tiposParceiroPublicIds: tiposParceiro
                 };
 
                 const multipartData = new FormData();
-                multipartData.append('arquivo', formData.get('arquivo'));
+                if (arquivoInput.files[0]) {
+                  multipartData.append('arquivo', arquivoInput.files[0]);
+                }
                 multipartData.append('dados', JSON.stringify(dados));
 
                 Modal.showLoading('A guardar material...');
@@ -157,7 +164,7 @@
                 })
                 .catch(err => {
                   Modal.hideLoading();
-                  Modal.error('Erro de rede.');
+                  Modal.error('Erro de rede ou conexão.');
                 });
               });
             });

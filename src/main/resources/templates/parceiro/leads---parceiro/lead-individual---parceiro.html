@@ -8,7 +8,7 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a th:href="@{/parceiro/leads---parceiro/lead-individual---parceiro}" aria-current="page" class="link-5 w--current">q</a>
+            <a href="javascript:history.back()" class="link-5">q</a>
             <div class="text-block-258">#646576</div>
           </div>
         </div>
@@ -44,7 +44,7 @@
             </div>
             <div class="list-item">
               <div class="list-item-lable">Pacote</div>
-              <div class="list-item" th:text="${lead.pacoteNome + ' - KZ ' + #numbers.formatDecimal(lead.pacotePreco, 0, 'POINT', 2, 'COMMA')}">-----</div>
+              <div class="list-item" th:text="${lead.pacoteNome + ' - KZ ' + #numbers.formatDecimal(lead.pacotePreco, 1, 'POINT', 0, 'COMMA')}">-----</div>
             </div>
             <div class="w-layout-grid grid-51">
               <a href="#" class="action-button full w-inline-block" id="btn-mudar-estado">

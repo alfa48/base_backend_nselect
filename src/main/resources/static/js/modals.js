@@ -52,15 +52,18 @@ const Modal = {
             if (result.isConfirmed) {
                 Modal.showLoading('A eliminar...');
                 fetch(url, { method: 'DELETE' })
-                    .then(res => res.json())
-                    .then(data => {
+                    .then(async res => {
+                        const data = await res.json();
                         Modal.hideLoading();
-                        if (data.message) {
-                            Modal.toast(data.message, 'success');
+                        
+                        if (res.ok) {
+                            const successMsg = data.msg || data.message || 'Item eliminado com sucesso.';
+                            Modal.toast(successMsg, 'success');
                             if (successCallback) successCallback(data);
                             else setTimeout(() => location.reload(), 1500);
                         } else {
-                            Modal.error(data.error || 'Erro ao eliminar item.');
+                            const errorMsg = data.msg || data.message || 'Erro ao eliminar item.';
+                            Modal.error(errorMsg);
                         }
                     })
                     .catch(err => {
@@ -88,8 +91,9 @@ const Modal = {
             .then(res => res.json())
             .then(data => {
                 Modal.hideLoading();
-                if (data.message) {
-                    Modal.toast(data.message, 'success');
+                const feedbackMsg = data.msg || data.message;
+                if (feedbackMsg && !data.error) {
+                    Modal.toast(feedbackMsg, 'success');
                     if (typeof successUrlOrCallback === 'function') {
                         successUrlOrCallback(data);
                     } else if (successUrlOrCallback) {
@@ -98,7 +102,7 @@ const Modal = {
                         setTimeout(() => location.reload(), 1500);
                     }
                 } else {
-                    Modal.error(data.error || 'Ocorreu um erro no processamento.');
+                    Modal.error(data.msg || data.message || data.error || 'Ocorreu um erro no processamento.');
                 }
             })
             .catch(err => {

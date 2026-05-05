@@ -69,6 +69,18 @@ public class ParceiroService extends BaseApiService {
         delete("/admin/parceiros/" + publicId);
     }
 
+    public org.springframework.http.ResponseEntity<byte[]> downloadDocumento(String publicId) {
+        return getEntity("/admin/parceiros/" + publicId + "/documento", byte[].class);
+    }
+
+    public org.springframework.http.ResponseEntity<byte[]> downloadFotoUsuario(String usuarioPublicId) {
+        return getEntity("/usuarios/" + usuarioPublicId + "/foto", byte[].class);
+    }
+
+    public org.springframework.http.ResponseEntity<byte[]> exibirArquivo(String caminho) {
+        return getEntity("/arquivos/exibir?caminho=" + caminho, byte[].class);
+    }
+
     /**
      * Obtém os indicadores de performance específicos do parceiro autenticado.
      * Inclui total de leads, leads convertidos, faturação e tendências (%) de crescimento.

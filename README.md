@@ -1,52 +1,42 @@
-# Spring Boot BFF Starter - App Base
+# DPD - Portal de Gestão (BFF)
 
-Este projeto é a **App Base oficial** para o desenvolvimento de novas aplicações na nossa stack. Ele não é apenas um projeto para ser expandido, mas sim o **esqueleto** que deve ser clonado e utilizado como ponto de partida para toda e qualquer nova aplicação que siga o padrão (Backend for Frontend).
+Este projeto é o **Backend for Frontend (BFF)** do DPD, desenvolvido em Spring Boot. Ele atua como orquestrador e interface web para a gestão de parceiros, leads, tickets e materiais de apoio.
 
-## Objetivo da App Base
+## Arquitetura
 
-Providenciar uma estrutura pré-configurada e padronizada para que novos programadores não percam tempo configurando:
-1.  **Infraestrutura Docker**: Makefile e Docker Compose prontos.
-2.  **Arquitetura de Consumo**: Serviços genéricos para APIs externas.
-3.  **UI Componentizada**: Sistema de fragmentos Thymeleaf e layout responsivo.
-4.  **Segurança de Sessão**: Fluxo de autenticação manual pré-implementado.
+A aplicação funciona como um orquestrador de interface e **não possui base de dados local**. 
+- Todas as operações de leitura e escrita são delegadas para uma API externa.
+- A segurança de sessão e o fluxo de autenticação são geridos localmente utilizando Spring Security, comunicando com os serviços da API para validação.
+- A interface de utilizador é renderizada server-side utilizando **Thymeleaf**, com um sistema de layouts e fragmentos para consistência visual.
 
----
+## Principais Módulos
 
-## Como iniciar uma nova aplicação a partir desta Base
+- **Dashboard**: Visão geral e estatísticas.
+- **Gestão de Parceiros (Analytics)**: Listagem, criação, edição e visualização de parceiros (agentes, etc) com filtros por província e tipo.
+- **Gestão de Leads**: Acompanhamento e gestão de oportunidades de negócio.
+- **Gestão de Tickets**: Sistema de suporte e acompanhamento de incidências.
+- **Materiais de Apoio**: Gestão de recursos disponibilizados aos parceiros.
 
-1.  **Clone este repositório** como o seu novo projeto.
-2.  **Renomeie o artefacto** no `pom.xml` (`<artifactId>`).
-3.  **Configure as constantes**: Defina as chaves de API e URLs no ficheiro `application.properties` ou via variáveis de ambiente (`API_KEY` e `API_BASE_URL`).
-4.  **Desenvolva seus módulos**: Siga os padrões descritos no [DEV_DOC.md](DEV_DOC.md).
+## Pré-requisitos e Configuração
 
----
+Certifique-se de ter o Docker e Docker Compose instalados, ou o Java 17+ e Maven para desenvolvimento local.
 
-## Arquitetura Base (Consumo Externo)
-
-A aplicação funciona como um orquestrador de interface. Ela **não possui base de dados local**. 
-- Todas as operações de leitura e escrita devem ser delegadas para APIs via `BaseApiService`.
-- A lógica de negócio "pesada" reside nas APIs externas.
-
----
-
-## Componentes Reutilizáveis
-
-- **`BaseApiService`**: Herança obrigatória para novos serviços de API.
-- **`Constant`**: Centralizador de configurações sensíveis (agora via Properties/Env).
-- **`Fragments`**: Localizados em `templates/layout/fragments/`, garantem que o "look and feel" da marca seja consistente em todas as aplicações derivadas.
-
----
+As configurações principais encontram-se em `src/main/resources/application.properties` (ou `application-dev.properties`). Pode ser necessário configurar a `API_BASE_URL` ou outras variáveis de ambiente dependendo do ambiente.
 
 ## Comandos de Inicialização Rápida
 
+O projeto utiliza um `Makefile` para simplificar a gestão de processos:
+
 ```bash
 make build    # Constrói o ambiente (Docker)
-make up       # Inicia a aplicação (Porta 8090)
-- `make logs`: Monitorização técnica
-- `make dev`: Executa localmente com Hot-Reload (mais rápido para dev)
+make up       # Inicia a aplicação no Docker (Porta 8091 por padrão)
+make logs     # Visualiza os logs da aplicação a correr no Docker
+make dev      # Executa localmente com Hot-Reload (recomendado para desenvolvimento)
 ```
 
----
+## Estrutura do Projeto
 
-## Notas de Desenvolvimento
-Para mais detalhes técnicos sobre como implementar novos módulos, consulte o arquivo [DEV_DOC.md](DEV_DOC.md).
+- `src/main/java/co/ao/base/controller/`: Controladores web (Thymeleaf) e API controllers (REST).
+- `src/main/java/co/ao/base/service/`: Serviços responsáveis pela comunicação com as APIs externas.
+- `src/main/resources/templates/`: Ficheiros HTML/Thymeleaf organizados por módulos (admin, auth, etc).
+- `src/main/resources/static/`: Recursos estáticos como CSS, JS e imagens.

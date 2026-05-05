@@ -135,6 +135,21 @@ public abstract class BaseApiService {
     }
 
     /**
+     * Método genérico para execução de chamadas GET que retorna a ResponseEntity completa.
+     * Útil para download de arquivos onde os headers são necessários.
+     */
+    protected <T> ResponseEntity<T> getEntity(String endpoint, Class<T> responseType) {
+        String url = Constant.BASE_URL + endpoint;
+        try {
+            log.info("API REQUEST (ENTITY): GET {}", url);
+            return restTemplate.exchange(url, HttpMethod.GET, getRequestEntity(null), responseType);
+        } catch (HttpStatusCodeException e) {
+            log.error("API ENTITY ERROR: {} | Status: {}", url, e.getStatusCode());
+            throw e;
+        }
+    }
+
+    /**
      * Método centralizado para execução de chamadas à API com suporte a retries e logging.
      */
     protected <T> T execute(String endpoint, HttpMethod method, HttpEntity<?> entity, Class<T> responseType) {

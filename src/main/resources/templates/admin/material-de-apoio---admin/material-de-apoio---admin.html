@@ -8,11 +8,26 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a th:href="@{/admin/dashboard}" class="link-5">q</a>
+            <a href="javascript:history.back()" class="link-5">q</a>
             <div class="text-block-258">Material de apoio</div>
+            <form action="/admin/materiais" method="get" class="search w-form">
+              <input class="search-input w-input" maxlength="256" name="nome" th:value="${param.nome}" placeholder="Pesquisar por nome" type="search" id="search">
+              <input th:if="${param.tipo != null}" type="hidden" name="tipo" th:value="${param.tipo}">
+              <input type="submit" class="search-button w-button" value="x">
+            </form>
           </div>
           <div class="div-block-457">
-            <a th:href="@{/admin/materiais/novo}" class="link-43" style="margin-left: 20px;">Novo material</a>
+            <div class="form-block-2 w-form" style="display: flex; align-items: center;">
+              <form id="filter-form" method="get" action="/admin/materiais" class="form-3">
+                <select name="tipo" class="select-field-2 _2 w-select" onchange="this.form.submit()">
+                  <option value="">Tipo de Conteúdo</option>
+                  <option value="PROMOCIONAL" th:selected="${param.tipo == 'PROMOCIONAL'}">Promocional</option>
+                  <option value="EDUCATIVO" th:selected="${param.tipo == 'EDUCATIVO'}">Educativo</option>
+                </select>
+                <input th:if="${param.nome != null}" type="hidden" name="nome" th:value="${param.nome}">
+              </form>
+              <a th:href="@{/admin/materiais/novo}" class="link-43" style="margin-left: 20px;">Novo material</a>
+            </div>
           </div>
         </div>
       </div>
@@ -49,6 +64,25 @@
           Nenhum material de apoio encontrado.
         </div>
 
+        <!-- Paginação -->
+        <div th:if="${materiais != null && materiais.totalPages > 1}" class="table-pagination-wrapper" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+          <div class="pagination-description">
+            A mostrar página <span class="pagination-bold" th:text="${materiais.number + 1}">1</span> 
+            de <span class="pagination-bold" th:text="${materiais.totalPages}">10</span>
+          </div>
+          <div class="pagination-nav">
+            <a th:if="${materiais.number > 0}" 
+               th:href="@{/admin/materiais(pagina=${materiais.number - 1}, tamanho=${materiais.size}, nome=${param.nome}, tipo=${param.tipo})}" 
+               class="btn-pagination" style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; margin-right: 5px;">
+               Anterior
+            </a>
+            <a th:if="${materiais.number + 1 < materiais.totalPages}" 
+               th:href="@{/admin/materiais(pagina=${materiais.number + 1}, tamanho=${materiais.size}, nome=${param.nome}, tipo=${param.tipo})}" 
+               class="btn-pagination" style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333;">
+               Próximo
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>

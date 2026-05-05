@@ -58,4 +58,9 @@ public class AuthViewController {
     public String userLogin() {
         return "redirect:/dashboard";
     }
+
+    @GetMapping("/noauth")
+    public String loginFailed() {
+        return "redirect:/?error=Credenciais incorretas. Verifique o seu email e senha.";
+    }
 }

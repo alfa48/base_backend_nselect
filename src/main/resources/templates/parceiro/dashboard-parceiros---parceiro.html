@@ -29,7 +29,7 @@
           <div class="div-block-453">
             <div class="text-block-253">Minha faturação</div>
             <div class="text-block-254"
-              th:text="${'KZ ' + #numbers.formatDecimal(overview.faturacaoTotal, 0, 'POINT', 2, 'COMMA')}">KZ 0,00</div>
+              th:text="${'KZ ' + #numbers.formatDecimal(overview.faturacaoTotal, 1, 'POINT', 0, 'COMMA')}">KZ 0,00</div>
             <div>
               <div class="kpi-bottom-section">
                 <div class="kpi-stats-wrapper" th:if="${overview != null}">

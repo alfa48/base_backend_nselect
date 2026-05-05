@@ -1,60 +1,18 @@
 <!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
-<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69ece6767da02af7512b39c1" data-wf-site="69ece585cad09a74baae0d40">
+<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69ece6767da02af7512b39c1"
+  data-wf-site="69ece585cad09a74baae0d40">
+
 <head th:replace="~{layout/fragments/head :: head('Dashboard - Admin')}"></head>
+
 <body>
   <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
   <section class="section-3 main">
     <div class="contain-this">
       <div>
         <div class="w-layout-grid grid-49">
-          <div class="div-block-453">
-            <div class="text-block-253">Total de parceiros</div>
-            <div class="text-block-254" th:text="${overview != null ? overview.totalParceiros : '0'}">0</div>
-            <div>
-              <div class="kpi-bottom-section">
-                <div class="kpi-stats-wrapper" th:if="${overview != null}">
-                  <div class="kpi-stats" th:classappend="${(overview.totalParceirosTrend != null ? overview.totalParceirosTrend : 0.0) >= 0 ? 'positive' : 'negative'}">
-                    <div class="icon kpi-stats-icon">
-                      <div class="main-font-icon smaller-icon" th:text="${(overview.totalParceirosTrend != null ? overview.totalParceirosTrend : 0.0) >= 0 ? '8' : 'trending_down'}">8</div>
-                    </div>
-                    <div class="stats" th:text="${#numbers.formatDecimal(overview.totalParceirosTrend != null ? overview.totalParceirosTrend : 0.0, 1, 2) + '%'}">8.26%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="div-block-453">
-            <div class="text-block-253">Total de leads</div>
-            <div class="text-block-254" th:text="${overview != null ? overview.totalLeads : '0'}">0</div>
-            <div>
-              <div class="kpi-bottom-section">
-                <div class="kpi-stats-wrapper" th:if="${overview != null}">
-                  <div class="kpi-stats" th:classappend="${(overview.totalLeadsTrend != null ? overview.totalLeadsTrend : 0.0) >= 0 ? 'positive' : 'negative'}">
-                    <div class="icon kpi-stats-icon">
-                      <div class="main-font-icon smaller-icon" th:classappend="${(overview.totalLeadsTrend != null ? overview.totalLeadsTrend : 0.0) < 0 ? 'down' : ''}" th:text="${(overview.totalLeadsTrend != null ? overview.totalLeadsTrend : 0.0) >= 0 ? 'trending_up' : '8'}">8</div>
-                    </div>
-                    <div class="stats" th:text="${#numbers.formatDecimal(overview.totalLeadsTrend != null ? overview.totalLeadsTrend : 0.0, 1, 2) + '%'}">8.26%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="div-block-453">
-            <div class="text-block-253">Tickets Abertos</div>
-            <div class="text-block-254" th:text="${overview != null ? overview.ticketsAbertos : '0'}">0</div>
-            <div>
-              <div class="kpi-bottom-section">
-                <div class="kpi-stats-wrapper" th:if="${overview != null}">
-                  <div class="kpi-stats" th:classappend="${(overview.ticketsAbertosTrend != null ? overview.ticketsAbertosTrend : 0.0) >= 0 ? 'negative' : 'positive'}">
-                    <div class="icon kpi-stats-icon">
-                      <div class="main-font-icon smaller-icon" th:text="${(overview.ticketsAbertosTrend != null ? overview.ticketsAbertosTrend : 0.0) >= 0 ? 'trending_up' : '8'}">8</div>
-                    </div>
-                    <div class="stats" th:text="${#numbers.formatDecimal(overview.ticketsAbertosTrend != null ? overview.ticketsAbertosTrend : 0.0, 1, 2) + '%'}">8.26%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div th:replace="~{layout/fragments/kpis :: kpi-card('Total de parceiros', ${overview != null ? overview.totalParceiros : '0'}, ${overview != null ? overview.totalParceirosTrend : null}, false)}"></div>
+          <div th:replace="~{layout/fragments/kpis :: kpi-card('Total de leads', ${overview != null ? overview.totalLeads : '0'}, ${overview != null ? overview.totalLeadsTrend : null}, false)}"></div>
+          <div th:replace="~{layout/fragments/kpis :: kpi-card('Tickets Abertos', ${overview != null ? overview.ticketsAbertos : '0'}, ${overview != null ? overview.ticketsAbertosTrend : null}, true)}"></div>
         </div>
       </div>
       <div class="div-block-454">
@@ -73,7 +31,8 @@
                 <!-- Iterar Últimos Tickets -->
                 <th:block th:each="ticket : ${recentTickets}">
                   <div class="main-card">
-                    <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId})}" class="main-items-of-card w-inline-block">
+                    <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId})}"
+                      class="main-items-of-card w-inline-block">
                       <div class="icon-div">
                         <div class="text-block-255">2</div>
                       </div>
@@ -84,7 +43,8 @@
                         <div class="text-block-256" th:text="${ticket.tipo}">TIPO</div>
                       </div>
                       <div class="content-do-card-div status-things">
-                        <div class="status-wrapper" th:classappend="${ticket.estado != null ? #strings.toLowerCase(ticket.estado) : ''}">
+                        <div class="status-wrapper"
+                          th:classappend="${ticket.estado != null ? #strings.toLowerCase(ticket.estado) : ''}">
                           <div class="status-text" th:text="${ticket.estado}">ABERTO</div>
                         </div>
                       </div>
@@ -94,7 +54,8 @@
                     </div>
                   </div>
                 </th:block>
-                <div th:if="${#lists.isEmpty(recentTickets)}" class="text-block-256" style="text-align: center; padding: 20px; opacity: 0.6;">
+                <div th:if="${#lists.isEmpty(recentTickets)}" class="text-block-256"
+                  style="text-align: center; padding: 20px; opacity: 0.6;">
                   Nenhum ticket recente.
                 </div>
               </div>
@@ -104,7 +65,8 @@
                 <!-- Iterar Últimos Parceiros -->
                 <th:block th:each="parceiro : ${recentParceiros}">
                   <div class="main-card">
-                    <a th:href="@{/admin/parceiros/ver/{id}(id=${parceiro.publicId})}" class="main-items-of-card w-inline-block">
+                    <a th:href="@{/admin/parceiros/ver/{id}(id=${parceiro.publicId})}"
+                      class="main-items-of-card w-inline-block">
                       <div class="icon-div">
                         <div class="text-block-255">j</div>
                       </div>
@@ -115,7 +77,8 @@
                         <div class="text-block-256" th:text="${parceiro.provinciaNome}">Província</div>
                       </div>
                       <div class="content-do-card-div status-things">
-                        <div class="status-wrapper" th:classappend="${parceiro.tipoParceiroNome == 'PARCEIRO' ? 'factura' : (parceiro.tipoParceiroNome == 'AGENTE' ? 'nao-pago' : 'pago')}">
+                        <div class="status-wrapper"
+                          th:classappend="${parceiro.tipoParceiroNome == 'PARCEIRO' ? 'factura' : (parceiro.tipoParceiroNome == 'AGENTE' ? 'nao-pago' : 'pago')}">
                           <div class="status-text" th:text="${parceiro.tipoParceiroNome}">AGENTE</div>
                         </div>
                       </div>
@@ -126,7 +89,8 @@
                     </div>
                   </div>
                 </th:block>
-                <div th:if="${#lists.isEmpty(recentParceiros)}" class="text-block-256" style="text-align: center; padding: 20px; opacity: 0.6;">
+                <div th:if="${#lists.isEmpty(recentParceiros)}" class="text-block-256"
+                  style="text-align: center; padding: 20px; opacity: 0.6;">
                   Nenhum parceiro recente.
                 </div>
               </div>
@@ -138,4 +102,5 @@
   </section>
   <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
 </body>
+
 </html>

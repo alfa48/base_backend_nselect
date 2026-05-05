@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+  <!-- Fragmento para Cartão de KPI -->
+  <div th:fragment="kpi-card(title, value, trend, inverse)" class="div-block-453">
+    <div class="text-block-253" th:text="${title}">Título</div>
+    <div class="text-block-254" th:text="${value != null ? value : '0'}">0</div>
+    <div>
+      <div class="kpi-bottom-section">
+        <div class="kpi-stats-wrapper" th:if="${trend != null}">
+          <div class="kpi-stats"
+            th:classappend="${inverse ? (trend >= 0 ? 'negative' : 'positive') : (trend >= 0 ? 'positive' : 'negative')}">
+            <div class="icon kpi-stats-icon">
+              <div class="main-font-icon smaller-icon"
+                th:text="${trend >= 0 ? '8' : 'trending_down'}">
+                8</div>
+            </div>
+            <div class="stats"
+              th:text="${#numbers.formatDecimal(trend, 1, 2) + '%'}">
+              0.00%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

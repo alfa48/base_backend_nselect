@@ -8,23 +8,19 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a href="#" class="link-5">q</a>
-            <div class="text-block-258">#576776</div>
+            <a href="javascript:history.back()" class="link-5">q</a>
+            <div class="text-block-258" th:text="${'#' + #strings.substring(ticket.publicId, 0, 8)}">#576776</div>
           </div>
           <div class="div-block-457">
             <div class="form-block-2 w-form">
-              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3" data-wf-page-id="69ed36c029c38bf0ab3fbfc8" data-wf-element-id="709a0897-6eca-2ab4-da8c-b674fa6c19d8"><select id="field" name="field" data-name="Field" class="select-field-2 _2 w-select">
+              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3" data-wf-page-id="69ed36c029c38bf0ab3fbfc8" data-wf-element-id="709a0897-6eca-2ab4-da8c-b674fa6c19d8">
+                <select id="field" name="field" data-name="Field" class="select-field-2 _2 w-select">
                   <option value="">Tipo</option>
                   <option value="First">First choice</option>
                   <option value="Second">Second choice</option>
                   <option value="Third">Third choice</option>
-                </select></form>
-              <div class="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
-              </div>
-              <div class="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
-              </div>
+                </select>
+              </form>
             </div>
           </div>
         </div>
@@ -39,17 +35,20 @@
           <div id="w-node-_3b50b50b-8ed2-2c74-974d-88794ba803ee-ab3fbfc8">
             <div class="list-item">
               <div class="list-item-lable">Publicado por</div>
-              <div class="list-item" th:text="${ticket.publicadoPorNome}">---</div>
+              <div class="list-item" th:text="${ticket.publicadoPorNome}">------------</div>
             </div>
             <div class="list-item">
               <div class="list-item-lable">Tipo</div>
-              <div class="list-item" th:text="${ticket.tipo}">Tipo</div>
+              <div th:if="${ticket.tipo == 'CANCELAR'}" class="list-item redd">Cancelar subscrição</div>
+              <div th:if="${ticket.tipo == 'BUG'}" class="list-item pendente">Bug no sistema</div>
+              <div th:if="${ticket.tipo == 'RECLAMACAO'}" class="list-item blue">Reclamação</div>
+              <div th:if="${ticket.tipo == 'OUTRO'}" class="list-item outro">Outro</div>
             </div>
             <div class="list-item">
               <div class="list-item-lable">Estado</div>
-              <div class="status-wrapper" th:classappend="${#strings.toLowerCase(ticket.estado)}">
-                <div class="status-text" th:text="${ticket.estado}">ABERTO</div>
-              </div>
+              <div th:if="${#strings.toLowerCase(ticket.estado) == 'aberto'}" class="list-item redd">Aberto</div>
+              <div th:if="${#strings.toLowerCase(ticket.estado) == 'progresso'}" class="list-item blue">Em progresso</div>
+              <div th:if="${#strings.toLowerCase(ticket.estado) == 'resolvido'}" class="list-item green">Resolvido</div>
             </div>
             <div class="w-layout-grid" style="gap: 10px; margin-top: 20px;">
               <a th:href="@{/parceiro/tickets/editar/{id}(id=${ticket.publicId})}" class="action-button full w-inline-block">
@@ -58,7 +57,7 @@
                   <div class="button-text quick-action-text">Editar</div>
                 </div>
               </a>
-              <button type="button" class="action-button full w-inline-block btn-delete-ticket" th:data-id="${ticket.publicId}" style="border: none; background: transparent; cursor: pointer;">
+              <button type="button" class="action-button full w-inline-block btn-delete-ticket" th:data-id="${ticket.publicId}" style="border: none; background: transparent; cursor: pointer; width: 100%;">
                 <div class="icon quick-action">
                   <div class="main-font-icon" style="color: #ff5b5b;">v</div>
                   <div class="button-text quick-action-text" style="color: #ff5b5b;">Eliminar</div>

@@ -67,17 +67,20 @@ public class ParceiroViewController {
     }
 
     @GetMapping("/leads")
-    public String listarLeads(@RequestParam(defaultValue = "0") int pagina,
-                              @RequestParam(defaultValue = "10") int tamanho,
-                              @RequestParam(required = false) String estado,
-                              @RequestParam(required = false) String dataInicial,
+    public String listarLeads(@RequestParam(required = false) String dataInicial,
                               @RequestParam(required = false) String dataFinal,
                               Model model) {
         try {
-            model.addAttribute("leads", leadService.listarLeads(pagina, tamanho, estado, dataInicial, dataFinal));
+            model.addAttribute("leadsLead", leadService.listarLeads(0, 10, "LEAD", dataInicial, dataFinal));
+            model.addAttribute("leadsPendente", leadService.listarLeads(0, 10, "PENDENTE", dataInicial, dataFinal));
+            model.addAttribute("leadsConvertido", leadService.listarLeads(0, 10, "CONVERTIDO", dataInicial, dataFinal));
+            model.addAttribute("leadsPerdido", leadService.listarLeads(0, 10, "PERDIDO", dataInicial, dataFinal));
         } catch (Exception e) {
             log.error("Erro ao listar leads do parceiro: {}", e.getMessage());
-            model.addAttribute("leads", new co.ao.base.model.PageResponse<>());
+            model.addAttribute("leadsLead", new co.ao.base.model.PageResponse<>());
+            model.addAttribute("leadsPendente", new co.ao.base.model.PageResponse<>());
+            model.addAttribute("leadsConvertido", new co.ao.base.model.PageResponse<>());
+            model.addAttribute("leadsPerdido", new co.ao.base.model.PageResponse<>());
         }
         return "parceiro/leads---parceiro/leads-main---parceiro";
     }
@@ -179,7 +182,7 @@ public class ParceiroViewController {
             return "redirect:/parceiro/leads?error=Lead não encontrado";
         }
         model.addAttribute("leadId", id);
-        return "parceiro/leads---parceiro/nova-nota---parceiro";
+        return "parceiro/leads---parceiro/criar-nota---parceiro";
     }
 
     @GetMapping("/leads/{leadId}/notas/editar/{notaId}")

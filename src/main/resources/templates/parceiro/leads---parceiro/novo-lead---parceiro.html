@@ -11,7 +11,7 @@
       <div class="contain-this">
         <div class="div-block-455">
           <div class="div-block-456">
-            <a href="#" class="link-5">q</a>
+            <a href="javascript:history.back()" class="link-5">q</a>
             <div class="text-block-258">Novo lead</div>
           </div>
         </div>
@@ -46,6 +46,16 @@
                 <select id="pacotePublicId" name="pacotePublicId" class="select-field w-select" required>
                   <option value="">Selecione...</option>
                   <option th:each="p : ${pacotes}" th:value="${p.publicId}" th:text="${p.nome}"></option>
+                </select>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="estado" class="form-field-lable">Estado</label>
+                <select id="estado" name="estado" class="select-field w-select" required>
+                  <option value="">Selecione...</option>
+                  <option value="LEAD">LEAD</option>
+                  <option value="PENDENTE">PENDENTE</option>
+                  <option value="CONVERTIDO">CONVERTIDO</option>
+                  <option value="PERDIDO">PERDIDO</option>
                 </select>
               </div>
               <div class="create-this">
