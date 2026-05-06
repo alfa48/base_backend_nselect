@@ -14,6 +14,7 @@ public class MaterialApoioDTO {
     private String tagPromocional;
     private String tagEducativo;
     private List<String> tiposParceiroPublicIds;
+    private String tiposParceiroNomes;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdAt;
 }

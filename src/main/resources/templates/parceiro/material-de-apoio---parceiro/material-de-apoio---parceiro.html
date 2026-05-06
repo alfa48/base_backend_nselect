@@ -43,7 +43,7 @@
                 <div class="text-block-256 main" th:text="${material.nome}">Nome do conteudo</div>
               </div>
               <div class="content-do-card-div">
-                <div class="text-block-256" th:text="${material.tipoConteudo}">PROMOCIONAL</div>
+                <div class="text-block-256" th:text="${material.tiposParceiroNomes != null ? material.tiposParceiroNomes : 'Para todos'}">Agentes, Parceiros, Representantes Certificados</div>
               </div>
               <div class="content-do-card-div status-things">
                 <div class="status-wrapper" th:classappend="${material.tipoConteudo == 'PROMOCIONAL' ? 'pago' : 'nao-pago'}">

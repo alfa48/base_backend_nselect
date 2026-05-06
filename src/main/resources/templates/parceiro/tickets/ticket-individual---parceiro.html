@@ -1,6 +1,9 @@
 <!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="69ed36c029c38bf0ab3fbfc8" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<html data-wf-page="69ed36c029c38bf0ab3fbfc8" data-wf-site="69ece585cad09a74baae0d40"
+  xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{layout/fragments/head :: head('Ticket individual- Parceiro')}"></head>
+
 <body>
   <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
   <section class="section-3 no-shad _500">
@@ -13,7 +16,8 @@
           </div>
           <div class="div-block-457">
             <div class="form-block-2 w-form">
-              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3" data-wf-page-id="69ed36c029c38bf0ab3fbfc8" data-wf-element-id="709a0897-6eca-2ab4-da8c-b674fa6c19d8">
+              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3"
+                data-wf-page-id="69ed36c029c38bf0ab3fbfc8" data-wf-element-id="709a0897-6eca-2ab4-da8c-b674fa6c19d8">
                 <select id="field" name="field" data-name="Field" class="select-field-2 _2 w-select">
                   <option value="">Tipo</option>
                   <option value="First">First choice</option>
@@ -35,7 +39,8 @@
           <div id="w-node-_3b50b50b-8ed2-2c74-974d-88794ba803ee-ab3fbfc8">
             <div class="list-item">
               <div class="list-item-lable">Publicado por</div>
-              <div class="list-item" th:text="${ticket.publicadoPorNome}">------------</div>
+              <div class="list-item" th:text="${ticket.publicadoPorNome != null ? ticket.publicadoPorNome : ''}">
+              </div>
             </div>
             <div class="list-item">
               <div class="list-item-lable">Tipo</div>
@@ -47,20 +52,24 @@
             <div class="list-item">
               <div class="list-item-lable">Estado</div>
               <div th:if="${#strings.toLowerCase(ticket.estado) == 'aberto'}" class="list-item redd">Aberto</div>
-              <div th:if="${#strings.toLowerCase(ticket.estado) == 'progresso'}" class="list-item blue">Em progresso</div>
+              <div th:if="${#strings.toLowerCase(ticket.estado) == 'progresso'}" class="list-item blue">Em progresso
+              </div>
               <div th:if="${#strings.toLowerCase(ticket.estado) == 'resolvido'}" class="list-item green">Resolvido</div>
             </div>
             <div class="w-layout-grid" style="gap: 10px; margin-top: 20px;">
-              <a th:href="@{/parceiro/tickets/editar/{id}(id=${ticket.publicId})}" class="action-button full w-inline-block">
+              <a th:href="@{/parceiro/tickets/editar/{id}(id=${ticket.publicId})}"
+                class="action-button full w-inline-block">
                 <div class="icon quick-action">
                   <div class="main-font-icon">u</div>
                   <div class="button-text quick-action-text">Editar</div>
                 </div>
               </a>
-              <button type="button" class="action-button full w-inline-block btn-delete-ticket" th:data-id="${ticket.publicId}" style="border: none; background: transparent; cursor: pointer; width: 100%;">
+              <button type="button" class="action-button full w-inline-block btn-delete-ticket"
+                th:data-id="${ticket.publicId}"
+                style="border: none; background: transparent; cursor: pointer; width: 100%;">
                 <div class="icon quick-action">
                   <div class="main-font-icon" style="color: #ff5b5b;">v</div>
-                  <div class="button-text quick-action-text" style="color: #ff5b5b;">Eliminar</div>
+                  <div class="button-text quick-action-text" style="color: #ff5b5b;">Apagar</div>
                 </div>
               </button>
             </div>
@@ -71,9 +80,9 @@
   </section>
   <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('.btn-delete-ticket').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
           const id = this.getAttribute('data-id');
           Modal.deleteItem(id, `/api/tickets/${id}`, 'este ticket', () => {
             window.location.href = '/parceiro/tickets';
@@ -83,4 +92,5 @@
     });
   </script>
 </body>
+
 </html>

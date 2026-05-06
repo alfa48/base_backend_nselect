@@ -30,7 +30,7 @@ public class AuthApiController {
         } catch (HttpStatusCodeException e) {
             model.addAttribute("error", "Erro na API: " + e.getResponseBodyAsString());
         } catch (RestClientException e) {
-            model.addAttribute("error", "Não foi possível conectar ao servidor. Verifique o URL ou a sua conexão.");
+            model.addAttribute("error", "Não foi possível conectar ao servidor. Verifique a URL ou a sua conexão.");
         } catch (Exception e) {
             model.addAttribute("error", "Ocorreu um erro inesperado: " + e.getMessage());
         }

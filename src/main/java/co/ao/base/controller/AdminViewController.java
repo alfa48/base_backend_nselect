@@ -65,7 +65,7 @@ public class AdminViewController {
 
         // Recent Tickets
         try {
-            var tickets = ticketService.listarTickets(0, 5);
+            var tickets = ticketService.listarTicketsAdmin(0, 5);
             model.addAttribute("recentTickets", tickets != null ? tickets.getContent() : new java.util.ArrayList<>());
         } catch (Exception e) {
             model.addAttribute("recentTickets", new java.util.ArrayList<>());
@@ -314,13 +314,30 @@ public class AdminViewController {
     }
 
     @GetMapping("/materiais/editar/{id}")
-    public String editarMaterial(@PathVariable String id, Model model) {
+    public String editarMaterial(@PathVariable String id,
+                                 @RequestParam(required = false) String nome,
+                                 @RequestParam(required = false) String tipoConteudo,
+                                 @RequestParam(required = false) String arquivoUrl,
+                                 @RequestParam(required = false) String tagPromocional,
+                                 @RequestParam(required = false) String tagEducativo,
+                                 Model model) {
         try {
             model.addAttribute("material", materialApoioService.buscarMaterial(id));
+        } catch (Exception e) {
+            log.warn("Nao foi possivel pre-carregar material {}: {}. Usando dados da URL.", id, e.getMessage());
+            co.ao.base.model.MaterialApoioDTO m = new co.ao.base.model.MaterialApoioDTO();
+            m.setPublicId(id);
+            m.setNome(nome);
+            m.setTipoConteudo(tipoConteudo);
+            m.setArquivoUrl(arquivoUrl);
+            m.setTagPromocional(tagPromocional);
+            m.setTagEducativo(tagEducativo);
+            model.addAttribute("material", m);
+        }
+        try {
             model.addAttribute("tiposParceiro", dominioService.listarTiposParceiro());
         } catch (Exception e) {
-            log.error("Erro ao carregar material para edição: {}", e.getMessage());
-            return "redirect:/admin/materiais?error=Erro ao carregar dados";
+            model.addAttribute("tiposParceiro", java.util.Collections.emptyList());
         }
         return "admin/material-de-apoio---admin/editar-material---admin";
     }
@@ -335,7 +352,7 @@ public class AdminViewController {
                                @RequestParam(defaultValue = "10") int tamanho,
                                Model model) {
         try {
-            model.addAttribute("tickets", ticketService.listarTickets(pagina, tamanho));
+            model.addAttribute("tickets", ticketService.listarTicketsAdmin(pagina, tamanho));
         } catch (Exception e) {
             model.addAttribute("tickets", new co.ao.base.model.PageResponse<>());
             model.addAttribute("error", "Não foi possível carregar os tickets no momento.");
@@ -345,12 +362,23 @@ public class AdminViewController {
 
 
     @GetMapping("/tickets/{id}")
-    public String verTicket(@PathVariable String id, Model model) {
+    public String verTicket(@PathVariable String id,
+                            @RequestParam(required = false) String conteudo,
+                            @RequestParam(required = false) String tipo,
+                            @RequestParam(required = false) String estado,
+                            @RequestParam(required = false) String publicadoPorNome,
+                            Model model) {
         try {
-            model.addAttribute("ticket", ticketService.buscarTicket(id));
+            model.addAttribute("ticket", ticketService.buscarTicketAdmin(id));
         } catch (Exception e) {
-            log.error("Erro ao ver ticket: {}", e.getMessage());
-            return "redirect:/admin/tickets?error=Ticket não encontrado";
+            log.warn("Nao foi possivel carregar ticket {}: {}. Usando dados da URL.", id, e.getMessage());
+            co.ao.base.model.TicketDTO t = new co.ao.base.model.TicketDTO();
+            t.setPublicId(id);
+            t.setConteudo(conteudo != null ? conteudo : "(Dados nao disponiveis)");
+            t.setTipo(tipo != null ? tipo : "OUTRO");
+            t.setEstado(estado != null ? estado : "ABERTO");
+            t.setPublicadoPorNome(publicadoPorNome);
+            model.addAttribute("ticket", t);
         }
         return "admin/tickets---admin/ticket-individual---admin";
     }

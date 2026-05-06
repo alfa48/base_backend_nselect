@@ -23,9 +23,8 @@ public class MaterialApoioService extends BaseApiService {
     }
 
     public PageResponse<MaterialApoioDTO> listarMateriaisAdmin(int pagina, int tamanho, String nome, String tipoConteudo) {
-        log.info(">>> SERVICE HIT: listarMateriaisAdmin (Forçando uso de /materiais-apoio)");
-        // O Admin usa o mesmo endpoint de listagem que o parceiro, mas com permissões de Admin
-        StringBuilder url = new StringBuilder("/materiais-apoio?pagina=").append(pagina).append("&tamanho=").append(tamanho);
+        log.info(">>> SERVICE HIT: listarMateriaisAdmin (Using /materiais-apoio/admin/todos)");
+        StringBuilder url = new StringBuilder("/materiais-apoio/admin/todos?pagina=").append(pagina).append("&tamanho=").append(tamanho);
         if (nome != null && !nome.isEmpty()) url.append("&nome=").append(nome);
         if (tipoConteudo != null && !tipoConteudo.isEmpty()) url.append("&tipoConteudo=").append(tipoConteudo);
 
@@ -67,6 +66,7 @@ public class MaterialApoioService extends BaseApiService {
     }
 
     public MaterialApoioDTO buscarMaterial(String publicId) {
-        return get("/admin/materiais-apoio/" + publicId, MaterialApoioDTO.class);
+        log.info(">>> SERVICE HIT: buscarMaterial (Using /materiais-apoio/{})", publicId);
+        return get("/materiais-apoio/" + publicId, MaterialApoioDTO.class);
     }
 }

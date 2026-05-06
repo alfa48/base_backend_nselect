@@ -67,14 +67,57 @@ public class ParceiroViewController {
     }
 
     @GetMapping("/leads")
-    public String listarLeads(@RequestParam(required = false) String dataInicial,
-                              @RequestParam(required = false) String dataFinal,
+    public String listarLeads(@RequestParam(required = false) Integer mes,
+                              @RequestParam(required = false) Integer ano,
+                              @RequestParam(required = false) String estado,
+                              @RequestParam(defaultValue = "10") Integer tamanho,
                               Model model) {
+        
         try {
-            model.addAttribute("leadsLead", leadService.listarLeads(0, 10, "LEAD", dataInicial, dataFinal));
-            model.addAttribute("leadsPendente", leadService.listarLeads(0, 10, "PENDENTE", dataInicial, dataFinal));
-            model.addAttribute("leadsConvertido", leadService.listarLeads(0, 10, "CONVERTIDO", dataInicial, dataFinal));
-            model.addAttribute("leadsPerdido", leadService.listarLeads(0, 10, "PERDIDO", dataInicial, dataFinal));
+            model.addAttribute("meses", dominioService.listarMeses());
+        } catch (Exception e) {
+            model.addAttribute("meses", java.util.Collections.emptyList());
+        }
+
+        model.addAttribute("mesSel", mes);
+        model.addAttribute("anoSel", ano);
+        model.addAttribute("estadoSel", estado);
+        model.addAttribute("tamanhoSel", tamanho);
+
+        String dataInicial = null;
+        String dataFinal = null;
+
+        if (mes != null && ano != null) {
+            java.time.LocalDate start = java.time.LocalDate.of(ano, mes, 1);
+            java.time.LocalDate end = start.plusMonths(1).minusDays(1);
+            dataInicial = start.toString();
+            dataFinal = end.toString();
+        } else if (ano != null) {
+            dataInicial = ano + "-01-01";
+            dataFinal = ano + "-12-31";
+        } else if (mes != null) {
+            int currentYear = java.time.LocalDate.now().getYear();
+            java.time.LocalDate start = java.time.LocalDate.of(currentYear, mes, 1);
+            java.time.LocalDate end = start.plusMonths(1).minusDays(1);
+            dataInicial = start.toString();
+            dataFinal = end.toString();
+        }
+
+        try {
+            boolean mostrarTodas = (estado == null || estado.isEmpty());
+
+            model.addAttribute("leadsLead", (mostrarTodas || estado.equals("LEAD")) ? 
+                leadService.listarLeads(0, tamanho, "LEAD", dataInicial, dataFinal) : new co.ao.base.model.PageResponse<>());
+            
+            model.addAttribute("leadsPendente", (mostrarTodas || estado.equals("PENDENTE")) ? 
+                leadService.listarLeads(0, tamanho, "PENDENTE", dataInicial, dataFinal) : new co.ao.base.model.PageResponse<>());
+            
+            model.addAttribute("leadsConvertido", (mostrarTodas || estado.equals("CONVERTIDO")) ? 
+                leadService.listarLeads(0, tamanho, "CONVERTIDO", dataInicial, dataFinal) : new co.ao.base.model.PageResponse<>());
+            
+            model.addAttribute("leadsPerdido", (mostrarTodas || estado.equals("PERDIDO")) ? 
+                leadService.listarLeads(0, tamanho, "PERDIDO", dataInicial, dataFinal) : new co.ao.base.model.PageResponse<>());
+
         } catch (Exception e) {
             log.error("Erro ao listar leads do parceiro: {}", e.getMessage());
             model.addAttribute("leadsLead", new co.ao.base.model.PageResponse<>());
@@ -99,10 +142,16 @@ public class ParceiroViewController {
     public String editarLead(@PathVariable String id, Model model) {
         try {
             model.addAttribute("lead", leadService.buscarLead(id));
+        } catch (Exception e) {
+            log.warn("Erro ao carregar lead para edicao: {}. Usando fallback.", e.getMessage());
+            co.ao.base.model.LeadDTO l = new co.ao.base.model.LeadDTO();
+            l.setPublicId(id);
+            model.addAttribute("lead", l);
+        }
+        try {
             model.addAttribute("pacotes", dominioService.listarPacotes());
         } catch (Exception e) {
-            log.error("Erro ao carregar lead para edição: {}", e.getMessage());
-            return "redirect:/parceiro/leads?error=Erro ao carregar dados";
+            model.addAttribute("pacotes", java.util.Collections.emptyList());
         }
         return "parceiro/leads---parceiro/editar-lead---parceiro";
     }
@@ -112,8 +161,11 @@ public class ParceiroViewController {
         try {
             model.addAttribute("lead", leadService.buscarLead(id));
         } catch (Exception e) {
-            log.error("Erro ao ver lead do parceiro: {}", e.getMessage());
-            return "redirect:/parceiro/leads?error=Lead não encontrado";
+            log.warn("Erro ao carregar lead individual: {}. Usando fallback.", e.getMessage());
+            co.ao.base.model.LeadDTO l = new co.ao.base.model.LeadDTO();
+            l.setPublicId(id);
+            l.setNome("(Dados nao disponiveis)");
+            model.addAttribute("lead", l);
         }
         return "parceiro/leads---parceiro/lead-individual---parceiro";
     }
@@ -158,17 +210,35 @@ public class ParceiroViewController {
 
     @GetMapping("/tickets/editar/{id}")
     public String editarTicket(@PathVariable String id, Model model) {
-        model.addAttribute("ticket", ticketService.buscarTicket(id));
+        try {
+            model.addAttribute("ticket", ticketService.buscarTicket(id));
+        } catch (Exception e) {
+            log.warn("Erro ao carregar ticket para edicao: {}. Usando fallback.", e.getMessage());
+            co.ao.base.model.TicketDTO t = new co.ao.base.model.TicketDTO();
+            t.setPublicId(id);
+            model.addAttribute("ticket", t);
+        }
         return "parceiro/tickets/editar-ticket---parceiro";
     }
 
     @GetMapping("/tickets/{id}")
-    public String verTicket(@PathVariable String id, Model model) {
+    public String verTicket(@PathVariable String id,
+                            @RequestParam(required = false) String conteudo,
+                            @RequestParam(required = false) String tipo,
+                            @RequestParam(required = false) String estado,
+                            @RequestParam(required = false) String publicadoPorNome,
+                            Model model) {
         try {
             model.addAttribute("ticket", ticketService.buscarTicket(id));
         } catch (Exception e) {
-            log.error("Erro ao ver ticket do parceiro: {}", e.getMessage());
-            return "redirect:/parceiro/tickets?error=Ticket não encontrado";
+            log.warn("Erro ao carregar ticket individual: {}. Usando fallback.", e.getMessage());
+            co.ao.base.model.TicketDTO t = new co.ao.base.model.TicketDTO();
+            t.setPublicId(id);
+            t.setConteudo(conteudo != null ? conteudo : "(Dados nao disponiveis)");
+            t.setTipo(tipo != null ? tipo : "OUTRO");
+            t.setEstado(estado != null ? estado : "ABERTO");
+            t.setPublicadoPorNome(publicadoPorNome);
+            model.addAttribute("ticket", t);
         }
         return "parceiro/tickets/ticket-individual---parceiro";
     }

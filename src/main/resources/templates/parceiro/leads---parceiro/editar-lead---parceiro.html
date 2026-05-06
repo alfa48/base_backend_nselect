@@ -1,6 +1,9 @@
 <!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="69ed2e96a5bc49a97118d330" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<html data-wf-page="69ed2e96a5bc49a97118d330" data-wf-site="69ece585cad09a74baae0d40"
+  xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{layout/fragments/head :: head('Editar lead - Parceiro')}"></head>
+
 <body>
   <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
   <section class="section-3 no-shad">
@@ -22,15 +25,18 @@
             <div class="criar-content-wrapper">
               <div class="form-field-wrapper">
                 <label for="nome" class="form-field-lable">Nome</label>
-                <input class="form-text-field w-input" name="nome" th:value="${lead.nome}" type="text" id="nome" required>
+                <input class="form-text-field w-input" name="nome" th:value="${lead.nome}" type="text" id="nome"
+                  required>
               </div>
               <div class="form-field-wrapper">
                 <label for="email" class="form-field-lable">Email</label>
-                <input class="form-text-field w-input" name="email" th:value="${lead.email}" type="email" id="email" required>
+                <input class="form-text-field w-input" name="email" th:value="${lead.email}" type="email" id="email"
+                  required>
               </div>
               <div class="form-field-wrapper">
                 <label for="telemovel" class="form-field-lable">Telemóvel</label>
-                <input class="form-text-field w-input" name="telemovel" th:value="${lead.telemovel}" type="text" id="telemovel" required>
+                <input class="form-text-field w-input" name="telemovel" th:value="${lead.telemovel}" type="text"
+                  id="telemovel" required>
               </div>
               <div class="form-field-wrapper">
                 <label for="nif" class="form-field-lable">NIF</label>
@@ -40,7 +46,8 @@
                 <label for="pacotePublicId" class="form-field-lable">Pacote que o lead pretende comprar</label>
                 <select id="pacotePublicId" name="pacotePublicId" class="select-field w-select" required>
                   <option value="">Selecione...</option>
-                  <option th:each="p : ${pacotes}" th:value="${p.publicId}" th:text="${p.nome}" th:selected="${lead.pacotePublicId == p.publicId}"></option>
+                  <option th:each="p : ${pacotes}" th:value="${p.publicId}" th:text="${p.nome}"
+                    th:selected="${lead.pacotePublicId == p.publicId}"></option>
                 </select>
               </div>
               <div class="form-field-wrapper">
@@ -52,11 +59,13 @@
                   <option value="PERDIDO" th:selected="${lead.estado == 'PERDIDO'}">Perdido</option>
                 </select>
               </div>
-              
+
               <div class="photo-upload-input-wrapper">
                 <label for="comprovativo" class="form-field-lable">Comprovativo (lead convertido)</label>
-                <input type="file" id="comprovativo" name="comprovativo" style="display: none;" onchange="updateFileName(this)">
-                <div class="photo-upload-input-field" onclick="document.getElementById('comprovativo').click()" style="cursor: pointer;">
+                <input type="file" id="comprovativo" name="comprovativo" style="display: none;"
+                  onchange="updateFileName(this)">
+                <div class="photo-upload-input-field" onclick="document.getElementById('comprovativo').click()"
+                  style="cursor: pointer;">
                   <div class="icon upload-icon">
                     <div class="main-font-icon">4</div>
                   </div>
@@ -66,7 +75,7 @@
               </div>
 
               <div class="create-this">
-                <button type="submit" class="button main mobile w-button">Salvar Alterações</button>
+                <button type="submit" class="button main mobile w-button">Salvar</button>
               </div>
             </div>
           </form>
@@ -77,11 +86,11 @@
               document.getElementById('file-name-display').innerText = fileName;
             }
 
-            document.getElementById('form-editar-lead').addEventListener('submit', function(e) {
+            document.getElementById('form-editar-lead').addEventListener('submit', function (e) {
               e.preventDefault();
               const leadId = document.getElementById('leadPublicId').value;
               const formData = new FormData(this);
-              
+
               const dados = {
                 nome: formData.get('nome'),
                 email: formData.get('email'),
@@ -103,20 +112,20 @@
                 method: 'PUT',
                 body: multipartData
               })
-              .then(res => res.json())
-              .then(data => {
-                Modal.hideLoading();
-                if (data.message) {
-                  Modal.toast(data.message);
-                  setTimeout(() => { window.location.href = '/parceiro/leads/' + leadId; }, 1500);
-                } else {
-                  Modal.error(data.error || 'Erro ao atualizar lead');
-                }
-              })
-              .catch(err => {
-                Modal.hideLoading();
-                Modal.error('Erro de rede');
-              });
+                .then(res => res.json())
+                .then(data => {
+                  Modal.hideLoading();
+                  if (data.message) {
+                    Modal.toast(data.message);
+                    setTimeout(() => { window.location.href = '/parceiro/leads/' + leadId; }, 1500);
+                  } else {
+                    Modal.error(data.error || 'Erro ao atualizar lead');
+                  }
+                })
+                .catch(err => {
+                  Modal.hideLoading();
+                  Modal.error('Erro de rede');
+                });
             });
           </script>
           <div class="w-form-done">
@@ -127,21 +136,21 @@
           </div>
         </div>
       </div>
-      <div class="div-block-106">
+      <div class="div-block-106" style="margin-top: 15px;">
         <button type="button" class="action-button cncel w-inline-block btn-delete-lead" th:data-id="${lead.publicId}">
-            <div class="icon quick-action">
-                <div class="main-font-icon" style="color: #ff5b5b;">v</div>
-                <div class="button-text quick-action-text" style="color: #ff5b5b;">Apagar Lead</div>
-            </div>
+          <div class="icon quick-action">
+            <div class="main-font-icon" style="color: #ff5b5b;">v</div>
+            <div class="button-text quick-action-text" style="color: #ff5b5b;">Apagar</div>
+          </div>
         </button>
       </div>
     </div>
   </section>
   <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('.btn-delete-lead').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
           const leadId = this.getAttribute('data-id');
           Modal.deleteItem(leadId, `/api/leads/${leadId}`, 'este lead', () => {
             window.location.href = '/parceiro/leads';
@@ -151,4 +160,5 @@
     });
   </script>
 </body>
+
 </html>

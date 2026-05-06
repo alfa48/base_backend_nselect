@@ -1,6 +1,9 @@
 <!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="69ed077057818795fe23ad02" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<html data-wf-page="69ed077057818795fe23ad02" data-wf-site="69ece585cad09a74baae0d40"
+  xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{layout/fragments/head :: head('Material de apoio - Admin')}"></head>
+
 <body>
   <div th:replace="~{layout/fragments/admin-nav :: nav}"></div>
   <section class="section-3 parceiros">
@@ -11,7 +14,8 @@
             <a href="javascript:history.back()" class="link-5">q</a>
             <div class="text-block-258">Material de apoio</div>
             <form action="/admin/materiais" method="get" class="search w-form">
-              <input class="search-input w-input" maxlength="256" name="nome" th:value="${param.nome}" placeholder="Pesquisar por nome" type="search" id="search">
+              <input class="search-input w-input" maxlength="256" name="nome" th:value="${param.nome}"
+                placeholder="Pesquisar por nome" type="search" id="search">
               <input th:if="${param.tipo != null}" type="hidden" name="tipo" th:value="${param.tipo}">
               <input type="submit" class="search-button w-button" value="x">
             </form>
@@ -37,7 +41,8 @@
         <!-- Iterar Materiais -->
         <th:block th:if="${materiais != null && materiais.content != null}" th:each="material : ${materiais.content}">
           <div class="main-card">
-            <a th:href="${material.arquivoUrl}" target="_blank" class="main-items-of-card w-inline-block">
+            <a th:href="@{/admin/materiais/editar/{id}(id=${material.publicId}, nome=${material.nome}, tipoConteudo=${material.tipoConteudo}, arquivoUrl=${material.arquivoUrl}, tagPromocional=${material.tagPromocional}, tagEducativo=${material.tagEducativo})}"
+              class="main-items-of-card w-inline-block">
               <div class="icon-div">
                 <div class="text-block-255">c</div>
               </div>
@@ -45,41 +50,46 @@
                 <div class="text-block-256 main" th:text="${material.nome}">Nome do conteudo</div>
               </div>
               <div class="content-do-card-div">
-                <div class="text-block-256" th:text="${material.tipoConteudo}">PROMOCIONAL</div>
+                <div class="text-block-256" th:text="${material.tiposParceiroNomes != null ? material.tiposParceiroNomes : 'Todos os parceiros'}">Agentes, Parceiros, Representantes Certificados</div>
               </div>
               <div class="content-do-card-div status-things">
-                <div class="status-wrapper" th:classappend="${material.tipoConteudo == 'PROMOCIONAL' ? 'pago' : 'nao-pago'}">
+                <div class="status-wrapper"
+                  th:classappend="${material.tipoConteudo == 'PROMOCIONAL' ? 'pago' : 'nao-pago'}">
                   <div class="status-text" th:text="${material.tipoConteudo}">PROMOCIONAL</div>
                 </div>
               </div>
             </a>
             <div class="options-side">
-              <a th:href="@{/admin/materiais/editar/{id}(id=${material.publicId})}" class="link-4">u</a>
-              <a href="#" class="link-4 btn-delete-material" th:data-id="${material.publicId}" style="color: #ff4d4d;">v</a>
+              <a th:href="${material.arquivoUrl}" target="_blank" class="link-4">8</a>
+              <a th:href="@{/admin/materiais/editar/{id}(id=${material.publicId}, nome=${material.nome}, tipoConteudo=${material.tipoConteudo}, arquivoUrl=${material.arquivoUrl}, tagPromocional=${material.tagPromocional}, tagEducativo=${material.tagEducativo})}" class="link-4">u</a>
             </div>
           </div>
         </th:block>
-        
-        <div th:if="${materiais == null || materiais.content == null || #lists.isEmpty(materiais.content)}" class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
+
+        <div th:if="${materiais == null || materiais.content == null || #lists.isEmpty(materiais.content)}"
+          class="text-block-256" style="text-align: center; padding: 40px; opacity: 0.6;">
           Nenhum material de apoio encontrado.
         </div>
 
         <!-- Paginação -->
-        <div th:if="${materiais != null && materiais.totalPages > 1}" class="table-pagination-wrapper" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+        <div th:if="${materiais != null && materiais.totalPages > 1}" class="table-pagination-wrapper"
+          style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
           <div class="pagination-description">
-            A mostrar página <span class="pagination-bold" th:text="${materiais.number + 1}">1</span> 
+            A mostrar página <span class="pagination-bold" th:text="${materiais.number + 1}">1</span>
             de <span class="pagination-bold" th:text="${materiais.totalPages}">10</span>
           </div>
           <div class="pagination-nav">
-            <a th:if="${materiais.number > 0}" 
-               th:href="@{/admin/materiais(pagina=${materiais.number - 1}, tamanho=${materiais.size}, nome=${param.nome}, tipo=${param.tipo})}" 
-               class="btn-pagination" style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; margin-right: 5px;">
-               Anterior
+            <a th:if="${materiais.number > 0}"
+              th:href="@{/admin/materiais(pagina=${materiais.number - 1}, tamanho=${materiais.size}, nome=${param.nome}, tipo=${param.tipo})}"
+              class="btn-pagination"
+              style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; margin-right: 5px;">
+              Anterior
             </a>
-            <a th:if="${materiais.number + 1 < materiais.totalPages}" 
-               th:href="@{/admin/materiais(pagina=${materiais.number + 1}, tamanho=${materiais.size}, nome=${param.nome}, tipo=${param.tipo})}" 
-               class="btn-pagination" style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333;">
-               Próximo
+            <a th:if="${materiais.number + 1 < materiais.totalPages}"
+              th:href="@{/admin/materiais(pagina=${materiais.number + 1}, tamanho=${materiais.size}, nome=${param.nome}, tipo=${param.tipo})}"
+              class="btn-pagination"
+              style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333;">
+              Próximo
             </a>
           </div>
         </div>
@@ -87,16 +97,8 @@
     </div>
   </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.btn-delete-material').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const id = this.getAttribute('data-id');
-          Modal.deleteItem(id, `/api/admin/materiais-apoio/${id}`, 'este material');
-        });
-      });
-    });
-  </script>
+
   <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
 </body>
+
 </html>

@@ -192,6 +192,7 @@ a {
   padding-top: 9px;
   font-size: 15px;
   display: flex;
+  width: 100%;
 }
 
 .button.main.mobile:hover {

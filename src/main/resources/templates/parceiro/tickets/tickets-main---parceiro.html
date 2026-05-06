@@ -46,7 +46,7 @@
         <!-- Iterar Tickets -->
         <th:block th:each="ticket : ${tickets.content}">
           <div class="main-card">
-            <a th:href="@{/parceiro/tickets/{id}(id=${ticket.publicId})}" class="main-items-of-card w-inline-block">
+            <a th:href="@{/parceiro/tickets/{id}(id=${ticket.publicId}, conteudo=${ticket.conteudo}, tipo=${ticket.tipo}, estado=${ticket.estado}, publicadoPorNome=${ticket.publicadoPorNome})}" class="main-items-of-card w-inline-block">
               <div class="icon-div">
                 <div class="text-block-255">2</div>
               </div>
@@ -65,7 +65,7 @@
               </div>
             </a>
             <div class="options-side">
-              <a th:href="@{/parceiro/tickets/{id}(id=${ticket.publicId})}" class="link-4">8</a>
+              <a th:href="@{/parceiro/tickets/{id}(id=${ticket.publicId}, conteudo=${ticket.conteudo}, tipo=${ticket.tipo}, estado=${ticket.estado}, publicadoPorNome=${ticket.publicadoPorNome})}" class="link-4">8</a>
             </div>
           </div>
         </th:block>
