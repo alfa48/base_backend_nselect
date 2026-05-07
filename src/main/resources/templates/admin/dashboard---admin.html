@@ -10,9 +10,15 @@
     <div class="contain-this">
       <div>
         <div class="w-layout-grid grid-49">
-          <div th:replace="~{layout/fragments/kpis :: kpi-card('Total de parceiros', ${overview != null ? overview.totalParceiros : '0'}, ${overview != null ? overview.totalParceirosTrend : null}, false)}"></div>
-          <div th:replace="~{layout/fragments/kpis :: kpi-card('Total de leads', ${overview != null ? overview.totalLeads : '0'}, ${overview != null ? overview.totalLeadsTrend : null}, false)}"></div>
-          <div th:replace="~{layout/fragments/kpis :: kpi-card('Tickets Abertos', ${overview != null ? overview.ticketsAbertos : '0'}, ${overview != null ? overview.ticketsAbertosTrend : null}, true)}"></div>
+          <div
+            th:replace="~{layout/fragments/kpis :: kpi-card('Total de parceiros', ${overview != null ? overview.totalParceiros : '0'}, ${overview != null ? overview.totalParceirosTrend : null}, false)}">
+          </div>
+          <div
+            th:replace="~{layout/fragments/kpis :: kpi-card('Total de leads', ${overview != null ? overview.totalLeads : '0'}, ${overview != null ? overview.totalLeadsTrend : null}, false)}">
+          </div>
+          <div
+            th:replace="~{layout/fragments/kpis :: kpi-card('Tickets Abertos', ${overview != null ? overview.ticketsAbertos : '0'}, ${overview != null ? overview.ticketsAbertosTrend : null}, true)}">
+          </div>
         </div>
       </div>
       <div class="div-block-454">
@@ -31,13 +37,14 @@
                 <!-- Iterar Últimos Tickets -->
                 <th:block th:each="ticket : ${recentTickets}">
                   <div class="main-card">
-                    <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId})}"
+                    <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId}, conteudo=${ticket.conteudo}, tipo=${ticket.tipo}, estado=${ticket.estado}, publicadoPorNome=${ticket.publicadoPorNome})}"
                       class="main-items-of-card w-inline-block">
                       <div class="icon-div">
                         <div class="text-block-255">2</div>
                       </div>
                       <div class="content-do-card-div">
-                        <div class="text-block-256 main" th:text="${ticket.conteudo}">Parte do conteudo do ticket</div>
+                        <div class="text-block-256 main" th:text="${#strings.abbreviate(ticket.conteudo, 30)}">Parte do
+                          conteudo do ticket</div>
                       </div>
                       <div class="content-do-card-div">
                         <div class="text-block-256" th:text="${ticket.tipo}">TIPO</div>
@@ -50,7 +57,7 @@
                       </div>
                     </a>
                     <div class="options-side">
-                      <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId})}" class="link-4">8</a>
+                      <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId}, conteudo=${ticket.conteudo}, tipo=${ticket.tipo}, estado=${ticket.estado}, publicadoPorNome=${ticket.publicadoPorNome})}" class="link-4">8</a>
                     </div>
                   </div>
                 </th:block>

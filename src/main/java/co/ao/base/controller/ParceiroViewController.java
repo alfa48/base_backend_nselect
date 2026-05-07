@@ -49,14 +49,40 @@ public class ParceiroViewController {
             Map<String, Object> apiData = parceiroService.getOverview();
             if (apiData != null) {
                 if (apiData.containsKey("totalLeads")) overview.put("totalLeads", apiData.get("totalLeads"));
-                // Mapear totalFaturacao (API) para faturacaoTotal (Template)
                 if (apiData.containsKey("totalFaturacao")) overview.put("faturacaoTotal", apiData.get("totalFaturacao"));
-                // As tendências não existem na Libera API atual, mantemos os padrões 0.0
             }
         } catch (Exception e) {
             log.error("Erro ao obter overview do parceiro: {}", e.getMessage());
         }
         
+        overview.put("ticketsAbertos", 0L);
+        overview.put("ticketsAbertosPercent", 0.0);
+        try {
+            var ticketsPage = ticketService.listarTickets(0, 1000);
+            if (ticketsPage != null && ticketsPage.getContent() != null) {
+                long totalTickets = ticketsPage.getTotalElements();
+                long abertos = ticketsPage.getContent().stream()
+                        .filter(t -> "ABERTO".equalsIgnoreCase(t.getEstado()))
+                        .count();
+                
+                double percent = 0.0;
+                long totalBase = totalTickets; // 100% based on total tickets
+                
+                // Se o utilizador preferir basear a percentagem no total de leads:
+                // long totalLeads = Long.parseLong(overview.get("totalLeads").toString());
+                // totalBase = totalLeads;
+                
+                if (totalBase > 0) {
+                    percent = ((double) abertos / totalBase) * 100;
+                }
+                
+                overview.put("ticketsAbertos", abertos);
+                overview.put("ticketsAbertosPercent", percent);
+            }
+        } catch (Exception e) {
+            log.error("Erro ao obter tickets para overview: {}", e.getMessage());
+        }
+
         model.addAttribute("overview", overview);
         try {
             model.addAttribute("recentLeads", leadService.listarLeads(0, 5, null, null, null));
@@ -249,7 +275,7 @@ public class ParceiroViewController {
             model.addAttribute("lead", leadService.buscarLead(id));
         } catch (Exception e) {
             log.error("Erro ao carregar lead para nova nota: {}", e.getMessage());
-            return "redirect:/parceiro/leads?error=Lead não encontrado";
+            return "redirect:/parceiro/leads?error=Lead desconhecido";
         }
         model.addAttribute("leadId", id);
         return "parceiro/leads---parceiro/criar-nota---parceiro";

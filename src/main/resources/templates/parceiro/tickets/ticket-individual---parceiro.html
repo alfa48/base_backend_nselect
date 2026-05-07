@@ -12,20 +12,8 @@
         <div class="div-block-455">
           <div class="div-block-456">
             <a href="javascript:history.back()" class="link-5">q</a>
-            <div class="text-block-258" th:text="${'#' + #strings.substring(ticket.publicId, 0, 8)}">#576776</div>
-          </div>
-          <div class="div-block-457">
-            <div class="form-block-2 w-form">
-              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3"
-                data-wf-page-id="69ed36c029c38bf0ab3fbfc8" data-wf-element-id="709a0897-6eca-2ab4-da8c-b674fa6c19d8">
-                <select id="field" name="field" data-name="Field" class="select-field-2 _2 w-select">
-                  <option value="">Tipo</option>
-                  <option value="First">First choice</option>
-                  <option value="Second">Second choice</option>
-                  <option value="Third">Third choice</option>
-                </select>
-              </form>
-            </div>
+            <div class="text-block-258"
+              th:text="${'#' + #strings.toUpperCase(#strings.substring(ticket.publicId, 0, 8))}">#576776</div>
           </div>
         </div>
       </div>

@@ -43,6 +43,22 @@
               </div>
             </div>
           </div>
+          <div class="div-block-453">
+            <div class="text-block-253">Tickets Abertos</div>
+            <div class="text-block-254" th:text="${overview.ticketsAbertos}">0</div>
+            <div>
+              <div class="kpi-bottom-section">
+                <div class="kpi-stats-wrapper" th:if="${overview != null}">
+                  <div class="kpi-stats" th:classappend="${overview.ticketsAbertosPercent >= 0 ? 'positive' : 'negative'}">
+                    <div class="icon kpi-stats-icon">
+                      <div class="main-font-icon smaller-icon">8</div>
+                    </div>
+                    <div class="stats" th:text="${#numbers.formatDecimal(overview.ticketsAbertosPercent, 1, 2) + '%'}">0.00%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="div-block-454">

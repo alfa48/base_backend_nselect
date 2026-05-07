@@ -19,15 +19,13 @@
               <form id="email-form" name="email-form" th:action="@{/parceiro/leads}" method="get" class="form-3">
                 <select id="ano" name="ano" class="select-field-2 w-select" onchange="this.form.submit()">
                   <option value="">Ano</option>
-                  <option th:each="y : ${#numbers.sequence(#temporals.year(#temporals.createNow()), 2024)}" 
-                          th:value="${y}" th:text="${y}" th:selected="${y == anoSel}"></option>
+                  <option th:each="y : ${#numbers.sequence(#temporals.year(#temporals.createNow()), 2024)}"
+                    th:value="${y}" th:text="${y}" th:selected="${y == anoSel}"></option>
                 </select>
                 <select id="mes" name="mes" class="select-field-2 w-select" onchange="this.form.submit()">
                   <option value="">Mês</option>
-                  <option th:each="m : ${meses}" 
-                          th:value="${m.id}" 
-                          th:text="${m.nome}"
-                          th:selected="${m.id == mesSel}"></option>
+                  <option th:each="m : ${meses}" th:value="${m.id}" th:text="${m.nome}" th:selected="${m.id == mesSel}">
+                  </option>
                 </select>
                 <select id="estado" name="estado" class="select-field-2 w-select" onchange="this.form.submit()">
                   <option value="">Fase</option>
@@ -49,40 +47,56 @@
         <div class="phase-content-wp">
           <div th:replace="~{layout/fragments/leads :: column-header('LEADS', ${leadsLead})}"></div>
           <th:block th:if="${leadsLead != null}" th:each="lead : ${leadsLead.content}">
-            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, '', @{/parceiro/leads/{id}(id=${lead.publicId})})}"></div>
+            <div
+              th:replace="~{layout/fragments/leads :: lead-card(${lead}, '', @{/parceiro/leads/{id}(id=${lead.publicId})})}">
+            </div>
           </th:block>
-          <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsLead}, @{/parceiro/leads(estado='LEAD', mes=${mesSel}, ano=${anoSel}, tamanho=${tamanhoSel + 10})})}"></div>
+          <div
+            th:replace="~{layout/fragments/leads :: ver-mais(${leadsLead}, @{/parceiro/leads(estado='LEAD', mes=${mesSel}, ano=${anoSel}, tamanho=${tamanhoSel + 10})})}">
+          </div>
         </div>
 
         <!-- Coluna: PENDENTE -->
         <div class="phase-content-wp">
           <div th:replace="~{layout/fragments/leads :: column-header('PENDENTE', ${leadsPendente})}"></div>
           <th:block th:if="${leadsPendente != null}" th:each="lead : ${leadsPendente.content}">
-            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'col-2', @{/parceiro/leads/{id}(id=${lead.publicId})})}"></div>
+            <div
+              th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'col-2', @{/parceiro/leads/{id}(id=${lead.publicId})})}">
+            </div>
           </th:block>
-          <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsPendente}, @{/parceiro/leads(estado='PENDENTE', mes=${mesSel}, ano=${anoSel}, tamanho=${tamanhoSel + 10})})}"></div>
+          <div
+            th:replace="~{layout/fragments/leads :: ver-mais(${leadsPendente}, @{/parceiro/leads(estado='PENDENTE', mes=${mesSel}, ano=${anoSel}, tamanho=${tamanhoSel + 10})})}">
+          </div>
         </div>
 
         <!-- Coluna: CONVERTIDO -->
         <div class="phase-content-wp">
           <div th:replace="~{layout/fragments/leads :: column-header('CONVERTIDO', ${leadsConvertido})}"></div>
           <th:block th:if="${leadsConvertido != null}" th:each="lead : ${leadsConvertido.content}">
-            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'won', @{/parceiro/leads/{id}(id=${lead.publicId})})}"></div>
+            <div
+              th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'won', @{/parceiro/leads/{id}(id=${lead.publicId})})}">
+            </div>
           </th:block>
-          <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsConvertido}, @{/parceiro/leads(estado='CONVERTIDO', mes=${mesSel}, ano=${anoSel}, tamanho=${tamanhoSel + 10})})}"></div>
+          <div
+            th:replace="~{layout/fragments/leads :: ver-mais(${leadsConvertido}, @{/parceiro/leads(estado='CONVERTIDO', mes=${mesSel}, ano=${anoSel}, tamanho=${tamanhoSel + 10})})}">
+          </div>
         </div>
 
         <!-- Coluna: PERDIDO -->
         <div class="phase-content-wp">
           <div th:replace="~{layout/fragments/leads :: column-header('PERDIDO', ${leadsPerdido})}"></div>
           <th:block th:if="${leadsPerdido != null}" th:each="lead : ${leadsPerdido.content}">
-            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'lost', @{/parceiro/leads/{id}(id=${lead.publicId})})}"></div>
+            <div
+              th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'lost', @{/parceiro/leads/{id}(id=${lead.publicId})})}">
+            </div>
           </th:block>
-          <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsPerdido}, @{/parceiro/leads(estado='PERDIDO', mes=${mesSel}, ano=${anoSel}, tamanho=${tamanhoSel + 10})})}"></div>
+          <div
+            th:replace="~{layout/fragments/leads :: ver-mais(${leadsPerdido}, @{/parceiro/leads(estado='PERDIDO', mes=${mesSel}, ano=${anoSel}, tamanho=${tamanhoSel + 10})})}">
+          </div>
         </div>
       </div>
     </div>
-      </div>
+    </div>
     </div>
   </section>
   <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>

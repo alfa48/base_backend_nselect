@@ -27,8 +27,26 @@ public class TicketApiController {
     @PutMapping("/{publicId}")
     public ResponseEntity<?> editarTicket(@PathVariable String publicId, @RequestBody Object request) {
         try {
-            ticketService.editarTicket(publicId, request);
+            var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+            boolean isAdmin = auth != null && auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                
+            if (isAdmin) {
+                ticketService.editarTicketAdmin(publicId, request);
+            } else {
+                ticketService.editarTicket(publicId, request);
+            }
             return ResponseEntity.ok(Map.of("message", "Ticket atualizado com sucesso"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    @PatchMapping("/{publicId}/estado")
+    public ResponseEntity<?> alterarEstadoTicket(@PathVariable String publicId, @RequestBody Object request) {
+        try {
+            ticketService.alterarEstadoTicketAdmin(publicId, request);
+            return ResponseEntity.ok(Map.of("message", "Estado atualizado com sucesso"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }

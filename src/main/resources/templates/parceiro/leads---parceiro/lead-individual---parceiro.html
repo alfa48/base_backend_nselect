@@ -1,6 +1,9 @@
 <!DOCTYPE html><!--  Last Published: Sat Apr 25 2026 22:30:53 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="69ed2bf42f342051644c392e" data-wf-site="69ece585cad09a74baae0d40" xmlns:th="http://www.thymeleaf.org">
+<html data-wf-page="69ed2bf42f342051644c392e" data-wf-site="69ece585cad09a74baae0d40"
+  xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{layout/fragments/head :: head('Lead individual - Parceiro')}"></head>
+
 <body>
   <div th:replace="~{layout/fragments/parceiro-nav :: nav}"></div>
   <section class="section-3 no-shad">
@@ -44,7 +47,9 @@
             </div>
             <div class="list-item">
               <div class="list-item-lable">Pacote</div>
-              <div class="list-item" th:text="${lead.pacoteNome + ' - KZ ' + #numbers.formatDecimal(lead.pacotePreco, 1, 'POINT', 0, 'COMMA')}">-----</div>
+              <div class="list-item"
+                th:text="${lead.pacoteNome + ' - KZ ' + #numbers.formatDecimal(lead.pacotePreco, 1, 'POINT', 0, 'COMMA')}">
+                -----</div>
             </div>
             <div class="w-layout-grid grid-51">
               <a href="#" class="action-button full w-inline-block" id="btn-mudar-estado">
@@ -53,13 +58,15 @@
                   <div class="button-text quick-action-text">Mudar estado</div>
                 </div>
               </a>
-              <a th:href="@{/parceiro/leads/{id}/notas/novo(id=${lead.publicId})}" class="action-button full w-inline-block">
+              <a th:href="@{/parceiro/leads/{id}/notas/novo(id=${lead.publicId})}"
+                class="action-button full w-inline-block">
                 <div class="icon quick-action">
                   <div class="main-font-icon">i</div>
                   <div class="button-text quick-action-text">Submeter nota</div>
                 </div>
               </a>
-              <a th:href="@{/parceiro/leads/editar/{id}(id=${lead.publicId})}" class="action-button full w-inline-block">
+              <a th:href="@{/parceiro/leads/editar/{id}(id=${lead.publicId})}"
+                class="action-button full w-inline-block">
                 <div class="icon quick-action">
                   <div class="main-font-icon">u</div>
                   <div class="button-text quick-action-text">Editar</div>
@@ -69,7 +76,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Área de Notas -->
       <div class="div-block-501">
         <div class="text-block-331">Notas do agente</div>
@@ -79,31 +86,78 @@
               <div class="text-block-332">i</div>
               <div class="div-block-502">
                 <p class="paragraph" th:text="${nota.nota}">Lorem ipsum...</p>
-                <div class="text-block-333" th:text="${'Data de criação: ' + #temporals.format(nota.createdAt, 'dd/MM/yyyy HH:mm')}">Data</div>
+                <div class="text-block-333"
+                  th:text="${'Data de criação: ' + #temporals.format(nota.createdAt, 'dd/MM/yyyy HH:mm')}">Data</div>
                 <div class="div-block-505" style="display: flex; gap: 10px;">
-                  <a th:href="@{/parceiro/leads/{leadId}/notas/editar/{notaId}(leadId=${lead.publicId}, notaId=${nota.publicId})}" class="link-45" style="color: #667999;">u</a>
-                  <a href="#" class="link-45 btn-delete-nota" th:data-id="${nota.publicId}" style="color: #ff5b5b;">v</a>
+                  <a th:href="@{/parceiro/leads/{leadId}/notas/editar/{notaId}(leadId=${lead.publicId}, notaId=${nota.publicId})}"
+                    class="link-45" style="color: #667999;">u</a>
+                  <a href="#" class="link-45 btn-delete-nota" th:data-id="${nota.publicId}"
+                    style="color: #ff5b5b;">v</a>
                 </div>
               </div>
             </div>
           </th:block>
         </div>
-        <div th:if="${#lists.isEmpty(lead.notas)}" id="no-notes-msg" class="text-block-331" style="font-size: 14px; opacity: 0.6;">Sem notas registadas.</div>
+        <div th:if="${lead.notas != null and lead.notas.size() > 5}" id="notes-pagination" style="display:flex; justify-content:space-between; align-items: center; margin-top: 15px;">
+           <button id="btn-prev-notes" class="action-button w-button" style="padding: 8px 15px; font-size: 12px; background-color: #f8fbff; color: #007bff; border: 1px solid #c9d7f0;" disabled>Anterior</button>
+           <span id="notes-page-info" style="font-size: 13px; color: #667999;">Página 1</span>
+           <button id="btn-next-notes" class="action-button w-button" style="padding: 8px 15px; font-size: 12px; background-color: #f8fbff; color: #007bff; border: 1px solid #c9d7f0;">Próxima</button>
+        </div>
+        <div th:if="${#lists.isEmpty(lead.notas)}" id="no-notes-msg" class="text-block-331"
+          style="font-size: 14px; opacity: 0.6;">Sem notas registadas.</div>
       </div>
     </div>
   </section>
 
   <script th:inline="javascript">
-    const leadId = [[${lead.publicId}]];
+    const leadId = [[${ lead.publicId }]];
 
     document.querySelectorAll('.btn-delete-nota').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         const notaId = this.getAttribute('data-id');
         Modal.deleteItem(notaId, `/api/leads/${leadId}/notas/${notaId}`, 'esta nota');
       });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const notes = document.querySelectorAll('.nota-do-parceiro');
+      const itemsPerPage = 5;
+      let currentPage = 1;
+      const totalPages = Math.ceil(notes.length / itemsPerPage);
+
+      function renderNotes() {
+        notes.forEach((note, index) => {
+          note.style.display = (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) ? 'flex' : 'none';
+        });
+
+        const btnPrev = document.getElementById('btn-prev-notes');
+        const btnNext = document.getElementById('btn-next-notes');
+        const pageInfo = document.getElementById('notes-page-info');
+
+        if (btnPrev && btnNext && pageInfo) {
+          btnPrev.disabled = currentPage === 1;
+          btnNext.disabled = currentPage === totalPages;
+          btnPrev.style.opacity = currentPage === 1 ? '0.5' : '1';
+          btnPrev.style.cursor = currentPage === 1 ? 'not-allowed' : 'pointer';
+          btnNext.style.opacity = currentPage === totalPages ? '0.5' : '1';
+          btnNext.style.cursor = currentPage === totalPages ? 'not-allowed' : 'pointer';
+          pageInfo.innerText = `Página ${currentPage} de ${totalPages}`;
+        }
+      }
+
+      if (notes.length > itemsPerPage) {
+        document.getElementById('btn-prev-notes').addEventListener('click', () => {
+          if (currentPage > 1) { currentPage--; renderNotes(); }
+        });
+        document.getElementById('btn-next-notes').addEventListener('click', () => {
+          if (currentPage < totalPages) { currentPage++; renderNotes(); }
+        });
+        renderNotes();
+      }
     });
   </script>
 
   <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
 </body>
+
 </html>

@@ -2,12 +2,12 @@
     "openapi": "3.1.0",
     "info": {
         "title": "App Base API",
-        "description": "API REST base com autentica\u00e7\u00e3o JWT, gest\u00e3o de utilizadores, upload de ficheiros e sistema de refresh tokens. Desenvolvida para servir como ponto de partida em novos projectos.",
+        "description": "API REST base com autenticação JWT, gestão de utilizadores, upload de ficheiros e sistema de refresh tokens. Desenvolvida para servir como ponto de partida em novos projectos.",
         "version": "1.0.0"
     },
     "servers": [
         {
-            "url": "https://libera.ss-cloud.co"
+            "url": "https://api-parceiro-dexa.appteste.info"
         }
     ],
     "security": [
@@ -17,16 +17,20 @@
     ],
     "tags": [
         {
-            "name": "Autentica\u00e7\u00e3o",
-            "description": "Endpoints de autentica\u00e7\u00e3o e gest\u00e3o de sess\u00e3o"
+            "name": "Tipos de Parceiro",
+            "description": "Lista de tipos de parceiro (dados de referência)"
         },
         {
-            "name": "Materiais de Apoio",
-            "description": "Consulta de materiais de apoio dirigidos ao parceiro autenticado"
+            "name": "Autenticação",
+            "description": "Endpoints de autenticação e gestão de sessão"
+        },
+        {
+            "name": "Pacotes",
+            "description": "Lista de pacotes disponíveis (dados de referência)"
         },
         {
             "name": "Admin - Materiais de Apoio",
-            "description": "Gest\u00e3o de materiais de apoio (acesso exclusivo a administradores)"
+            "description": "Gestão de materiais de apoio (acesso exclusivo a administradores)"
         },
         {
             "name": "Ficheiros",
@@ -34,23 +38,31 @@
         },
         {
             "name": "Notas de Lead",
-            "description": "Gest\u00e3o de notas associadas a leads (acesso exclusivo a utilizadores com papel PARCEIRO)"
+            "description": "Gestão de notas associadas a leads (acesso exclusivo a utilizadores com papel PARCEIRO)"
         },
         {
             "name": "Leads",
-            "description": "Gest\u00e3o de leads (acesso exclusivo a utilizadores com papel PARCEIRO)"
-        },
-        {
-            "name": "Tickets",
-            "description": "Consulta de tickets do parceiro autenticado"
+            "description": "Gestão de leads (acesso exclusivo a utilizadores com papel PARCEIRO)"
         },
         {
             "name": "Admin - Parceiros",
-            "description": "Gest\u00e3o de parceiros (acesso exclusivo a administradores)"
+            "description": "Gestão de parceiros (acesso exclusivo a administradores)"
+        },
+        {
+            "name": "Províncias",
+            "description": "Lista de províncias de Angola (dados de referência)"
         },
         {
             "name": "Utilizadores",
-            "description": "Gest\u00e3o de utilizadores da plataforma"
+            "description": "Gestão de utilizadores da plataforma"
+        },
+        {
+            "name": "Tickets",
+            "description": "Submissão e consulta de tickets (PARCEIRO) — listagem e eliminação globais (ADMIN)"
+        },
+        {
+            "name": "Materiais de Apoio",
+            "description": "Consulta de materiais filtrados por tipo de parceiro (PARCEIRO) — listagem global (ADMIN)"
         }
     ],
     "paths": {
@@ -84,7 +96,7 @@
                         }
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -94,7 +106,7 @@
                         }
                     },
                     "404": {
-                        "description": "Utilizador n\u00e3o encontrado",
+                        "description": "Utilizador não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -137,7 +149,7 @@
                         "description": "Utilizador actualizado com sucesso"
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos",
+                        "description": "Campos inválidos",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -147,7 +159,7 @@
                         }
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -157,7 +169,7 @@
                         }
                     },
                     "404": {
-                        "description": "Utilizador n\u00e3o encontrado",
+                        "description": "Utilizador não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -190,7 +202,7 @@
                         "description": "Utilizador eliminado com sucesso"
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -200,7 +212,7 @@
                         }
                     },
                     "404": {
-                        "description": "Utilizador n\u00e3o encontrado",
+                        "description": "Utilizador não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -252,7 +264,7 @@
                         }
                     },
                     "404": {
-                        "description": "Lead n\u00e3o encontrado",
+                        "description": "Lead não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -268,7 +280,7 @@
                     "Leads"
                 ],
                 "summary": "Editar lead",
-                "description": "Actualiza os dados de um lead. Se o novo estado for CONVERTIDO \u00e9 obrigat\u00f3rio enviar o comprovativo (caso ainda n\u00e3o exista). O comprovativo \u00e9 opcional para os restantes estados.",
+                "description": "Actualiza os dados de um lead. Se o novo estado for CONVERTIDO é obrigatório enviar o comprovativo (caso ainda não exista). O comprovativo é opcional para os restantes estados.",
                 "operationId": "editar_1",
                 "parameters": [
                     {
@@ -306,7 +318,7 @@
                         "description": "Lead actualizado com sucesso"
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos ou comprovativo em falta para CONVERTIDO",
+                        "description": "Campos inválidos ou comprovativo em falta para CONVERTIDO",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -326,7 +338,7 @@
                         }
                     },
                     "404": {
-                        "description": "Lead ou pacote n\u00e3o encontrado",
+                        "description": "Lead ou pacote não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -369,7 +381,7 @@
                         }
                     },
                     "404": {
-                        "description": "Lead n\u00e3o encontrado",
+                        "description": "Lead não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -387,7 +399,7 @@
                     "Notas de Lead"
                 ],
                 "summary": "Editar nota",
-                "description": "Actualiza o texto de uma nota. S\u00f3 o autor pode editar.",
+                "description": "Actualiza o texto de uma nota. Só o autor pode editar.",
                 "operationId": "editar_2",
                 "parameters": [
                     {
@@ -422,7 +434,7 @@
                         "description": "Nota actualizada"
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos",
+                        "description": "Campos inválidos",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -432,7 +444,7 @@
                         }
                     },
                     "403": {
-                        "description": "Acesso negado ou n\u00e3o \u00e9 o autor",
+                        "description": "Acesso negado ou não é o autor",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -442,7 +454,7 @@
                         }
                     },
                     "404": {
-                        "description": "Nota n\u00e3o encontrada",
+                        "description": "Nota não encontrada",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -458,7 +470,7 @@
                     "Notas de Lead"
                 ],
                 "summary": "Eliminar nota",
-                "description": "Elimina permanentemente uma nota. S\u00f3 o autor pode eliminar.",
+                "description": "Elimina permanentemente uma nota. Só o autor pode eliminar.",
                 "operationId": "eliminar_2",
                 "parameters": [
                     {
@@ -483,7 +495,7 @@
                         "description": "Nota eliminada"
                     },
                     "403": {
-                        "description": "Acesso negado ou n\u00e3o \u00e9 o autor",
+                        "description": "Acesso negado ou não é o autor",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -493,7 +505,7 @@
                         }
                     },
                     "404": {
-                        "description": "Nota n\u00e3o encontrada",
+                        "description": "Nota não encontrada",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -545,7 +557,7 @@
                         }
                     },
                     "404": {
-                        "description": "Parceiro n\u00e3o encontrado",
+                        "description": "Parceiro não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -561,7 +573,7 @@
                     "Admin - Parceiros"
                 ],
                 "summary": "Editar parceiro",
-                "description": "Actualiza os dados de um parceiro. Todos os campos s\u00e3o opcionais; apenas os fornecidos s\u00e3o actualizados. Pode substituir a foto e/ou o documento BI.",
+                "description": "Actualiza os dados de um parceiro. Todos os campos são opcionais; apenas os fornecidos são actualizados. Pode substituir a foto e/ou o documento BI.",
                 "operationId": "editar_3",
                 "parameters": [
                     {
@@ -603,7 +615,7 @@
                         "description": "Parceiro actualizado"
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos",
+                        "description": "Campos inválidos",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -623,7 +635,7 @@
                         }
                     },
                     "404": {
-                        "description": "Parceiro, tipo de parceiro ou prov\u00edncia n\u00e3o encontrado",
+                        "description": "Parceiro, tipo de parceiro ou província não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -666,7 +678,7 @@
                         }
                     },
                     "404": {
-                        "description": "Parceiro n\u00e3o encontrado",
+                        "description": "Parceiro não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -684,7 +696,7 @@
                     "Admin - Materiais de Apoio"
                 ],
                 "summary": "Editar material de apoio",
-                "description": "Actualiza nome, tipos de parceiro e/ou tipo de conte\u00fado. Pode opcionalmente substituir o ficheiro.",
+                "description": "Actualiza nome, tipos de parceiro e/ou tipo de conteúdo. Pode opcionalmente substituir o ficheiro.",
                 "operationId": "editar_4",
                 "parameters": [
                     {
@@ -722,7 +734,7 @@
                         "description": "Material actualizado"
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos",
+                        "description": "Campos inválidos",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -742,7 +754,7 @@
                         }
                     },
                     "404": {
-                        "description": "Material ou tipo de parceiro n\u00e3o encontrado",
+                        "description": "Material ou tipo de parceiro não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -760,7 +772,7 @@
                     "Utilizadores"
                 ],
                 "summary": "Listar utilizadores",
-                "description": "Lista todos os utilizadores com pagina\u00e7\u00e3o",
+                "description": "Lista todos os utilizadores com paginação",
                 "operationId": "listar",
                 "parameters": [
                     {
@@ -796,7 +808,7 @@
                         }
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -836,7 +848,7 @@
                         }
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos ou email j\u00e1 registado",
+                        "description": "Campos inválidos ou email já registado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -846,7 +858,104 @@
                         }
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/tickets": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Listar os meus tickets",
+                "description": "Retorna todos os tickets publicados pelo parceiro autenticado (paginado)",
+                "operationId": "listar_1",
+                "parameters": [
+                    {
+                        "name": "pagina",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "tamanho",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista paginada de tickets",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PageResponseTicketResumoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Acesso negado — requer papel PARCEIRO",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Submeter um ticket",
+                "description": "Cria um novo ticket de suporte com estado ABERTO",
+                "operationId": "criar_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TicketRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ticket criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Acesso negado — requer papel PARCEIRO",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -865,7 +974,7 @@
                 ],
                 "summary": "Listar os meus leads",
                 "description": "Lista os leads do parceiro autenticado com filtros opcionais por estado, data inicial e data final",
-                "operationId": "listar_1",
+                "operationId": "listar_2",
                 "parameters": [
                     {
                         "name": "estado",
@@ -949,7 +1058,7 @@
                 ],
                 "summary": "Criar lead",
                 "description": "Cria um novo lead associado a um parceiro e pacote",
-                "operationId": "criar_1",
+                "operationId": "criar_2",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -962,7 +1071,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Lead criado \u2014 devolve o publicId",
+                        "description": "Lead criado — devolve o publicId",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -972,7 +1081,7 @@
                         }
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos",
+                        "description": "Campos inválidos",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -982,7 +1091,7 @@
                         }
                     },
                     "403": {
-                        "description": "Acesso negado \u2014 requer papel PARCEIRO",
+                        "description": "Acesso negado — requer papel PARCEIRO",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -992,7 +1101,7 @@
                         }
                     },
                     "404": {
-                        "description": "Parceiro ou pacote n\u00e3o encontrado",
+                        "description": "Parceiro ou pacote não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1011,7 +1120,7 @@
                 ],
                 "summary": "Listar notas",
                 "description": "Retorna todas as notas de um lead, ordenadas da mais recente para a mais antiga",
-                "operationId": "listar_2",
+                "operationId": "listar_3",
                 "parameters": [
                     {
                         "name": "leadPublicId",
@@ -1047,7 +1156,7 @@
                         }
                     },
                     "404": {
-                        "description": "Lead n\u00e3o encontrado",
+                        "description": "Lead não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1064,7 +1173,7 @@
                 ],
                 "summary": "Criar nota",
                 "description": "Adiciona uma nova nota a um lead",
-                "operationId": "criar_2",
+                "operationId": "criar_3",
                 "parameters": [
                     {
                         "name": "leadPublicId",
@@ -1087,7 +1196,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Nota criada \u2014 devolve o publicId",
+                        "description": "Nota criada — devolve o publicId",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1097,7 +1206,7 @@
                         }
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos",
+                        "description": "Campos inválidos",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1117,7 +1226,7 @@
                         }
                     },
                     "404": {
-                        "description": "Lead n\u00e3o encontrado",
+                        "description": "Lead não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1132,10 +1241,10 @@
         "/api/v1/auth/register": {
             "post": {
                 "tags": [
-                    "Autentica\u00e7\u00e3o"
+                    "Autenticação"
                 ],
                 "summary": "Registar utilizador",
-                "description": "Cria uma conta p\u00fablica com role ADMIN e devolve tokens prontos a usar",
+                "description": "Cria uma conta pública com role ADMIN e devolve tokens prontos a usar",
                 "operationId": "registrar",
                 "requestBody": {
                     "content": {
@@ -1159,7 +1268,7 @@
                         }
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos ou email j\u00e1 registado",
+                        "description": "Campos inválidos ou email já registado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1174,10 +1283,10 @@
         "/api/v1/auth/refresh-token": {
             "post": {
                 "tags": [
-                    "Autentica\u00e7\u00e3o"
+                    "Autenticação"
                 ],
                 "summary": "Renovar access token",
-                "description": "Emite novos tokens a partir de um refresh token v\u00e1lido",
+                "description": "Emite novos tokens a partir de um refresh token válido",
                 "operationId": "refreshToken",
                 "parameters": [
                     {
@@ -1201,7 +1310,7 @@
                         }
                     },
                     "400": {
-                        "description": "Refresh token inv\u00e1lido ou expirado",
+                        "description": "Refresh token inválido ou expirado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1211,7 +1320,7 @@
                         }
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1226,10 +1335,10 @@
         "/api/v1/auth/logout": {
             "post": {
                 "tags": [
-                    "Autentica\u00e7\u00e3o"
+                    "Autenticação"
                 ],
-                "summary": "Terminar sess\u00e3o",
-                "description": "Invalida todos os tokens activos \u2014 efeito quase imediato",
+                "summary": "Terminar sessão",
+                "description": "Invalida todos os tokens activos — efeito quase imediato",
                 "operationId": "logout",
                 "parameters": [
                     {
@@ -1243,10 +1352,10 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Sess\u00e3o terminada com sucesso"
+                        "description": "Sessão terminada com sucesso"
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1261,7 +1370,7 @@
         "/api/v1/auth/login": {
             "post": {
                 "tags": [
-                    "Autentica\u00e7\u00e3o"
+                    "Autenticação"
                 ],
                 "summary": "Autenticar utilizador",
                 "description": "Autentica com email/password e retorna access + refresh tokens",
@@ -1288,7 +1397,7 @@
                         }
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos",
+                        "description": "Campos inválidos",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1316,8 +1425,8 @@
                     "Admin - Parceiros"
                 ],
                 "summary": "Listar parceiros",
-                "description": "Lista todos os parceiros com filtros opcionais por nome, prov\u00edncia e tipo de parceiro",
-                "operationId": "listar_3",
+                "description": "Lista todos os parceiros com filtros opcionais por nome, província e tipo de parceiro",
+                "operationId": "listar_4",
                 "parameters": [
                     {
                         "name": "nome",
@@ -1393,7 +1502,7 @@
                 ],
                 "summary": "Criar parceiro",
                 "description": "Cria um novo parceiro e o respectivo utilizador com papel PARCEIRO. Aceita foto e documento BI/Passaporte opcionais.",
-                "operationId": "criar_3",
+                "operationId": "criar_4",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -1421,7 +1530,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Parceiro criado \u2014 devolve o publicId",
+                        "description": "Parceiro criado — devolve o publicId",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1431,7 +1540,7 @@
                         }
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos ou duplicados",
+                        "description": "Campos inválidos ou duplicados",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1441,7 +1550,7 @@
                         }
                     },
                     "403": {
-                        "description": "Acesso negado \u2014 requer papel ADMIN",
+                        "description": "Acesso negado — requer papel ADMIN",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1451,7 +1560,7 @@
                         }
                     },
                     "404": {
-                        "description": "Tipo de parceiro ou prov\u00edncia n\u00e3o encontrado",
+                        "description": "Tipo de parceiro ou província não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1470,7 +1579,7 @@
                 ],
                 "summary": "Criar material de apoio",
                 "description": "Cria um novo material de apoio com ficheiro (imagem ou PDF) associado a um ou mais tipos de parceiro",
-                "operationId": "criar_4",
+                "operationId": "criar_5",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -1494,7 +1603,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Material criado \u2014 devolve o publicId",
+                        "description": "Material criado — devolve o publicId",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1504,7 +1613,7 @@
                         }
                     },
                     "400": {
-                        "description": "Campos inv\u00e1lidos",
+                        "description": "Campos inválidos",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1514,7 +1623,7 @@
                         }
                     },
                     "403": {
-                        "description": "Acesso negado \u2014 requer papel ADMIN",
+                        "description": "Acesso negado — requer papel ADMIN",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1524,7 +1633,7 @@
                         }
                     },
                     "404": {
-                        "description": "Tipo de parceiro n\u00e3o encontrado",
+                        "description": "Tipo de parceiro não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1542,7 +1651,7 @@
                     "Utilizadores"
                 ],
                 "summary": "Actualizar foto de perfil",
-                "description": "Faz upload de uma nova foto de perfil (JPEG, PNG ou WEBP, m\u00e1x 5 MB). O pr\u00f3prio utilizador ou um ADMIN pode alterar a foto.",
+                "description": "Faz upload de uma nova foto de perfil (JPEG, PNG ou WEBP, máx 5 MB). O próprio utilizador ou um ADMIN pode alterar a foto.",
                 "operationId": "uploadFoto",
                 "parameters": [
                     {
@@ -1574,7 +1683,7 @@
                 },
                 "responses": {
                     "202": {
-                        "description": "Foto actualizada \u2014 devolve a URL completa da nova foto",
+                        "description": "Foto actualizada — devolve a URL completa da nova foto",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1584,7 +1693,7 @@
                         }
                     },
                     "400": {
-                        "description": "Ficheiro inv\u00e1lido ou tipo n\u00e3o suportado",
+                        "description": "Ficheiro inválido ou tipo não suportado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1594,7 +1703,7 @@
                         }
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1604,7 +1713,7 @@
                         }
                     },
                     "403": {
-                        "description": "Sem permiss\u00e3o para alterar a foto deste utilizador",
+                        "description": "Sem permissão para alterar a foto deste utilizador",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1614,7 +1723,72 @@
                         }
                     },
                     "404": {
-                        "description": "Utilizador n\u00e3o encontrado",
+                        "description": "Utilizador não encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/tickets/{publicId}/estado": {
+            "patch": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Alterar estado do ticket (Admin)",
+                "description": "Actualiza o estado de um ticket específico (ABERTO, PROGRESSO, RESOLVIDO). Acesso exclusivo ao ADMIN.",
+                "operationId": "alterarEstado",
+                "parameters": [
+                    {
+                        "name": "publicId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TicketEstadoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estado actualizado com sucesso"
+                    },
+                    "400": {
+                        "description": "Estado inválido",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Acesso negado — requer papel ADMIN",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ticket não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1632,7 +1806,7 @@
                     "Leads"
                 ],
                 "summary": "Upload de comprovativo",
-                "description": "Faz upload do comprovativo de um lead (JPEG, PNG, WEBP ou PDF, m\u00e1x 5 MB)",
+                "description": "Faz upload do comprovativo de um lead (JPEG, PNG, WEBP ou PDF, máx 5 MB)",
                 "operationId": "uploadComprovativo",
                 "parameters": [
                     {
@@ -1664,7 +1838,7 @@
                 },
                 "responses": {
                     "202": {
-                        "description": "Comprovativo carregado \u2014 devolve o caminho relativo",
+                        "description": "Comprovativo carregado — devolve o caminho relativo",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1674,7 +1848,7 @@
                         }
                     },
                     "400": {
-                        "description": "Ficheiro inv\u00e1lido ou tipo n\u00e3o suportado",
+                        "description": "Ficheiro inválido ou tipo não suportado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1694,7 +1868,7 @@
                         }
                     },
                     "404": {
-                        "description": "Lead n\u00e3o encontrado",
+                        "description": "Lead não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1706,25 +1880,17 @@
                 }
             }
         },
-        "/files/{subdir}/{filename}": {
+        "/files/{path}": {
             "get": {
                 "tags": [
                     "Ficheiros"
                 ],
                 "summary": "Obter ficheiro",
-                "description": "Retorna um ficheiro carregado (imagem) pelo seu caminho relativo. Endpoint p\u00fablico.",
+                "description": "Retorna um ficheiro carregado (imagem ou documento) pelo seu caminho relativo. Endpoint público.",
                 "operationId": "serveFile",
                 "parameters": [
                     {
-                        "name": "subdir",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "filename",
+                        "name": "path",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -1789,7 +1955,7 @@
                         }
                     },
                     "401": {
-                        "description": "N\u00e3o autenticado",
+                        "description": "Não autenticado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1801,14 +1967,144 @@
                 }
             }
         },
-        "/api/v1/tickets": {
+        "/api/v1/tipos-parceiro": {
+            "get": {
+                "tags": [
+                    "Tipos de Parceiro"
+                ],
+                "summary": "Listar todos os tipos de parceiro",
+                "description": "Retorna os tipos disponíveis. Usar para o campo tipo no formulário de parceiro e no filtro de materiais de apoio.",
+                "operationId": "listar_5",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tipos de parceiro",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TipoParceiroResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/tickets/{publicId}": {
             "get": {
                 "tags": [
                     "Tickets"
                 ],
-                "summary": "Listar os meus tickets",
-                "description": "Retorna todos os tickets publicados pelo parceiro autenticado (paginado)",
-                "operationId": "listar_4",
+                "summary": "Detalhes do ticket",
+                "description": "Retorna todas as informações de um ticket específico",
+                "operationId": "buscarDetalhes_2",
+                "parameters": [
+                    {
+                        "name": "publicId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ticket encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TicketResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Acesso negado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ticket não encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Eliminar ticket",
+                "description": "Elimina permanentemente um ticket. O ADMIN pode eliminar qualquer ticket; o PARCEIRO só pode eliminar os seus próprios.",
+                "operationId": "eliminar_4",
+                "parameters": [
+                    {
+                        "name": "publicId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ticket eliminado com sucesso"
+                    },
+                    "400": {
+                        "description": "Sem permissão para eliminar o ticket de outro parceiro",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Acesso negado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ticket não encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/tickets/admin/todos": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Listar todos os tickets (Admin)",
+                "description": "Retorna todos os tickets de todos os parceiros paginados. Acesso exclusivo ao ADMIN.",
+                "operationId": "listarAdmin",
                 "parameters": [
                     {
                         "name": "pagina",
@@ -1843,7 +2139,7 @@
                         }
                     },
                     "403": {
-                        "description": "Acesso negado \u2014 requer papel PARCEIRO",
+                        "description": "Acesso negado — requer papel ADMIN",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1855,51 +2151,49 @@
                 }
             }
         },
-        "/api/v1/tickets/{publicId}": {
+        "/api/v1/provincias": {
             "get": {
                 "tags": [
-                    "Tickets"
+                    "Províncias"
                 ],
-                "summary": "Detalhes do ticket",
-                "description": "Retorna todas as informa\u00e7\u00f5es de um ticket espec\u00edfico",
-                "operationId": "buscarDetalhes_2",
-                "parameters": [
-                    {
-                        "name": "publicId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+                "summary": "Listar todas as províncias",
+                "description": "Retorna as 18 províncias de Angola. Usar para popular dropdowns no formulário de parceiro.",
+                "operationId": "listar_6",
                 "responses": {
                     "200": {
-                        "description": "Ticket encontrado",
+                        "description": "Lista de províncias",
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/TicketResponse"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProvinciaResponse"
+                                    }
                                 }
                             }
                         }
-                    },
-                    "403": {
-                        "description": "Acesso negado",
+                    }
+                }
+            }
+        },
+        "/api/v1/pacotes": {
+            "get": {
+                "tags": [
+                    "Pacotes"
+                ],
+                "summary": "Listar todos os pacotes",
+                "description": "Retorna os pacotes com nome e preço. Usar para popular o dropdown de pacote pretendido no formulário de lead.",
+                "operationId": "listar_7",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pacotes",
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/StandardError"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Ticket n\u00e3o encontrado",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/StandardError"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PacoteResponse"
+                                    }
                                 }
                             }
                         }
@@ -1913,8 +2207,8 @@
                     "Materiais de Apoio"
                 ],
                 "summary": "Listar materiais de apoio",
-                "description": "Retorna os materiais de apoio cujo alvo inclui o tipo de parceiro do utilizador autenticado. Permite pesquisar por nome e filtrar por tipo de conte\u00fado.",
-                "operationId": "listar_5",
+                "description": "Retorna os materiais de apoio cujo alvo inclui o tipo de parceiro do utilizador autenticado. Permite pesquisar por nome e filtrar por tipo de conteúdo.",
+                "operationId": "listar_8",
                 "parameters": [
                     {
                         "name": "nome",
@@ -1969,7 +2263,7 @@
                         }
                     },
                     "403": {
-                        "description": "Acesso negado \u2014 requer papel PARCEIRO",
+                        "description": "Acesso negado — requer papel PARCEIRO",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1979,7 +2273,81 @@
                         }
                     },
                     "404": {
-                        "description": "Parceiro n\u00e3o encontrado para o utilizador autenticado",
+                        "description": "Parceiro não encontrado para o utilizador autenticado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StandardError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/materiais-apoio/admin/todos": {
+            "get": {
+                "tags": [
+                    "Materiais de Apoio"
+                ],
+                "summary": "Listar todos os materiais (Admin)",
+                "description": "Retorna todos os materiais de apoio sem filtro de tipo de parceiro. Acesso exclusivo ao ADMIN.",
+                "operationId": "listarAdmin_1",
+                "parameters": [
+                    {
+                        "name": "nome",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tipoConteudo",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "PROMOCIONAL",
+                                "EDUCATIVO"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "pagina",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "tamanho",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista paginada de materiais",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PageResponseMaterialApoioResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Acesso negado — requer papel ADMIN",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -1996,8 +2364,8 @@
                 "tags": [
                     "Leads"
                 ],
-                "summary": "Leads dos \u00faltimos 7 dias",
-                "description": "Retorna os leads criados nos \u00faltimos 7 dias pelo parceiro autenticado",
+                "summary": "Leads dos últimos 7 dias",
+                "description": "Retorna os leads criados nos últimos 7 dias pelo parceiro autenticado",
                 "operationId": "ultimosSeteDias",
                 "responses": {
                     "200": {
@@ -2032,7 +2400,7 @@
                     "Leads"
                 ],
                 "summary": "Overview dos meus leads",
-                "description": "Retorna o total de leads e o total de fatura\u00e7\u00e3o do parceiro autenticado para uso em dashboard",
+                "description": "Retorna o total de leads e o total de faturação do parceiro autenticado para uso em dashboard",
                 "operationId": "overview",
                 "responses": {
                     "200": {
@@ -2065,7 +2433,7 @@
                 ],
                 "summary": "Listar todos os leads (Admin)",
                 "description": "Lista todos os leads de todos os parceiros com filtros opcionais. Acesso exclusivo ao ADMIN.",
-                "operationId": "listarAdmin",
+                "operationId": "listarAdmin_2",
                 "parameters": [
                     {
                         "name": "estado",
@@ -2140,7 +2508,7 @@
                         }
                     },
                     "403": {
-                        "description": "Acesso negado \u2014 requer papel ADMIN",
+                        "description": "Acesso negado — requer papel ADMIN",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -2158,7 +2526,7 @@
                     "Admin - Parceiros"
                 ],
                 "summary": "Baixar documento BI/Passaporte",
-                "description": "Faz download do documento de identifica\u00e7\u00e3o (BI ou Passaporte) do parceiro",
+                "description": "Faz download do documento de identificação (BI ou Passaporte) do parceiro",
                 "operationId": "baixarDocumento",
                 "parameters": [
                     {
@@ -2193,7 +2561,7 @@
                         }
                     },
                     "404": {
-                        "description": "Parceiro ou documento n\u00e3o encontrado",
+                        "description": "Parceiro ou documento não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -2246,7 +2614,7 @@
                         }
                     },
                     "404": {
-                        "description": "Material ou ficheiro n\u00e3o encontrado",
+                        "description": "Material ou ficheiro não encontrado",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -2432,6 +2800,28 @@
                     "username"
                 ]
             },
+            "TicketRequest": {
+                "type": "object",
+                "properties": {
+                    "conteudo": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "enum": [
+                            "CANCELAR",
+                            "BUG",
+                            "RECLAMACAO",
+                            "OUTRO"
+                        ]
+                    }
+                },
+                "required": [
+                    "conteudo",
+                    "tipo"
+                ]
+            },
             "RegisterRequest": {
                 "type": "object",
                 "properties": {
@@ -2554,6 +2944,22 @@
                     "tipoParceiroPublicId"
                 ]
             },
+            "TicketEstadoRequest": {
+                "type": "object",
+                "properties": {
+                    "estado": {
+                        "type": "string",
+                        "enum": [
+                            "ABERTO",
+                            "PROGRESSO",
+                            "RESOLVIDO"
+                        ]
+                    }
+                },
+                "required": [
+                    "estado"
+                ]
+            },
             "PageResponseUsuarioResponse": {
                 "type": "object",
                 "properties": {
@@ -2627,6 +3033,17 @@
                     }
                 }
             },
+            "TipoParceiroResponse": {
+                "type": "object",
+                "properties": {
+                    "publicId": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    }
+                }
+            },
             "PageResponseTicketResumoResponse": {
                 "type": "object",
                 "properties": {
@@ -2686,6 +3103,9 @@
                             "RESOLVIDO"
                         ]
                     },
+                    "publicadoPorNome": {
+                        "type": "string"
+                    },
                     "createdAt": {
                         "type": "string"
                     }
@@ -2728,6 +3148,31 @@
                     },
                     "updatedAt": {
                         "type": "string"
+                    }
+                }
+            },
+            "ProvinciaResponse": {
+                "type": "object",
+                "properties": {
+                    "publicId": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PacoteResponse": {
+                "type": "object",
+                "properties": {
+                    "publicId": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "preco": {
+                        "type": "number"
                     }
                 }
             },

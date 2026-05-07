@@ -17,40 +17,69 @@
     <div class="contain-this">
       <div class="div-block-504">
         <div class="w-form">
-          <form id="email-form" name="email-form" data-name="Email Form" method="get" data-wf-page-id="69ed37b34104ad1d7843c106" data-wf-element-id="03374ad5-4b5c-7975-c0b4-bdc2efb949d4">
+          <form id="form-editar-ticket" method="post" enctype="application/json">
+            <input type="hidden" id="ticketPublicId" th:value="${ticket.publicId}">
             <div class="criar-content-wrapper">
-              <div class="form-field-wrapper"><label for="field-3" class="form-field-lable">Tipo</label><select id="field-3" name="field-3" data-name="Field 3" class="select-field w-select">
-                  <option value="First">Selecione...</option>
-                  <option value="Another option">Bug no sistema</option>
-                  <option value="Another option">Cancelar subscrição</option>
-                </select></div>
-              <div class="form-field-wrapper"><label for="field-3" class="form-field-lable">Descrição</label>
-                <div class="div-block-100"></div><textarea placeholder="Descrição..." maxlength="5000" id="field-4" name="field-4" data-name="field" class="form-text-field _2 _888 w-input"></textarea>
+              <div class="form-field-wrapper">
+                <label for="tipo" class="form-field-lable">Tipo</label>
+                <select id="tipo" name="tipo" class="select-field w-select" required>
+                  <option value="">Selecione...</option>
+                  <option value="BUG" th:selected="${ticket.tipo == 'BUG'}">Bug no sistema</option>
+                  <option value="CANCELAR" th:selected="${ticket.tipo == 'CANCELAR'}">Cancelar subscrição</option>
+                  <option value="RECLAMACAO" th:selected="${ticket.tipo == 'RECLAMACAO'}">Reclamação</option>
+                  <option value="OUTRO" th:selected="${ticket.tipo == 'OUTRO'}">Outro</option>
+                </select>
+              </div>
+              <div class="form-field-wrapper">
+                <label for="conteudo" class="form-field-lable">Descrição</label>
+                <textarea placeholder="Descrição..." maxlength="5000" id="conteudo" name="conteudo" required class="form-text-field _2 _888 w-input" th:text="${ticket.conteudo}"></textarea>
               </div>
               <div class="create-this">
-                <a href="#" class="button main mobile w-button">Salvar</a>
+                <button type="submit" class="button main mobile w-button">Salvar</button>
               </div>
             </div>
           </form>
-          <div class="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
-          </div>
-          <div class="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
-          </div>
         </div>
-      </div>
-      <div class="div-block-106" style="margin-top: 15px;">
-        <a href="javascript:history.back()" class="action-button cncel w-inline-block">
-          <div class="icon quick-action">
-            <div class="main-font-icon">v</div>
-            <div class="button-text quick-action-text">Apagar</div>
-          </div>
-        </a>
-        <link rel="prefetch" href="javascript:history.back()">
       </div>
     </div>
   </section>
   <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('form-editar-ticket');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const ticketId = document.getElementById('ticketPublicId').value;
+        const formData = new FormData(this);
+        const dados = {
+          tipo: formData.get('tipo'),
+          conteudo: formData.get('conteudo')
+        };
+        
+        Modal.showLoading('A atualizar ticket...');
+        fetch(`/api/tickets/${ticketId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dados)
+        })
+        .then(res => res.json())
+        .then(data => {
+          Modal.hideLoading();
+          if (data.message) {
+            Modal.toast(data.message);
+            setTimeout(() => { window.location.href = '/parceiro/tickets/' + ticketId; }, 1500);
+          } else {
+            Modal.error(data.error || 'Erro ao atualizar ticket');
+          }
+        })
+        .catch(err => {
+          Modal.hideLoading();
+          Modal.error('Erro de rede');
+        });
+      });
+    });
+  </script>
 </body>
 </html>

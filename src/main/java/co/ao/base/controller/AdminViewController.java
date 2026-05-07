@@ -58,7 +58,12 @@ public class AdminViewController {
         // Recent Partners
         try {
             var partners = parceiroService.listarParceiros(0, 5, null, null, null);
-            model.addAttribute("recentParceiros", partners != null ? partners.getContent() : new java.util.ArrayList<>());
+            if (partners != null && partners.getContent() != null) {
+                partners.getContent().forEach(this::processarFicheirosParceiro);
+                model.addAttribute("recentParceiros", partners.getContent());
+            } else {
+                model.addAttribute("recentParceiros", new java.util.ArrayList<>());
+            }
         } catch (Exception e) {
             model.addAttribute("recentParceiros", new java.util.ArrayList<>());
         }
@@ -84,7 +89,11 @@ public class AdminViewController {
         try {
             model.addAttribute("provincias", dominioService.listarProvincias());
             model.addAttribute("tipos", dominioService.listarTiposParceiro());
-            model.addAttribute("parceiros", parceiroService.listarParceiros(pagina, tamanho, nome, provincia, tipo));
+            var partners = parceiroService.listarParceiros(pagina, tamanho, nome, provincia, tipo);
+            if (partners != null && partners.getContent() != null) {
+                partners.getContent().forEach(this::processarFicheirosParceiro);
+            }
+            model.addAttribute("parceiros", partners);
         } catch (Exception e) {
             log.error("Erro ao listar parceiros: {}", e.getMessage());
             model.addAttribute("parceiros", new co.ao.base.model.PageResponse<>());
@@ -141,24 +150,18 @@ public class AdminViewController {
      * Centraliza a lógica de transformação de URLs de ficheiros para usar proxies seguros.
      */
     private void processarFicheirosParceiro(co.ao.base.model.ParceiroDTO parceiro) {
-        // Proxy para a Foto (Usando formato de caminho para ser mais amigável ao browser)
+        log.info("DEBUG FOTO: Parceiro={}, URL Original={}", parceiro.getPublicId(), parceiro.getFotoUrl());
         String fotoUrl = parceiro.getFotoUrl();
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
-            String caminho = fotoUrl;
-            if (caminho.contains("/files/")) {
-                caminho = caminho.substring(caminho.indexOf("/files/") + 7);
-            } else if (caminho.startsWith("http")) {
-                try {
-                    java.net.URL url = new java.net.URL(caminho);
-                    caminho = url.getPath();
-                    if (caminho.startsWith("/")) caminho = caminho.substring(1);
-                    if (caminho.startsWith("api/v1/")) caminho = caminho.substring(7);
-                } catch (Exception e) {
-                    log.warn("Falha ao processar caminho: {}", caminho);
-                }
+            if (fotoUrl.startsWith("http")) {
+                // Conforme solicitado: usa a URL completa diretamente se for absoluta
+                parceiro.setFotoUrl(fotoUrl);
+            } else {
+                // Se for caminho relativo, usamos o proxy
+                String path = fotoUrl;
+                if (path.startsWith("/")) path = path.substring(1);
+                parceiro.setFotoUrl("/admin/parceiros/foto/" + path);
             }
-            // Novo formato: /admin/parceiros/foto/caminho/completo.png
-            parceiro.setFotoUrl("/admin/parceiros/foto/" + caminho);
         } else {
             parceiro.setFotoUrl("/images/avatar-placeholder.png");
         }
@@ -169,7 +172,7 @@ public class AdminViewController {
         }
     }
 
-    @GetMapping("/admin/parceiros/foto/**")
+    @GetMapping("/parceiros/foto/**")
     public org.springframework.http.ResponseEntity<byte[]> exibirFotoParceiro(jakarta.servlet.http.HttpServletRequest request) {
         String fullPath = (String) request.getAttribute(org.springframework.web.servlet.HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
         String caminho = fullPath.replaceFirst("/admin/parceiros/foto/", "");
@@ -279,7 +282,7 @@ public class AdminViewController {
     @GetMapping("/leads/{id}")
     public String verLead(@PathVariable String id, Model model) {
         try {
-            model.addAttribute("lead", leadService.buscarLead(id));
+            model.addAttribute("lead", leadService.buscarLeadAdmin(id));
         } catch (Exception e) {
             log.error("Erro ao ver lead: {}", e.getMessage());
             return "redirect:/admin/leads?error=Lead não encontrado";
@@ -320,6 +323,7 @@ public class AdminViewController {
                                  @RequestParam(required = false) String arquivoUrl,
                                  @RequestParam(required = false) String tagPromocional,
                                  @RequestParam(required = false) String tagEducativo,
+                                 @RequestParam(required = false) java.util.List<String> tiposParceiroPublicIds,
                                  Model model) {
         try {
             model.addAttribute("material", materialApoioService.buscarMaterial(id));
@@ -332,6 +336,7 @@ public class AdminViewController {
             m.setArquivoUrl(arquivoUrl);
             m.setTagPromocional(tagPromocional);
             m.setTagEducativo(tagEducativo);
+            m.setTiposParceiroPublicIds(tiposParceiroPublicIds);
             model.addAttribute("material", m);
         }
         try {

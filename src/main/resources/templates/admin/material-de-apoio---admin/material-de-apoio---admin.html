@@ -41,7 +41,7 @@
         <!-- Iterar Materiais -->
         <th:block th:if="${materiais != null && materiais.content != null}" th:each="material : ${materiais.content}">
           <div class="main-card">
-            <a th:href="@{/admin/materiais/editar/{id}(id=${material.publicId}, nome=${material.nome}, tipoConteudo=${material.tipoConteudo}, arquivoUrl=${material.arquivoUrl}, tagPromocional=${material.tagPromocional}, tagEducativo=${material.tagEducativo})}"
+            <a th:href="@{/admin/materiais/editar/{id}(id=${material.publicId}, nome=${material.nome}, tipoConteudo=${material.tipoConteudo}, arquivoUrl=${material.arquivoUrl}, tagPromocional=${material.tagPromocional}, tagEducativo=${material.tagEducativo}, tiposParceiroPublicIds=${material.tiposParceiroPublicIds})}"
               class="main-items-of-card w-inline-block">
               <div class="icon-div">
                 <div class="text-block-255">c</div>
@@ -60,8 +60,8 @@
               </div>
             </a>
             <div class="options-side">
-              <a th:href="${material.arquivoUrl}" target="_blank" class="link-4">8</a>
-              <a th:href="@{/admin/materiais/editar/{id}(id=${material.publicId}, nome=${material.nome}, tipoConteudo=${material.tipoConteudo}, arquivoUrl=${material.arquivoUrl}, tagPromocional=${material.tagPromocional}, tagEducativo=${material.tagEducativo})}" class="link-4">u</a>
+              <a th:href="${material.arquivoUrl.startsWith('http') ? material.arquivoUrl : '/' + material.arquivoUrl}" target="_blank" class="link-4">8</a>
+              <a th:href="@{/admin/materiais/editar/{id}(id=${material.publicId}, nome=${material.nome}, tipoConteudo=${material.tipoConteudo}, arquivoUrl=${material.arquivoUrl}, tagPromocional=${material.tagPromocional}, tagEducativo=${material.tagEducativo}, tiposParceiroPublicIds=${material.tiposParceiroPublicIds})}" class="link-4">u</a>
             </div>
           </div>
         </th:block>

@@ -21,7 +21,7 @@ public class TicketService extends BaseApiService {
     }
 
     public TicketDTO buscarTicketAdmin(String publicId) {
-        return get("/tickets/admin/" + publicId, TicketDTO.class);
+        return get("/tickets/" + publicId, TicketDTO.class);
     }
 
     public String criarTicket(Object dados) {
@@ -30,6 +30,14 @@ public class TicketService extends BaseApiService {
 
     public void editarTicket(String publicId, Object dados) {
         put("/tickets/" + publicId, dados, Void.class);
+    }
+
+    public void editarTicketAdmin(String publicId, Object dados) {
+        put("/tickets/" + publicId, dados, Void.class);
+    }
+
+    public void alterarEstadoTicketAdmin(String publicId, Object dados) {
+        patch("/tickets/" + publicId + "/estado", dados, Void.class);
     }
 
     public void eliminarTicket(String publicId) {

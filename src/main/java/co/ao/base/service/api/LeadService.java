@@ -40,6 +40,10 @@ public class LeadService extends BaseApiService {
         return get("/leads/" + publicId, LeadDTO.class);
     }
 
+    public LeadDTO buscarLeadAdmin(String publicId) {
+        return get("/leads/" + publicId, LeadDTO.class);
+    }
+
     public String criarLead(LeadCreateRequest dados) {
         return post("/leads", dados, String.class);
     }
