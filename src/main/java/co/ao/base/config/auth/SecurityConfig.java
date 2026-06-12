@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .permitAll()
             )
             .rememberMe(me -> me
-                .key("mySecret!")
+                .key("mySecret!KeyDpdApi2026#.")
                 .tokenValiditySeconds(2592000) // 30 dias
                 .rememberMeParameter("checkRememberMe")
                 .userDetailsService(customUserDetailsService)

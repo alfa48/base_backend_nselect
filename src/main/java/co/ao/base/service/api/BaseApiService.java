@@ -155,7 +155,11 @@ public abstract class BaseApiService {
     protected <T> T execute(String endpoint, HttpMethod method, HttpEntity<?> entity, Class<T> responseType) {
         String url = Constant.BASE_URL + endpoint;
         try {
-            log.info("API REQUEST: {} {} | Payload: {}", method, url, entity.getBody());
+            if (endpoint != null && endpoint.contains("/auth")) {
+                log.info("API REQUEST: {} {} | Payload: [REDACTED FOR SECURITY]", method, url);
+            } else {
+                log.info("API REQUEST: {} {} | Payload: {}", method, url, entity.getBody());
+            }
             ResponseEntity<T> response = restTemplate.exchange(url, method, entity, responseType);
             log.info("API RESPONSE: {} | Status: {}", url, response.getStatusCode());
             return response.getBody();
