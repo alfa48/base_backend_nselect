@@ -18,9 +18,11 @@
                 <div class="kpi-stats-wrapper" th:if="${overview != null}">
                   <div class="kpi-stats" th:classappend="${overview.totalLeadsTrend >= 0 ? 'positive' : 'negative'}">
                     <div class="icon kpi-stats-icon">
-                      <div class="main-font-icon smaller-icon" th:text="${overview.totalLeadsTrend >= 0 ? '8' : 'trending_down'}">8</div>
+                      <div class="main-font-icon smaller-icon"
+                        th:text="${overview.totalLeadsTrend >= 0 ? '8' : 'trending_down'}">8</div>
                     </div>
-                    <div class="stats" th:text="${#numbers.formatDecimal(overview.totalLeadsTrend, 1, 2) + '%'}">8.26%</div>
+                    <div class="stats" th:text="${#numbers.formatDecimal(overview.totalLeadsTrend, 1, 2) + '%'}">8.26%
+                    </div>
                   </div>
                 </div>
               </div>
@@ -33,11 +35,14 @@
             <div>
               <div class="kpi-bottom-section">
                 <div class="kpi-stats-wrapper" th:if="${overview != null}">
-                  <div class="kpi-stats" th:classappend="${overview.faturacaoTotalTrend >= 0 ? 'positive' : 'negative'}">
+                  <div class="kpi-stats"
+                    th:classappend="${overview.faturacaoTotalTrend >= 0 ? 'positive' : 'negative'}">
                     <div class="icon kpi-stats-icon">
-                      <div class="main-font-icon smaller-icon" th:text="${overview.faturacaoTotalTrend >= 0 ? '8' : 'trending_down'}">8</div>
+                      <div class="main-font-icon smaller-icon"
+                        th:text="${overview.faturacaoTotalTrend >= 0 ? '8' : 'trending_down'}">8</div>
                     </div>
-                    <div class="stats" th:text="${#numbers.formatDecimal(overview.faturacaoTotalTrend, 1, 2) + '%'}">8.26%</div>
+                    <div class="stats" th:text="${#numbers.formatDecimal(overview.faturacaoTotalTrend, 1, 2) + '%'}">
+                      8.26%</div>
                   </div>
                 </div>
               </div>
@@ -49,11 +54,14 @@
             <div>
               <div class="kpi-bottom-section">
                 <div class="kpi-stats-wrapper" th:if="${overview != null}">
-                  <div class="kpi-stats" th:classappend="${overview.ticketsAbertosPercent >= 0 ? 'positive' : 'negative'}">
+                  <div class="kpi-stats"
+                    th:classappend="${overview.ticketsAbertosPercent >= 0 ? 'positive' : 'negative'}">
                     <div class="icon kpi-stats-icon">
-                      <div class="main-font-icon smaller-icon">8</div>
+                      <div class="main-font-icon smaller-icon"
+                        th:text="${overview.ticketsAbertosPercent >= 0 ? '8' : 'trending_down'}">8</div>
                     </div>
-                    <div class="stats" th:text="${#numbers.formatDecimal(overview.ticketsAbertosPercent, 1, 2) + '%'}">0.00%</div>
+                    <div class="stats" th:text="${#numbers.formatDecimal(overview.ticketsAbertosPercent, 1, 2) + '%'}">
+                      0.00%</div>
                   </div>
                 </div>
               </div>
@@ -74,7 +82,10 @@
                 <div class="text-block-256 main" th:text="${lead.nome}">Nome do lead</div>
               </div>
               <div class="content-do-card-div">
-                <div class="text-block-256" th:text="${lead.pacotePreco}">KZ 5.500</div>
+                <div class="text-block-256"
+                  th:text="'KZ ' + ${#numbers.formatDecimal(lead.pacotePreco, 1, 'POINT', 2, 'COMMA')}">
+                  KZ 5.500,00
+                </div>
               </div>
               <div class="content-do-card-div status-things">
                 <div class="status-wrapper" th:classappend="${#strings.toLowerCase(lead.estado)}">
@@ -85,7 +96,8 @@
             <div class="options-side">
               <a th:href="@{/parceiro/leads/{id}(id=${lead.publicId})}" class="link-4">8</a>
               <a th:href="@{/parceiro/leads/editar/{id}(id=${lead.publicId})}" class="link-4">u</a>
-              <button type="button" class="link-4 btn-delete-lead" th:data-id="${lead.publicId}" onclick="return false;">v</button>
+              <button type="button" class="link-4 btn-delete-lead" th:data-id="${lead.publicId}"
+                onclick="return false;">v</button>
             </div>
           </div>
         </th:block>

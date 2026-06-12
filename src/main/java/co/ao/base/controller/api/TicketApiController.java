@@ -20,7 +20,7 @@ public class TicketApiController {
             String publicId = ticketService.criarTicket(request);
             return ResponseEntity.ok(Map.of("message", "Ticket aberto com sucesso", "publicId", publicId));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -38,7 +38,7 @@ public class TicketApiController {
             }
             return ResponseEntity.ok(Map.of("message", "Ticket atualizado com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -48,7 +48,7 @@ public class TicketApiController {
             ticketService.alterarEstadoTicketAdmin(publicId, request);
             return ResponseEntity.ok(Map.of("message", "Estado atualizado com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 

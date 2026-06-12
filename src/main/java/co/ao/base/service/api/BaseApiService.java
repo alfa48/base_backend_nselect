@@ -180,6 +180,9 @@ public abstract class BaseApiService {
             throw e;
         } catch (Exception e) {
             log.error("API UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
+            if (e.getCause() != null) {
+                log.error("API CAUSE: {}", e.getCause().getMessage());
+            }
             throw new RestClientException("Erro inesperado na chamada da API: " + e.getMessage(), e);
         }
     }
@@ -219,6 +222,9 @@ public abstract class BaseApiService {
             throw e;
         } catch (Exception e) {
             log.error("API UNEXPECTED ERROR: {} | Message: {}", url, e.getMessage());
+            if (e.getCause() != null) {
+                log.error("API CAUSE: {}", e.getCause().getMessage());
+            }
             throw new RestClientException("Erro inesperado na chamada da API: " + e.getMessage(), e);
         }
     }

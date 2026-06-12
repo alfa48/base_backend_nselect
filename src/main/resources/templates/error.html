@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-wf-page="69ece585cad09a74baae0d43"
+  data-wf-site="69ece585cad09a74baae0d40">
+
+<head th:replace="~{layout/fragments/head :: head('Ocorreu um erro - Dexa Parceiros')}"></head>
+
+<body>
+  <div class="auth-bg">
+    <div class="auth-form-wrapper w-form" style="text-align: center;">
+
+      <div class="form-content">
+
+        <div class="form-header flex">
+          <div class="form-logo-wrapper">
+            <img sizes="(max-width: 750px) 100vw, 750px"
+              th:srcset="@{/images/dexa-contas.logo-p-500.png} + ' 500w, ' + @{/images/dexa-contas.logo.png} + ' 750w'"
+              th:src="@{/images/dexa-contas.logo.png}" loading="eager" alt="Dexa Contas">
+          </div>
+        </div>
+
+        <h2 class="error-title">
+          Ocorreu um problema
+        </h2>
+
+        <p class="error-message">
+          <strong th:if="${status != null}" th:text="'Erro ' + ${status} + ': '"></strong>
+
+          <span th:text="${error != null ? error : 'Não foi possível concluir a operação solicitada.'}">
+          </span>
+        </p>
+
+        <a th:href="@{/logout}" class="button main mobile w-button" style="border: none; width: 100%;">
+          Voltar ao Login
+        </a>
+
+      </div>
+    </div>
+
+    <div class="auth-image-overlay"></div>
+  </div>
+
+  <th:block th:replace="~{layout/fragments/scripts :: scripts}"></th:block>
+
+  <style>
+    .form-header {
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .error-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .error-title {
+      margin-bottom: 12px;
+      color: #1e293b;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .error-message {
+      color: #64748b;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      min-width: 220px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      background: #0057b8;
+      color: #fff !important;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all .2s ease;
+    }
+
+    .btn-primary:hover {
+      background: #00479a;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .error-title {
+        font-size: 24px;
+      }
+
+      .btn-primary {
+        width: 100%;
+      }
+    }
+  </style>
+
+</body>
+
+</html>

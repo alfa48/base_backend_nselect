@@ -42,10 +42,8 @@
                     <div class="img-wrapper cliente _4545" style="position: relative;">
                       <img id="preview-img-foto" th:src="${parceiro.fotoUrl}" width="300" height="300" alt="FOTO" class="img is--contain parceiro" style="max-height: 100px; max-width: 100%; object-fit: contain; margin-bottom: 5px;">
                     </div>
-                    <div id="foto-filename" th:text="${parceiro.nome + ' - Foto'}"
-                      style="font-size: 11px; color: #667999; text-align: center;"></div>
-                    <div style="margin-top: 5px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique
-                      para trocar</div>
+                    <div id="foto-filename" style="font-size: 11px; color: #667999; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 90%;"></div>
+                    <div style="margin-top: 5px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique para trocar a foto</div>
                   </div>
 
                   <input type="file" id="foto" name="foto" style="display:none" accept="image/*">
@@ -69,14 +67,24 @@
                   <!-- Preview Integrado -->
                   <div id="doc-preview"
                     th:style="${parceiro.getDocumentoUrl() != null} ? 'display: flex; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;' : 'display:none;'">
-                    <div class="main-font-icon" style="font-size: 40px; margin-bottom: 10px;">c</div>
-                    <div id="doc-filename" th:text="${parceiro.nome + ' - Documento'}"
-                      style="font-size: 11px; color: #667999; text-align: center; word-break: break-all;"></div>
-                    <div style="margin-top: 5px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique
-                      para trocar</div>
+                    <div style="padding: 10px 15px; background-color: #f8fbff; color: #0057b8; border: 1px solid #c9d7f0; border-radius: 6px; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                      Documento anexado
+                    </div>
+                    <div id="doc-filename" th:text="${parceiro.nome}"
+                      style="font-size: 11px; color: #667999; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 90%;"></div>
+                    <div style="margin-top: 5px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique para trocar o documento</div>
                   </div>
 
                   <input type="file" id="documento" name="documento" style="display:none" accept=".pdf,.epub,image/*,video/*,audio/*">
+                </div>
+
+                <div th:if="${parceiro.getDocumentoUrl() != null}" style="margin-top: 15px; display: flex; justify-content: flex-end;">
+                  <a th:href="${parceiro.getDocumentoUrl().startsWith('http') ? parceiro.getDocumentoUrl() : '/' + parceiro.getDocumentoUrl()}" target="_blank" 
+                     class="action-button w-inline-block" style="padding: 8px 16px; background-color: #eaf1fa; color: #0057b8; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                    <div class="main-font-icon" style="font-size: 16px; margin: 0;">8</div>
+                    <div style="font-size: 14px; font-weight: 500;">Baixar Anexo Atual</div>
+                  </a>
                 </div>
               </div>
 

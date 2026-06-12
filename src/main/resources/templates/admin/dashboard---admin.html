@@ -14,8 +14,11 @@
             th:replace="~{layout/fragments/kpis :: kpi-card('Total de parceiros', ${overview != null ? overview.totalParceiros : '0'}, ${overview != null ? overview.totalParceirosTrend : null}, false)}">
           </div>
           <div
-            th:replace="~{layout/fragments/kpis :: kpi-card('Total de leads', ${overview != null ? overview.totalLeads : '0'}, ${overview != null ? overview.totalLeadsTrend : null}, false)}">
+            th:replace="~{layout/fragments/kpis :: kpi-card('Total de leads convertidos', ${overview != null ? overview.totalLeads : '0'}, ${overview != null ? overview.totalLeadsTrend : null}, false)}">
           </div>
+          <!--div
+            th:replace="~{layout/fragments/kpis :: kpi-card('Faturação Global', ${overview != null ? 'KZ ' + #numbers.formatDecimal(overview.faturacaoTotal, 1, 'POINT', 0, 'COMMA') : 'KZ 0'}, ${overview != null ? overview.faturacaoTotalTrend : null}, false)}">
+          </div-->
           <div
             th:replace="~{layout/fragments/kpis :: kpi-card('Tickets Abertos', ${overview != null ? overview.ticketsAbertos : '0'}, ${overview != null ? overview.ticketsAbertosTrend : null}, true)}">
           </div>
@@ -57,7 +60,8 @@
                       </div>
                     </a>
                     <div class="options-side">
-                      <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId}, conteudo=${ticket.conteudo}, tipo=${ticket.tipo}, estado=${ticket.estado}, publicadoPorNome=${ticket.publicadoPorNome})}" class="link-4">8</a>
+                      <a th:href="@{/admin/tickets/{id}(id=${ticket.publicId}, conteudo=${ticket.conteudo}, tipo=${ticket.tipo}, estado=${ticket.estado}, publicadoPorNome=${ticket.publicadoPorNome})}"
+                        class="link-4">8</a>
                     </div>
                   </div>
                 </th:block>

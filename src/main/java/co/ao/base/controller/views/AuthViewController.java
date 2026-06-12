@@ -7,6 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.WebAttributes;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Controller
 public class AuthViewController {
@@ -60,7 +65,12 @@ public class AuthViewController {
     }
 
     @GetMapping("/noauth")
-    public String loginFailed() {
-        return "redirect:/?error=Credenciais incorretas. Verifique o seu email e senha.";
+    public String loginFailed(HttpServletRequest request) {
+        String errorMsg = "Credenciais incorretas. Verifique o seu email e senha.";
+        Object exception = request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        if (exception instanceof AuthenticationException) {
+            errorMsg = ((AuthenticationException) exception).getMessage();
+        }
+        return "redirect:/?error=" + URLEncoder.encode(errorMsg, StandardCharsets.UTF_8);
     }
 }

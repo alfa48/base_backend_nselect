@@ -49,7 +49,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 throw new BadCredentialsException("Falha na autenticação com a API.");
             }
         } catch (Exception e) {
-            throw new BadCredentialsException("Erro ao conectar com o serviço de autenticação: " + e.getMessage());
+            throw new BadCredentialsException(co.ao.base.util.ExceptionUtil.getMessage(e));
         }
     }
 

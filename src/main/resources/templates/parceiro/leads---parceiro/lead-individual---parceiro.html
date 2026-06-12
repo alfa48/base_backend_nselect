@@ -35,7 +35,9 @@
             </div>
             <div class="list-item">
               <div class="list-item-lable">Criado em</div>
-              <div class="list-item" th:text="${#temporals.format(lead.createdAt, 'dd/MM/yyyy HH:mm')}">-----</div>
+              <div class="list-item"
+                th:text="${lead.createdAtDate != null ? #temporals.format(lead.createdAtDate, 'dd/MM/yyyy HH:mm') : '---'}">
+                -----</div>
             </div>
           </div>
           <div id="w-node-c6163680-e59a-d217-9f55-1f5777ae443f-644c392e">
@@ -87,7 +89,8 @@
               <div class="div-block-502">
                 <p class="paragraph" th:text="${nota.nota}">Lorem ipsum...</p>
                 <div class="text-block-333"
-                  th:text="${'Data de criação: ' + #temporals.format(nota.createdAt, 'dd/MM/yyyy HH:mm')}">Data</div>
+                  th:text="${'Data de criação: ' + (nota.createdAt != null ? nota.createdAt : 'NULO')}">Data</div>
+
                 <div class="div-block-505" style="display: flex; gap: 10px;">
                   <a th:href="@{/parceiro/leads/{leadId}/notas/editar/{notaId}(leadId=${lead.publicId}, notaId=${nota.publicId})}"
                     class="link-45" style="color: #667999;">u</a>
@@ -98,10 +101,14 @@
             </div>
           </th:block>
         </div>
-        <div th:if="${lead.notas != null and lead.notas.size() > 5}" id="notes-pagination" style="display:flex; justify-content:space-between; align-items: center; margin-top: 15px;">
-           <button id="btn-prev-notes" class="action-button w-button" style="padding: 8px 15px; font-size: 12px; background-color: #f8fbff; color: #007bff; border: 1px solid #c9d7f0;" disabled>Anterior</button>
-           <span id="notes-page-info" style="font-size: 13px; color: #667999;">Página 1</span>
-           <button id="btn-next-notes" class="action-button w-button" style="padding: 8px 15px; font-size: 12px; background-color: #f8fbff; color: #007bff; border: 1px solid #c9d7f0;">Próxima</button>
+        <div th:if="${lead.notas != null and lead.notas.size() > 5}" id="notes-pagination"
+          style="display:flex; justify-content:space-between; align-items: center; margin-top: 15px;">
+          <button id="btn-prev-notes" class="action-button w-button"
+            style="padding: 8px 15px; font-size: 12px; background-color: #f8fbff; color: #007bff; border: 1px solid #c9d7f0;"
+            disabled>Anterior</button>
+          <span id="notes-page-info" style="font-size: 13px; color: #667999;">Página 1</span>
+          <button id="btn-next-notes" class="action-button w-button"
+            style="padding: 8px 15px; font-size: 12px; background-color: #f8fbff; color: #007bff; border: 1px solid #c9d7f0;">Próxima</button>
         </div>
         <div th:if="${#lists.isEmpty(lead.notas)}" id="no-notes-msg" class="text-block-331"
           style="font-size: 14px; opacity: 0.6;">Sem notas registadas.</div>
@@ -109,7 +116,123 @@
     </div>
   </section>
 
+  <!-- Modal Mudar Estado -->
+  <div id="modal-mudar-estado" class="modal-wrapper"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div class="modal-content"
+      style="background: white; padding: 25px; border-radius: 8px; width: 450px; max-width: 90%;">
+      <h3 style="margin-top: 0; font-size: 18px; margin-bottom: 20px;">Mudar estado do Lead</h3>
+      <form id="form-mudar-estado">
+        <!-- Hidden fields to preserve the full Lead object during PUT -->
+        <input type="hidden" name="nome" th:value="${lead.nome}">
+        <input type="hidden" name="email" th:value="${lead.email}">
+        <input type="hidden" name="telemovel" th:value="${lead.telemovel}">
+        <input type="hidden" name="nif" th:value="${lead.nif}">
+        <input type="hidden" name="pacotePublicId" th:value="${lead.pacotePublicId}">
+
+        <div class="form-field-wrapper" style="margin-bottom: 15px;">
+          <label for="modal-estado" class="form-field-lable"
+            style="font-weight: bold; margin-bottom: 8px; display: block;">Novo Estado</label>
+          <select id="modal-estado" name="estado" class="select-field w-select" required
+            onchange="toggleComprovativo(this.value)"
+            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            <option value="LEAD" th:selected="${lead.estado == 'LEAD'}">Lead</option>
+            <option value="PENDENTE" th:selected="${lead.estado == 'PENDENTE'}">Pendente</option>
+            <option value="CONVERTIDO" th:selected="${lead.estado == 'CONVERTIDO'}">Convertido</option>
+            <option value="PERDIDO" th:selected="${lead.estado == 'PERDIDO'}">Perdido</option>
+          </select>
+        </div>
+
+        <div id="comprovativo-wrapper" class="photo-upload-input-wrapper" style="display: none; margin-bottom: 20px;">
+          <label for="modal-comprovativo" class="form-field-lable"
+            style="font-weight: bold; margin-bottom: 8px; display: block;">Comprovativo (Obrigatório para
+            Convertido)</label>
+          <input type="file" id="modal-comprovativo" name="comprovativo" style="display: none;"
+            onchange="updateModalFileName(this)">
+          <div class="photo-upload-input-field" onclick="document.getElementById('modal-comprovativo').click()"
+            style="cursor: pointer; padding: 15px; border: 1px dashed #007bff; border-radius: 4px; text-align: center; background-color: #f8fbff;">
+            <div class="photo-upload-text" id="modal-file-name-display" style="color: #007bff;">Clique para fazer upload
+              do ficheiro</div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 25px;">
+          <button type="submit" class="button main mobile w-button" style="border: none; width: 100%;">Salvar</button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+
   <script th:inline="javascript">
+    function toggleComprovativo(estado) {
+      if (estado === 'CONVERTIDO') {
+        document.getElementById('comprovativo-wrapper').style.display = 'block';
+      } else {
+        document.getElementById('comprovativo-wrapper').style.display = 'none';
+        document.getElementById('modal-comprovativo').value = '';
+        document.getElementById('modal-file-name-display').innerText = 'Clique para fazer upload do ficheiro';
+      }
+    }
+
+    function updateModalFileName(input) {
+      const fileName = input.files[0] ? input.files[0].name : 'Clique para fazer upload do ficheiro';
+      document.getElementById('modal-file-name-display').innerText = fileName;
+    }
+
+    document.getElementById('btn-mudar-estado').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('modal-mudar-estado').style.display = 'flex';
+      toggleComprovativo(document.getElementById('modal-estado').value);
+    });
+
+    document.getElementById('modal-mudar-estado').addEventListener('click', function (e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+
+    document.getElementById('form-mudar-estado').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      const dados = {
+        nome: formData.get('nome'),
+        email: formData.get('email'),
+        telemovel: formData.get('telemovel'),
+        nif: formData.get('nif'),
+        pacotePublicId: formData.get('pacotePublicId'),
+        estado: formData.get('estado')
+      };
+
+      const multipartData = new FormData();
+      multipartData.append('dados', JSON.stringify(dados));
+      if (formData.get('comprovativo') && formData.get('comprovativo').size > 0) {
+        multipartData.append('comprovativo', formData.get('comprovativo'));
+      }
+
+      Modal.showLoading('A atualizar o estado...');
+
+      fetch('/api/leads/' + leadId, {
+        method: 'PUT',
+        body: multipartData
+      })
+        .then(res => res.json())
+        .then(data => {
+          Modal.hideLoading();
+          if (data.message) {
+            Modal.toast(data.message);
+            setTimeout(() => { location.reload(); }, 1500);
+          } else {
+            Modal.error(data.error || 'Erro ao atualizar o estado do lead');
+          }
+        })
+        .catch(err => {
+          Modal.hideLoading();
+          Modal.error('Erro de rede ao tentar atualizar.');
+        });
+    });
     const leadId = [[${ lead.publicId }]];
 
     document.querySelectorAll('.btn-delete-nota').forEach(btn => {
@@ -119,7 +242,7 @@
       });
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const notes = document.querySelectorAll('.nota-do-parceiro');
       const itemsPerPage = 5;
       let currentPage = 1;

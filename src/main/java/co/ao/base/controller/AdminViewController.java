@@ -285,7 +285,7 @@ public class AdminViewController {
             model.addAttribute("lead", leadService.buscarLeadAdmin(id));
         } catch (Exception e) {
             log.error("Erro ao ver lead: {}", e.getMessage());
-            return "redirect:/admin/leads?error=Lead não encontrado";
+            return "redirect:/admin/leads?error=Lead desconhecido";
         }
         return "admin/leads---admin/lead-individual---admin";
     }

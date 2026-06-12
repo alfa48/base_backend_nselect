@@ -332,7 +332,7 @@ Cria um novo parceiro e a respectiva conta de acesso (role `PARCEIRO`).
 | `nif` | ✅ |
 | `telefone` | ✅ |
 | `email` | ✅ |
-| `password` | ✅ (palavra-passe da conta do parceiro) |
+| `password` | ✅ (senha da conta do parceiro) |
 | `tipoParceiroPublicId` | ✅ |
 | `provinciaPublicId` | ✅ |
 | `iban` | ❌ |

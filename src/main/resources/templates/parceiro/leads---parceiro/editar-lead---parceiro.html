@@ -62,15 +62,42 @@
 
               <div class="photo-upload-input-wrapper">
                 <label for="comprovativo" class="form-field-lable">Comprovativo (lead convertido)</label>
-                <input type="file" id="comprovativo" name="comprovativo" style="display: none;"
-                  onchange="updateFileName(this)">
-                <div class="photo-upload-input-field" onclick="document.getElementById('comprovativo').click()"
-                  style="cursor: pointer;">
-                  <div class="icon upload-icon">
-                    <div class="main-font-icon">4</div>
+                <div class="photo-upload-input-field" id="upload-box" onclick="document.getElementById('comprovativo').click()"
+                  style="cursor: pointer; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #c9d7f0; border-radius: 8px; background-color: #f8fbff; transition: all 0.3s ease;">
+                  
+                  <div id="upload-placeholder" th:style="${lead.comprovativoUrl != null} ? 'display: none' : 'display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;'">
+                    <div class="icon upload-icon" style="margin-bottom: 10px;">
+                      <div class="main-font-icon">4</div>
+                    </div>
+                    <div class="photo-upload-text" id="file-name-display" style="margin-bottom: 4px;">Clique para fazer upload</div>
+                    <div class="photo-upload-text small-gray">Ficheiro deve ter menos que 1MB</div>
                   </div>
-                  <div class="photo-upload-text" id="file-name-display">Clique para fazer upload</div>
-                  <div class="photo-upload-text small-gray">Ficheiro deve ter menos que 1MB</div>
+
+                  <!-- Preview Integrado -->
+                  <div id="integrated-preview"
+                    th:style="${lead.comprovativoUrl != null} ? 'display: flex; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;' : 'display:none;'">
+                    
+                    <div id="preview-pdf-icon"
+                      style="padding: 10px 15px; background-color: #f8fbff; color: #0057b8; border: 1px solid #c9d7f0; border-radius: 6px; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                      Comprovativo anexado
+                    </div>
+                    <div id="integrated-filename" th:text="${lead.comprovativoUrl != null ? 'Comprovativo' : ''}"
+                      style="font-size: 13px; color: #667999; font-weight: 500; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 90%; padding: 0 10px;">
+                    </div>
+                    <div style="margin-top: 10px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique
+                      para trocar</div>
+                  </div>
+
+                  <input type="file" id="comprovativo" name="comprovativo" style="display: none;" onchange="updateFileName(this)">
+                </div>
+
+                <div th:if="${lead.comprovativoUrl != null}" style="margin-top: 15px; display: flex; justify-content: flex-end;">
+                  <a th:href="${lead.comprovativoUrl.startsWith('http') ? lead.comprovativoUrl : '/' + lead.comprovativoUrl}" target="_blank" 
+                     class="action-button w-inline-block" style="padding: 8px 16px; background-color: #eaf1fa; color: #0057b8; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                    <div class="main-font-icon" style="font-size: 16px; margin: 0;">8</div>
+                    <div style="font-size: 14px; font-weight: 500;">Baixar Comprovativo Atual</div>
+                  </a>
                 </div>
               </div>
 
@@ -82,8 +109,12 @@
 
           <script>
             function updateFileName(input) {
-              const fileName = input.files[0] ? input.files[0].name : 'Clique para fazer upload';
-              document.getElementById('file-name-display').innerText = fileName;
+              const file = input.files[0];
+              if (file) {
+                document.getElementById('upload-placeholder').style.display = 'none';
+                document.getElementById('integrated-preview').style.display = 'flex';
+                document.getElementById('integrated-filename').innerText = file.name;
+              }
             }
 
             document.getElementById('form-editar-lead').addEventListener('submit', function (e) {

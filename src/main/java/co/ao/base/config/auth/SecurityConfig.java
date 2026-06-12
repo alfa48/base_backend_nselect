@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -34,7 +35,19 @@ public class SecurityConfig {
             .formLogin(login -> login
                 .loginPage("/")
                 .loginProcessingUrl("/autenticar")
-                .defaultSuccessUrl("/userLogin", true)
+                .successHandler((request, response, authentication) -> {
+                    // Popular a sessão HTTP com os tokens para o BaseApiService
+                    if (authentication.getPrincipal() instanceof co.ao.base.model.UserDTO userDTO) {
+                        if (userDTO.getAccessToken() != null) {
+                            request.getSession().setAttribute("token", userDTO.getAccessToken());
+                        }
+                        if (userDTO.getRefreshToken() != null) {
+                            request.getSession().setAttribute("refreshToken", userDTO.getRefreshToken());
+                        }
+                        request.getSession().setAttribute("user", userDTO);
+                    }
+                    response.sendRedirect("/userLogin");
+                })
                 .failureUrl("/noauth")
                 .usernameParameter("username")
                 .passwordParameter("senha")
@@ -59,5 +72,10 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**");
     }
 }

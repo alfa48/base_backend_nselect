@@ -22,7 +22,7 @@ public class MaterialApoioApiController {
             String publicId = materialApoioService.criarMaterial(arquivo, dadosJson);
             return ResponseEntity.ok(Map.of("message", "Material criado com sucesso", "publicId", publicId));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -34,7 +34,7 @@ public class MaterialApoioApiController {
             materialApoioService.editarMaterial(publicId, arquivo, dadosJson);
             return ResponseEntity.ok(Map.of("message", "Material atualizado com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -44,7 +44,7 @@ public class MaterialApoioApiController {
             materialApoioService.eliminarMaterial(publicId);
             return ResponseEntity.ok(Map.of("message", "Material eliminado com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 }

@@ -41,10 +41,13 @@
                     style="display:none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #fff; flex-direction: column; align-items: center; justify-content: center; padding: 10px;">
                     <img id="preview-img-integrated" src=""
                       style="max-height: 80px; max-width: 100%; object-fit: contain; margin-bottom: 10px; display: none;">
-                    <div id="preview-pdf-icon" class="main-font-icon"
-                      style="font-size: 40px; margin-bottom: 10px; display: none;">c</div>
+                    <div id="preview-pdf-icon"
+                      style="padding: 10px 15px; background-color: #f8fbff; color: #0057b8; border: 1px solid #c9d7f0; border-radius: 6px; font-weight: bold; margin-bottom: 10px; display: none; align-items: center; gap: 8px;">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                      Documento PDF
+                    </div>
                     <div id="integrated-filename"
-                      style="font-size: 13px; color: #667999; font-weight: 500; text-align: center; word-break: break-all; padding: 0 10px;">
+                      style="font-size: 13px; color: #667999; font-weight: 500; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 90%; padding: 0 10px;">
                     </div>
                     <div style="margin-top: 10px; font-size: 11px; color: #007bff; text-decoration: underline;">Clique
                       para trocar</div>
@@ -132,7 +135,7 @@
                     reader.readAsDataURL(file);
                   } else {
                     previewImg.style.display = 'none';
-                    previewPdfIcon.style.display = 'block';
+                    previewPdfIcon.style.display = 'flex';
                   }
                 }
               });

@@ -24,7 +24,7 @@ public class ParceiroApiController {
             String publicId = parceiroService.criarParceiro(foto, documento, dadosJson);
             return ResponseEntity.ok(Map.of("publicId", publicId, "message", "Parceiro criado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+            return ResponseEntity.status(500).body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -38,7 +38,7 @@ public class ParceiroApiController {
             parceiroService.editarParceiro(id, foto, documento, dadosJson);
             return ResponseEntity.ok(Map.of("message", "Parceiro atualizado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+            return ResponseEntity.status(500).body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -48,7 +48,7 @@ public class ParceiroApiController {
             parceiroService.eliminarParceiro(id);
             return ResponseEntity.ok(Map.of("message", "Parceiro eliminado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+            return ResponseEntity.status(500).body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 }

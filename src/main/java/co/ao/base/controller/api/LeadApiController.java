@@ -22,7 +22,7 @@ public class LeadApiController {
             String publicId = leadService.criarLead(request);
             return ResponseEntity.ok(Map.of("message", "Lead criado com sucesso", "publicId", publicId));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -34,7 +34,7 @@ public class LeadApiController {
             leadService.editarLead(publicId, comprovativo, dadosJson);
             return ResponseEntity.ok(Map.of("message", "Lead atualizado com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -44,7 +44,7 @@ public class LeadApiController {
             leadService.eliminarLead(publicId);
             return ResponseEntity.ok(Map.of("message", "Lead eliminado com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -55,7 +55,7 @@ public class LeadApiController {
             leadService.uploadComprovativo(publicId, file);
             return ResponseEntity.ok(Map.of("message", "Comprovativo carregado com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -67,7 +67,7 @@ public class LeadApiController {
             String notaId = leadService.adicionarNota(publicId, nota);
             return ResponseEntity.ok(Map.of("message", "Nota adicionada com sucesso", "publicId", notaId));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -78,7 +78,7 @@ public class LeadApiController {
             leadService.editarNota(leadId, notaId, nota);
             return ResponseEntity.ok(Map.of("message", "Nota atualizada com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 
@@ -88,7 +88,7 @@ public class LeadApiController {
             leadService.eliminarNota(leadId, notaId);
             return ResponseEntity.ok(Map.of("message", "Nota eliminada com sucesso"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("error", co.ao.base.util.ExceptionUtil.getMessage(e)));
         }
     }
 }

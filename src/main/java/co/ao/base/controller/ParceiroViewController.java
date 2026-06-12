@@ -46,10 +46,34 @@ public class ParceiroViewController {
         overview.put("faturacaoTotalTrend", 0.0);
 
         try {
-            Map<String, Object> apiData = parceiroService.getOverview();
-            if (apiData != null) {
-                if (apiData.containsKey("totalLeads")) overview.put("totalLeads", apiData.get("totalLeads"));
-                if (apiData.containsKey("totalFaturacao")) overview.put("faturacaoTotal", apiData.get("totalFaturacao"));
+            double faturacaoConvertidos = 0.0;
+            double faturacaoTotalBase = 0.0;
+            long totalLeadsCount = 0L;
+            long convCount = 0L;
+            
+            var todosLeadsPage = leadService.listarLeads(0, 1000, null, null, null);
+            if (todosLeadsPage != null && todosLeadsPage.getContent() != null) {
+                totalLeadsCount = todosLeadsPage.getTotalElements();
+                for (var lead : todosLeadsPage.getContent()) {
+                    double preco = lead.getPacotePreco() != null ? lead.getPacotePreco() : 0.0;
+                    faturacaoTotalBase += preco;
+                    if ("CONVERTIDO".equalsIgnoreCase(lead.getEstado())) {
+                        convCount++;
+                        faturacaoConvertidos += preco;
+                    }
+                }
+            }
+
+            overview.put("totalLeads", totalLeadsCount);
+            if (totalLeadsCount > 0) {
+                overview.put("totalLeadsTrend", ((double) convCount / totalLeadsCount) * 100.0);
+            }
+            
+            overview.put("faturacaoTotal", faturacaoConvertidos);
+            if (faturacaoTotalBase > 0) {
+                overview.put("faturacaoTotalTrend", (faturacaoConvertidos / faturacaoTotalBase) * 100.0);
+            } else {
+                overview.put("faturacaoTotalTrend", 0.0);
             }
         } catch (Exception e) {
             log.error("Erro ao obter overview do parceiro: {}", e.getMessage());

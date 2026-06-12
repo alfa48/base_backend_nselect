@@ -58,7 +58,7 @@
         <div class="phase-content-wp">
           <div th:replace="~{layout/fragments/leads :: column-header('LEADS', ${leadsLead})}"></div>
           <th:block th:if="${leadsLead != null}" th:each="lead : ${leadsLead.content}">
-            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, '', @{/admin/leads/{id}(id=${lead.publicId})})}"></div>
+            <div th:replace="~{layout/fragments/leads :: lead-card-admin(${lead}, '')}"></div>
           </th:block>
           <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsLead}, @{/admin/leads(estado='LEAD', mes=${mesSel}, ano=${anoSel}, parceiro=${parceiroSel}, tamanho=${tamanhoSel + 10})})}"></div>
         </div>
@@ -67,7 +67,7 @@
         <div class="phase-content-wp">
           <div th:replace="~{layout/fragments/leads :: column-header('PENDENTE', ${leadsPendente})}"></div>
           <th:block th:if="${leadsPendente != null}" th:each="lead : ${leadsPendente.content}">
-            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'col-2', @{/admin/leads/{id}(id=${lead.publicId})})}"></div>
+            <div th:replace="~{layout/fragments/leads :: lead-card-admin(${lead}, 'col-2')}"></div>
           </th:block>
           <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsPendente}, @{/admin/leads(estado='PENDENTE', mes=${mesSel}, ano=${anoSel}, parceiro=${parceiroSel}, tamanho=${tamanhoSel + 10})})}"></div>
         </div>
@@ -76,7 +76,7 @@
         <div class="phase-content-wp">
           <div th:replace="~{layout/fragments/leads :: column-header('CONVERTIDO', ${leadsConvertido})}"></div>
           <th:block th:if="${leadsConvertido != null}" th:each="lead : ${leadsConvertido.content}">
-            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'won', @{/admin/leads/{id}(id=${lead.publicId})})}"></div>
+            <div th:replace="~{layout/fragments/leads :: lead-card-admin(${lead}, 'won')}"></div>
           </th:block>
           <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsConvertido}, @{/admin/leads(estado='CONVERTIDO', mes=${mesSel}, ano=${anoSel}, parceiro=${parceiroSel}, tamanho=${tamanhoSel + 10})})}"></div>
         </div>
@@ -85,7 +85,7 @@
         <div class="phase-content-wp">
           <div th:replace="~{layout/fragments/leads :: column-header('PERDIDO', ${leadsPerdido})}"></div>
           <th:block th:if="${leadsPerdido != null}" th:each="lead : ${leadsPerdido.content}">
-            <div th:replace="~{layout/fragments/leads :: lead-card(${lead}, 'lost', @{/admin/leads/{id}(id=${lead.publicId})})}"></div>
+            <div th:replace="~{layout/fragments/leads :: lead-card-admin(${lead}, 'lost')}"></div>
           </th:block>
           <div th:replace="~{layout/fragments/leads :: ver-mais(${leadsPerdido}, @{/admin/leads(estado='PERDIDO', mes=${mesSel}, ano=${anoSel}, parceiro=${parceiroSel}, tamanho=${tamanhoSel + 10})})}"></div>
         </div>
