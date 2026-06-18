@@ -23,6 +23,7 @@ public class AdminService extends BaseApiService {
         overview.put("totalParceiros", 0L);
         overview.put("totalParceirosTrend", 0.0);
         overview.put("totalLeads", 0L);
+        overview.put("totalLeadsConvertidos", 0L);
         overview.put("totalLeadsTrend", 0.0);
         overview.put("ticketsAbertos", 0L);
         overview.put("ticketsAbertosTrend", 0.0);
@@ -53,6 +54,7 @@ public class AdminService extends BaseApiService {
                 }
             }
             overview.put("totalLeads", totalLeads);
+            overview.put("totalLeadsConvertidos", convertedLeads);
             
             double totalLeadsTrend = 0.0;
             if (totalLeads > 0) {

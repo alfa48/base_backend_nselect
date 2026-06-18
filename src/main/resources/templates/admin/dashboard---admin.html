@@ -14,7 +14,7 @@
             th:replace="~{layout/fragments/kpis :: kpi-card('Total de parceiros', ${overview != null ? overview.totalParceiros : '0'}, ${overview != null ? overview.totalParceirosTrend : null}, false)}">
           </div>
           <div
-            th:replace="~{layout/fragments/kpis :: kpi-card('Total de leads convertidos', ${overview != null ? overview.totalLeads : '0'}, ${overview != null ? overview.totalLeadsTrend : null}, false)}">
+            th:replace="~{layout/fragments/kpis :: kpi-card('Total de leads convertidos', ${overview != null ? overview.totalLeadsConvertidos : '0'}, ${overview != null ? overview.totalLeadsTrend : null}, false)}">
           </div>
           <!--div
             th:replace="~{layout/fragments/kpis :: kpi-card('Faturação Global', ${overview != null ? 'KZ ' + #numbers.formatDecimal(overview.faturacaoTotal, 1, 'POINT', 0, 'COMMA') : 'KZ 0'}, ${overview != null ? overview.faturacaoTotalTrend : null}, false)}">

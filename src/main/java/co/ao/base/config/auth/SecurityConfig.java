@@ -46,7 +46,7 @@ public class SecurityConfig {
                         }
                         request.getSession().setAttribute("user", userDTO);
                     }
-                    response.sendRedirect("/userLogin");
+                    response.sendRedirect(request.getContextPath() + "/userLogin");
                 })
                 .failureUrl("/noauth")
                 .usernameParameter("username")
